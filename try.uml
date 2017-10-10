@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="331.0" y="212.0">api.Student</node>
+    <node x="711.0" y="1407.0">api.CSVParser</node>
+    <node x="508.0" y="1407.0">api.exceptions</node>
+    <node x="0.0" y="596.0">api.Event</node>
+    <node x="680.0" y="311.5">api.Faculty</node>
+    <node x="500.0" y="1090.0">api.Room</node>
+    <node x="886.0" y="596.0">api.Course</node>
+    <node x="293.0" y="1407.0">api.ScheduleGenerator</node>
+    <node x="0.0" y="1407.0">api.UserAuthentication</node>
+    <node x="404.5" y="0.0">api.User</node>
+    <node x="0.0" y="1090.0">api.CourseEvent</node>
+    <node x="945.0" y="1090.0">api.Group</node>
+    <node x="329.0" y="1090.0">api.Department</node>
+    <node x="0.0" y="289.5">api.Admin</node>
+    <node x="1179.0" y="1090.0">api.CourseStudentMap</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="api.Admin" target="api.User">
+      <point x="0.0" y="-92.0" />
+      <point x="155.5" y="187.0" />
+      <point x="434.8333333333333" y="187.0" />
+      <point x="-60.666666666666686" y="81.0" />
+    </edge>
+    <edge source="api.Student" target="api.User">
+      <point x="0.0" y="-169.5" />
+      <point x="0.0" y="81.0" />
+    </edge>
+    <edge source="api.Faculty" target="api.User">
+      <point x="0.0" y="-70.0" />
+      <point x="841.0" y="187.0" />
+      <point x="556.1666666666666" y="187.0" />
+      <point x="60.66666666666663" y="81.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="78.5" y="48.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

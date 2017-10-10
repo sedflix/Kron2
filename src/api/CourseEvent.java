@@ -4,10 +4,15 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
 //all the stuff we get from course is present here
+
+/**
+ * The Fixed Weekly timetable will be taken from this table
+ */
 public class CourseEvent {
     private int courseEventID;
     private Time startTime;
@@ -28,6 +33,10 @@ public class CourseEvent {
     }
 
     public List<Event> getAllCourseEvents() {
+        return new ArrayList<Event>();
+    }
+
+    public List<Event> getCourseOn(Date date) {
         return new ArrayList<Event>();
     }
 

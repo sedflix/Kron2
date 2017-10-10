@@ -10,6 +10,7 @@ public class Room {
 
     private int roomID;
     private String roomName;
+    private int capacity;
 
     public List<Room> getAllRooms() {
         return new ArrayList<Room>();

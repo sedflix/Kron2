@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Student extends User {
 
+    CourseStudentMap courseStudentMap;
+
     public Student(String emailId) {
         super(emailId);
     }
@@ -17,7 +19,7 @@ public class Student extends User {
         return new ArrayList<Course>();
     }
 
-    public List<Course> getTBACoures() {
+    public List<Course> getShoppingCoures() {
         return new ArrayList<Course>();
     }
 
@@ -33,7 +35,7 @@ public class Student extends User {
         return true;
     }
 
-    public boolean addTBACourse(Course course) {
+    public boolean addShoppingCourse(Course course) {
         return true;
     }
 
@@ -51,5 +53,9 @@ public class Student extends User {
 
     public List<Event> getPendingEventRequests() {
         return new ArrayList<Event>();
+    }
+
+    public boolean cancelEvenntRequest(Event event) {
+        return true;
     }
 }

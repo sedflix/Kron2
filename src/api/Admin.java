@@ -8,6 +8,9 @@ public class Admin extends User {
         super(emailId);
     }
 
+    public  List<Event> getAllRequests() {
+        return new ArrayList<Event>();
+    }
     public List<Event> getAllPendingRequests(){
         return new ArrayList<Event>();
     }

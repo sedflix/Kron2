@@ -2,6 +2,8 @@ package api;
 
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 
 //duplication of event data nd CourseEvent data is happening here
@@ -32,6 +34,18 @@ public class Event {
 
     public boolean deleteIt() {
         return true;
+    }
+
+    public boolean isRequestValid(Event event) {
+        return true;
+    }
+
+    public List<Event> deleteInvalidRequests() {
+        return new ArrayList<Event>();
+    }
+
+    public List<Event> getEventsOn() {
+        return new ArrayList<Event>();
     }
 }
 
