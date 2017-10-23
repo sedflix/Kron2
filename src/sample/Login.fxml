@@ -16,7 +16,7 @@
         </Button>
         <TextField fx:id="txtUserName" layoutY="98" layoutX="50" promptText="UserName">
         </TextField>
-        <PasswordField fx:id="tstPassword" layoutX="50" layoutY="150" promptText="Password">
+        <PasswordField fx:id="txtPassword" layoutX="50" layoutY="150" promptText="Password">
         </PasswordField>
 
         <Label fx:id="txtLabel" layoutX="50" layoutY="50" text="Enter Credentials"></Label>

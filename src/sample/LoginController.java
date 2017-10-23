@@ -13,13 +13,13 @@ public class LoginController {
     @FXML
     private TextField txtUserName;
     @FXML
-    private PasswordField tstPassword;
+    private PasswordField txtPassword;
     @FXML
     private Label txtLabel;
     @FXML
     public void login(ActionEvent event){
         try {
-            if (txtUserName.getText().equals("user") && tstPassword.getText().equals("pass")) {
+            if (txtUserName.getText().equals("user") && txtPassword.getText().equals("pass")) {
                 txtLabel.setText("Success");
             } else {
                 txtLabel.setText("Failure");
