@@ -2,8 +2,10 @@ package sample;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -17,31 +19,36 @@ public class CourseViewController extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/sample/course_view.fxml"));
+
+
+        /**
+         * Couse Description
+         */
+        Parent courseDescription = FXMLLoader.load(getClass().getResource("/sample/course_view.fxml"));
 
         Text courseHeading = new Text("Course Name");
         courseHeading.setId("course_heading");
-        TextFlow txetflow = (TextFlow) root.lookup("#course_heading");
+        TextFlow txetflow = (TextFlow) courseDescription.lookup("#course_heading");
         txetflow.getChildren().add(courseHeading);
 
 
         Text faculty = new Text("Faculty: Vivek Gupta, Anubha");
         faculty.setId("faculty");
-        TextFlow facultyTF = (TextFlow) root.lookup("#faculty");
+        TextFlow facultyTF = (TextFlow) courseDescription.lookup("#faculty");
         facultyTF.getChildren().add(faculty);
 
         Text pre = new Text("Preqs: CS201, CS301");
         pre.setId("prereq");
-        TextFlow preTF = (TextFlow) root.lookup("#prereq");
+        TextFlow preTF = (TextFlow) courseDescription.lookup("#prereq");
         preTF.getChildren().add(pre);
 
         Text credits = new Text("Credits: 4");
         credits.setId("credits");
-        TextFlow creditsTF = (TextFlow) root.lookup("#credits");
+        TextFlow creditsTF = (TextFlow) courseDescription.lookup("#credits");
         creditsTF.getChildren().add(credits);
 
 
-        TextArea coTA = (TextArea) root.lookup("#co");
+        TextArea coTA = (TextArea) courseDescription.lookup("#co");
 
 
         coTA.setText("CO 1: fhsdkcakgweb kwhjgvjbbjkslnvljfdvrvh kgmwilbejvnflkhb wkgljbkjflnvlbkh frwkhgphilivjnbjkgb. " +
@@ -58,9 +65,14 @@ public class CourseViewController extends Application {
 //        co.setId("co");
 
 
+        ScrollPane scrollPane = (ScrollPane) courseDescription.lookup("#scroll_time_table");
+        Node timeTable = FXMLLoader.load(getClass().getResource("/sample/TimeTable.fxml"));
+
+        scrollPane.setContent(timeTable);
+
 
         primaryStage.setTitle("Application");
-        primaryStage.setScene(new Scene(root, 700, 400));
+        primaryStage.setScene(new Scene(courseDescription, 700, 900));
         primaryStage.show();
     }
 }
