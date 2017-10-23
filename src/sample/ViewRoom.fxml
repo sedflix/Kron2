@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -11,72 +12,85 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <DatePicker layoutX="213.0" layoutY="156.0" />
-      <MenuButton layoutX="281.0" layoutY="200.0" mnemonicParsing="false" text="Hour">
-        <items>
-          <MenuItem mnemonicParsing="false" text="8" />
-          <MenuItem mnemonicParsing="false" text="9" />
-          <MenuItem mnemonicParsing="false" text="10" />
-          <MenuItem mnemonicParsing="false" text="11" />
-          <MenuItem mnemonicParsing="false" text="12" />
-          <MenuItem mnemonicParsing="false" text="1" />
-          <MenuItem mnemonicParsing="false" text="2" />
-          <MenuItem mnemonicParsing="false" text="3" />
-          <MenuItem mnemonicParsing="false" text="4" />
-          <MenuItem mnemonicParsing="false" text="5" />
-          <MenuItem mnemonicParsing="false" text="6" />
-        </items>
-      </MenuButton>
-      <MenuButton layoutX="340.0" layoutY="200.0" mnemonicParsing="false" text="Minute">
-         <items>
-            <MenuItem mnemonicParsing="false" text="00" />
-            <MenuItem mnemonicParsing="false" text="15" />
-            <MenuItem mnemonicParsing="false" text="30" />
-            <MenuItem mnemonicParsing="false" text="45" />
-         </items>
-      </MenuButton>
       <Text layoutX="190.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Starting Time" />
       <Text layoutX="192.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ending Time" />
-      <MenuButton layoutX="281.0" layoutY="237.0" mnemonicParsing="false" text="Hour">
-         <items>
-            <MenuItem mnemonicParsing="false" text="8" />
-            <MenuItem mnemonicParsing="false" text="9" />
-            <MenuItem mnemonicParsing="false" text="10" />
-            <MenuItem mnemonicParsing="false" text="11" />
-            <MenuItem mnemonicParsing="false" text="12" />
-            <MenuItem mnemonicParsing="false" text="1" />
-            <MenuItem mnemonicParsing="false" text="2" />
-            <MenuItem mnemonicParsing="false" text="3" />
-            <MenuItem mnemonicParsing="false" text="4" />
-            <MenuItem mnemonicParsing="false" text="5" />
-            <MenuItem mnemonicParsing="false" text="6" />
-         </items>
-      </MenuButton>
-      <MenuButton layoutX="340.0" layoutY="237.0" mnemonicParsing="false" text="Minute">
-         <items>
-             <MenuItem mnemonicParsing="false" text="00" />
-             <MenuItem mnemonicParsing="false" text="15" />
-             <MenuItem mnemonicParsing="false" text="30" />
-             <MenuItem mnemonicParsing="false" text="45" />
-         </items>
-      </MenuButton>
       <Label alignment="CENTER" layoutX="151.0" layoutY="79.0" prefHeight="50.0" prefWidth="299.0" text="Availability">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <MenuButton layoutX="251.0" layoutY="296.0" mnemonicParsing="false" text="Room Number">
-        <items>
-          <MenuItem mnemonicParsing="false" text="C01" />
-          <MenuItem mnemonicParsing="false" text="C02" />
-          <MenuItem mnemonicParsing="false" text="C03" />
-          <MenuItem mnemonicParsing="false" text="C11" />
-          <MenuItem mnemonicParsing="false" text="C12" />
-          <MenuItem mnemonicParsing="false" text="C13" />
-          <MenuItem mnemonicParsing="false" text="C21" />
-          <MenuItem mnemonicParsing="false" text="C22" />
-          <MenuItem mnemonicParsing="false" text="C23" />
-        </items>
-      </MenuButton>
+      
+       <ChoiceBox layoutX="281.0" layoutY="200.0" prefHeight="25.0" prefWidth="59.0" value="Hours">
+           <items>
+               <FXCollections fx:factory="observableArrayList">
+                   <String fx:value="8" />
+                   <String fx:value="9" />
+                   <String fx:value="10" />
+                   <String fx:value="11" />
+                   <String fx:value="12" />
+                   <String fx:value="1" />
+                   <String fx:value="2" />
+                   <String fx:value="3" />
+                   <String fx:value="4" />
+                   <String fx:value="5" />
+                   <String fx:value="6" />
+               </FXCollections>
+           </items>
+       </ChoiceBox>
+      <ChoiceBox layoutX="340.0" layoutY="200.0" prefHeight="25.0" prefWidth="59.0" value="Minutes">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="00" />
+               <String fx:value="15" />
+               <String fx:value="30" />
+               <String fx:value="45" />
+            </FXCollections>
+         </items>
+      </ChoiceBox>
+      <ChoiceBox layoutX="281.0" layoutY="237.0" prefHeight="25.0" prefWidth="59.0" value="Hours">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="8" />
+               <String fx:value="9" />
+               <String fx:value="10" />
+               <String fx:value="11" />
+               <String fx:value="12" />
+               <String fx:value="1" />
+               <String fx:value="2" />
+               <String fx:value="3" />
+               <String fx:value="4" />
+               <String fx:value="5" />
+               <String fx:value="6" />
+            </FXCollections>
+         </items>
+      </ChoiceBox>
+      <ChoiceBox layoutX="340.0" layoutY="237.0" prefHeight="25.0" prefWidth="59.0" value="Minutes">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="00" />
+               <String fx:value="15" />
+               <String fx:value="30" />
+               <String fx:value="45" />
+            </FXCollections>
+         </items>
+      </ChoiceBox>
+       <ChoiceBox layoutX="225.0" layoutY="302.0" prefWidth="150.0" value="Room">
+           <items>
+               <FXCollections fx:factory="observableArrayList">
+                   <String fx:value="C01"/>
+                   <String fx:value="C02"/>
+                   <String fx:value="C03"/>
+                   <String fx:value="C11"/>
+                   <String fx:value="C12"/>
+                   <String fx:value="C13"/>
+                   <String fx:value="C21"/>
+                   <String fx:value="C22"/>
+                   <String fx:value="C23"/>
+                   <String fx:value="S01"/>
+                   <String fx:value="S02"/>
+               </FXCollections>
+           </items>
+       </ChoiceBox>
       
        
    </children>
