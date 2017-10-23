@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
@@ -21,15 +22,29 @@ public class CourseViewController extends Application {
     public void start(Stage primaryStage) throws Exception {
 
 
+//        ObservableList<String> options =
+//                FXCollections.observableArrayList(
+//                        "1",
+//                        "2",
+//                        "3"
+//                );
         /**
          * Couse Description
          */
         Parent courseDescription = FXMLLoader.load(getClass().getResource("/sample/course_view.fxml"));
 
-        Text courseHeading = new Text("Course Name");
-        courseHeading.setId("course_heading");
-        TextFlow txetflow = (TextFlow) courseDescription.lookup("#course_heading");
-        txetflow.getChildren().add(courseHeading);
+//        Text courseHeading = new Text("Course Name");
+//        courseHeading.setId("course_heading");
+//        TextFlow txetflow = (TextFlow) courseDescription.lookup("#course_heading");
+//        txetflow.getChildren().add(courseHeading);
+
+        ComboBox<String> comboBox = (ComboBox<String>) courseDescription.lookup("#search");
+        comboBox.getItems().addAll(
+                "Advance Programming : CS121 : AP",
+                "5",
+                "6"
+        );
+
 
 
         Text faculty = new Text("Faculty: Vivek Gupta, Anubha");
@@ -70,7 +85,8 @@ public class CourseViewController extends Application {
 
         scrollPane.setContent(timeTable);
 
-        primaryStage.setTitle("Application");
+
+        primaryStage.setTitle("Kron2");
         primaryStage.setScene(new Scene(courseDescription, 700, 900));
         primaryStage.show();
     }
