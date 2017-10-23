@@ -1,4 +1,23 @@
 #course_heading {
     -fx-font-family: cursive;
-    -fx-font-size: 43px;
+    -fx-font-size: 32px;
+}
+
+#faculty {
+    -fx-font-size: 16px;
+
+}
+
+#prereq, #credits {
+    -fx-font-size: 16px;
+}
+
+#co_h2 {
+    -fx-font-size: 18px;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+
+#co_main {
+    -fx-font-size: 14px;
 }
