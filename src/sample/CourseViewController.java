@@ -70,7 +70,6 @@ public class CourseViewController extends Application {
 
         scrollPane.setContent(timeTable);
 
-
         primaryStage.setTitle("Application");
         primaryStage.setScene(new Scene(courseDescription, 700, 900));
         primaryStage.show();
