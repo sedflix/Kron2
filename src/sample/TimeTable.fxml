@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+      <AnchorPane layoutX="2.0" layoutY="94.0" >
+         <children>
+            <DatePicker layoutX="190.0" />
+            <Label layoutX="21.0" layoutY="4.0" text="Select Date" />
+            <TableView layoutY="92.0" prefHeight="200.0" prefWidth="593.0">
+              <columns>
+                  <TableColumn prefWidth="28.0" text="8:00" />
+                  <TableColumn prefWidth="28.0" text="8:30" />
+                  <TableColumn prefWidth="28.0" text="9:00" />
+                  <TableColumn prefWidth="28.0" text="9:30" />
+                  <TableColumn prefWidth="35.0" text="10:00" />
+                  <TableColumn prefWidth="35.0" text="10:30" />
+                  <TableColumn prefWidth="35.0" text="11:00" />
+                  <TableColumn prefWidth="35.0" text="11:30" />
+                  <TableColumn prefWidth="35.0" text="12:00" />
+                  <TableColumn prefWidth="35.0" text="12:30" />
+                  <TableColumn prefWidth="28.0" text="1:00" />
+                  <TableColumn prefWidth="28.0" text="1:30" />
+                  <TableColumn prefWidth="28.0" text="2:00" />
+                  <TableColumn prefWidth="28.0" text="2:30" />
+                  <TableColumn prefWidth="28.0" text="3:00" />
+                  <TableColumn prefWidth="28.0" text="3:30" />
+                  <TableColumn prefWidth="28.0" text="4:00" />
+                  <TableColumn prefWidth="28.0" text="4:30" />
+                  <TableColumn prefWidth="28.0" text="5:00" />
+                  <TableColumn prefWidth="28.0" text="5:30" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>

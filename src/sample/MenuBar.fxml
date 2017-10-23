@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="58.0" prefWidth="574.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <MenuBar fx:id="bar" prefHeight="25.0" prefWidth="406.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="Profile">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Close" />
+                    </items>
+                </Menu>
+
+                <Menu mnemonicParsing="false" text="Today">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Delete" />
+                    </items>
+                </Menu>
+
+                <Menu mnemonicParsing="false" text="TimeTable">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                    </items>
+                </Menu>
+
+                <Menu mnemonicParsing="false" text="Events">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Course">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Request Status">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                    </items>
+                </Menu>
+
+            </menus>
+        </MenuBar>
+        <TextField layoutX="406.0" promptText="Search" />
+    </children>
+</AnchorPane>
