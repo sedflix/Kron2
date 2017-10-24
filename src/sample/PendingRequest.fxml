@@ -17,7 +17,7 @@
         </columns>
           <items>
               <FXCollections fx:factory="observableArrayList">
-
+                    <String fx:value="abhi"/>
               </FXCollections>
           </items>
       </TableView>
