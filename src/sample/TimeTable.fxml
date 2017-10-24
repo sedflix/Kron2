@@ -1,34 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
-
-<AnchorPane layoutX="2.0" layoutY="94.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-        <TableView layoutY="92.0" prefHeight="200.0" prefWidth="593.0">
-            <columns>
-                <TableColumn prefWidth="28.0" text="8:00" />
-                <TableColumn prefWidth="28.0" text="8:30" />
-                  <TableColumn prefWidth="28.0" text="9:00" />
-                  <TableColumn prefWidth="28.0" text="9:30" />
-                  <TableColumn prefWidth="35.0" text="10:00" />
-                  <TableColumn prefWidth="35.0" text="10:30" />
-                  <TableColumn prefWidth="35.0" text="11:00" />
-                  <TableColumn prefWidth="35.0" text="11:30" />
-                  <TableColumn prefWidth="35.0" text="12:00" />
-                  <TableColumn prefWidth="35.0" text="12:30" />
-                  <TableColumn prefWidth="28.0" text="1:00" />
-                  <TableColumn prefWidth="28.0" text="1:30" />
-                  <TableColumn prefWidth="28.0" text="2:00" />
-                  <TableColumn prefWidth="28.0" text="2:30" />
-                  <TableColumn prefWidth="28.0" text="3:00" />
-                  <TableColumn prefWidth="28.0" text="3:30" />
-                  <TableColumn prefWidth="28.0" text="4:00" />
-                  <TableColumn prefWidth="28.0" text="4:30" />
-                  <TableColumn prefWidth="28.0" text="5:00" />
-                  <TableColumn prefWidth="28.0" text="5:30" />
-              </columns>
-            </TableView>
-         </children>
-      </AnchorPane>
+<?import javafx.scene.control.*?>
+<TableView xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+           minWidth="-Infinity" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.121">
+    <columns>
+        <TableColumn prefWidth="35.0" text="8:00"/>
+        <TableColumn prefWidth="35.0" text="8:30"/>
+        <TableColumn prefWidth="35.0" text="9:00"/>
+        <TableColumn prefWidth="35.0" text="9:30"/>
+        <TableColumn prefWidth="35.0" text="10:00"/>
+        <TableColumn prefWidth="35.0" text="10:30"/>
+        <TableColumn prefWidth="35.0" text="11:00"/>
+        <TableColumn prefWidth="35.0" text="11:30"/>
+        <TableColumn prefWidth="35.0" text="12:00"/>
+        <TableColumn prefWidth="35.0" text="12:30"/>
+        <TableColumn prefWidth="35.0" text="1:00"/>
+        <TableColumn prefWidth="35.0" text="1:30"/>
+        <TableColumn prefWidth="35.0" text="2:00"/>
+        <TableColumn prefWidth="35.0" text="2:30"/>
+        <TableColumn prefWidth="35.0" text="3:00"/>
+        <TableColumn prefWidth="35.0" text="3:30"/>
+        <TableColumn prefWidth="35.0" text="4:00"/>
+        <TableColumn prefWidth="35.0" text="4:30"/>
+        <TableColumn prefWidth="35.0" text="5:00"/>
+        <TableColumn prefWidth="35.0" text="5:30"/>
+    </columns>
+</TableView>
