@@ -7,9 +7,9 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 <?import java.lang.*?>
+<?import java.net.URL?>
 <GridPane xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity"
-          minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" vgap="10.0"
-          xmlns="http://javafx.com/javafx/8.0.121">
+          minHeight="-Infinity" minWidth="-Infinity" vgap="10.0" xmlns="http://javafx.com/javafx/8.0.121">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="217.0"/>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="533.0" minWidth="10.0" prefWidth="383.0"/>
@@ -26,9 +26,10 @@
     </rowConstraints>
     <children>
         <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER" GridPane.columnSpan="2147483647"
-                  GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="BOTTOM">
+                  GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="BOTTOM"
+                  GridPane.vgrow="ALWAYS">
             <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Create Event(Book Room) | Edit"
+                <Text fx:id="h1" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Event(Book Room) | Edit"
                       textAlignment="CENTER"/>
             </children>
             <GridPane.margin>
@@ -36,16 +37,18 @@
             </GridPane.margin>
         </TextFlow>
         <Label alignment="CENTER" prefWidth="1000.0" text="Choose a starting date" textAlignment="CENTER"
-               GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER"/>
-        <DatePicker prefWidth="1000.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+               GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER"
+               GridPane.vgrow="ALWAYS"/>
+        <DatePicker prefWidth="1000.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS"
+                    GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
             <GridPane.margin>
                 <Insets right="20.0"/>
             </GridPane.margin>
         </DatePicker>
         <Label alignment="CENTER" layoutX="10.0" layoutY="90.0" prefWidth="1000.0" text="Choose approx time"
-               textAlignment="CENTER" GridPane.rowIndex="2"/>
+               textAlignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS"/>
         <ChoiceBox prefWidth="1000.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS"
-                   GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                   GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <GridPane.margin>
                 <Insets right="20.0"/>
             </GridPane.margin>
@@ -66,15 +69,16 @@
                 </FXCollections>
             </items>
         </ChoiceBox>
-        <ScrollPane fx:id="scroll_time_table" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647"
-                    GridPane.rowIndex="3"/>
+        <ScrollPane fx:id="scroll_time_table" fitToHeight="true" fitToWidth="true" GridPane.columnSpan="2147483647"
+                    GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3"
+                    GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS"/>
         <Label alignment="CENTER" layoutX="10.0" layoutY="104.0" prefWidth="1000.0" text="Event Name"
-               textAlignment="CENTER" GridPane.rowIndex="4"/>
+               textAlignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS"/>
         <Label alignment="CENTER" layoutX="10.0" layoutY="332.0" prefWidth="1000.0" text="Crowd Size"
-               textAlignment="CENTER" GridPane.rowIndex="5"/>
+               textAlignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS"/>
         <Label alignment="CENTER" layoutX="10.0" layoutY="332.0" prefWidth="1000.0" text="Event Description"
-               textAlignment="CENTER" GridPane.rowIndex="6"/>
-        <TextField GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+               textAlignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6"/>
+        <TextField GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS"/>
         <TextField GridPane.columnIndex="1" GridPane.rowIndex="5"/>
         <TextField GridPane.columnIndex="1" GridPane.rowIndex="6"/>
         <Button mnemonicParsing="false" text="Request | Edit | Book" GridPane.columnSpan="2147483647"
@@ -85,4 +89,8 @@
             </padding>
         </Button>
     </children>
+
+    <stylesheets>
+        <URL value="@css/main.css"/>
+    </stylesheets>
 </GridPane>
