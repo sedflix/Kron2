@@ -1,24 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="sample.LoginController"
-            prefHeight="400.0" prefWidth="600.0"
->
-    <children>
-        <Button layoutX="124.0" layoutY="240" mnemonicParsing="false" text="Login" onAction="#login">
-        </Button>
-        <TextField fx:id="txtUserName" layoutY="98" layoutX="50" promptText="UserName">
-        </TextField>
-        <PasswordField fx:id="txtPassword" layoutX="50" layoutY="150" promptText="Password">
-        </PasswordField>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
-        <Label fx:id="txtLabel" layoutX="50" layoutY="50" text="Enter Credentials"></Label>
-    </children>
-
-</AnchorPane>
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="338.0" minWidth="10.0" percentWidth="50.0" prefWidth="326.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="430.0" minWidth="10.0" percentWidth="50.0" prefWidth="274.0" />
+  </columnConstraints>
+  <rowConstraints>
+      <RowConstraints maxHeight="197.0" minHeight="10.0" percentHeight="24.0" prefHeight="101.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="221.0" minHeight="10.0" percentHeight="24.0" prefHeight="61.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="140.0" minHeight="10.0" percentHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="143.0" minHeight="10.0" percentHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="97.0" minHeight="10.0" percentHeight="32.0" prefHeight="97.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <TextFlow maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" textAlignment="CENTER" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Credentials" textAlignment="JUSTIFY">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Text>
+         </children>
+      </TextFlow>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email" textAlignment="CENTER" wrappingWidth="167.986328125" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password" textAlignment="CENTER" wrappingWidth="171.04052734375" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Text>
+      <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Enter registered email" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+      <PasswordField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Enter Password" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+   </children>
+</GridPane>

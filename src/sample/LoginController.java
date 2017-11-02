@@ -1,31 +1,23 @@
 package sample;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.PasswordField;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-import java.awt.*;
-import java.util.concurrent.ExecutionException;
+import java.io.IOException;
 
-import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
-import javafx.event.ActionEvent;
-public class LoginController {
-    @FXML
-    private TextField txtUserName;
-    @FXML
-    private PasswordField txtPassword;
-    @FXML
-    private Label txtLabel;
-    @FXML
-    public void login(ActionEvent event){
-        try {
-            if (txtUserName.getText().equals("user") && txtPassword.getText().equals("pass")) {
-                txtLabel.setText("Success");
-            } else {
-                txtLabel.setText("Failure");
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
+
+public class LoginController extends Application{
+   @Override
+    public void start(Stage primaryStage) throws IOException{
+       Parent root = FXMLLoader.load(getClass().getResource("/sample/Login.fxml"));
+       primaryStage.setTitle("Kron2");
+       primaryStage.setScene(new Scene(root, 600, 350));
+       primaryStage.show();
+   }
+   public static void main(String[] args){
+       launch(args);
+   }
 }
