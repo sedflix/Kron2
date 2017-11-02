@@ -1,22 +1,22 @@
 package sample;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
 
-public class SignupController {
-    @FXML
-    private Label txtStatus;
-    @FXML
-    private TextField txtName;
-    @FXML
-    private TextField txtMailID;
-    @FXML
-    private TextField txtCategory;
-    @FXML
-    private PasswordField txtPassword;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-    @FXML
-    public void signup(){
-        // do something
+import java.io.IOException;
+
+public class SignupController extends Application{
+    public void start(Stage primaryStage) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/sample/Signup.fxml"));
+        primaryStage.setTitle("Kron2");
+        primaryStage.setScene(new Scene(root, 600, 350));
+        primaryStage.show();
+    }
+    public static void main(String[] args){
+        launch(args);
     }
 }
