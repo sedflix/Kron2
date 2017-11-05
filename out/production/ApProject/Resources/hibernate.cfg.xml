@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/spring</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">root</property>
+
+
+        <property name="connection.pool.size">1</property>
+
+        <!-- SQL Dialect -->
+
+        <property name="dialect">org.hibernate.dialect.MySQL57Dialect</property>
+
+
+        <!-- Disable the second-level cache -->
+
+        <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+
+        <!-- Echo all executed SQL to stdout -->
+
+        <property name="hibernate.show_sql">true</property>
+
+        <!-- Drop the existing tables and create new one -->
+
+        <property name="hbm2ddl.auto">create</property>
+
+        <!-- Mention here all the model classes along with their package name -->
+
+        <!--<mapping class="org.hibernate.tutorial.hbm.Event"/>-->
+        <mapping class="api.Room"/>
+    </session-factory>
+</hibernate-configuration>

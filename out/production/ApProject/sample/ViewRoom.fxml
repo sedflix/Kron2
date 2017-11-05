@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <DatePicker layoutX="213.0" layoutY="156.0" />
+      <Text layoutX="190.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Starting Time" />
+      <Text layoutX="192.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ending Time" />
+      <Label alignment="CENTER" layoutX="151.0" layoutY="79.0" prefHeight="50.0" prefWidth="299.0" text="Availability">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      
+       <ChoiceBox layoutX="281.0" layoutY="200.0" prefHeight="25.0" prefWidth="59.0" value="Hours">
+           <items>
+               <FXCollections fx:factory="observableArrayList">
+                   <String fx:value="8" />
+                   <String fx:value="9" />
+                   <String fx:value="10" />
+                   <String fx:value="11" />
+                   <String fx:value="12" />
+                   <String fx:value="1" />
+                   <String fx:value="2" />
+                   <String fx:value="3" />
+                   <String fx:value="4" />
+                   <String fx:value="5" />
+                   <String fx:value="6" />
+               </FXCollections>
+           </items>
+       </ChoiceBox>
+      <ChoiceBox layoutX="340.0" layoutY="200.0" prefHeight="25.0" prefWidth="59.0" value="Minutes">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="00" />
+               <String fx:value="15" />
+               <String fx:value="30" />
+               <String fx:value="45" />
+            </FXCollections>
+         </items>
+      </ChoiceBox>
+      <ChoiceBox layoutX="281.0" layoutY="237.0" prefHeight="25.0" prefWidth="59.0" value="Hours">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="8" />
+               <String fx:value="9" />
+               <String fx:value="10" />
+               <String fx:value="11" />
+               <String fx:value="12" />
+               <String fx:value="1" />
+               <String fx:value="2" />
+               <String fx:value="3" />
+               <String fx:value="4" />
+               <String fx:value="5" />
+               <String fx:value="6" />
+            </FXCollections>
+         </items>
+      </ChoiceBox>
+      <ChoiceBox layoutX="340.0" layoutY="237.0" prefHeight="25.0" prefWidth="59.0" value="Minutes">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="00" />
+               <String fx:value="15" />
+               <String fx:value="30" />
+               <String fx:value="45" />
+            </FXCollections>
+         </items>
+      </ChoiceBox>
+       <ChoiceBox layoutX="225.0" layoutY="302.0" prefWidth="150.0" value="Room">
+           <items>
+               <FXCollections fx:factory="observableArrayList">
+                   <String fx:value="C01"/>
+                   <String fx:value="C02"/>
+                   <String fx:value="C03"/>
+                   <String fx:value="C11"/>
+                   <String fx:value="C12"/>
+                   <String fx:value="C13"/>
+                   <String fx:value="C21"/>
+                   <String fx:value="C22"/>
+                   <String fx:value="C23"/>
+                   <String fx:value="S01"/>
+                   <String fx:value="S02"/>
+               </FXCollections>
+           </items>
+       </ChoiceBox>
+      
+       
+   </children>
+</AnchorPane>
