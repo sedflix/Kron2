@@ -1,6 +1,5 @@
 <component name="libraryTable">
-  <library name="Hibernate 5.2.11-5.2.11" type="hibernate">
-    <properties version="5.2.11" />
+  <library name="Hibernate 5.2.11-5.2.11">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/src/lib/classmate-1.3.0.jar!/" />
       <root url="jar://$PROJECT_DIR$/src/lib/hibernate-commons-annotations-5.0.1.Final.jar!/" />
