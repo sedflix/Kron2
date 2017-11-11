@@ -5,17 +5,16 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 public class User {
 
     @Column
     private String name;
-    @Id
-    @Column(unique = true)
+    @Column(unique = true, nullable = true)
     private String rollNumber;
+    @Id
     @Column(unique = true)
     private String email;
     @Column
@@ -24,8 +23,17 @@ public class User {
     private Group groupType;
 
     @Column
-    @OneToMany(mappedBy = "courseId")
-    private Set<Course> auditedCourse = new HashSet<>();
+    @OneToMany
+    private List<Course> auditedCourse;
+
+
+    @OneToMany
+    private List<Course> registeredCourse;
+
+    @OneToMany
+    private List<Course> shoppingCourse;
+
+
 
 
     public User(String name, String rollNumber, String email, String password, Group groupType) {
