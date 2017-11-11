@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Admin extends User {
-    public Admin(String emailId) {
-        super(emailId);
+
+    public Admin(String name, String rollNumber, String email, String password, Group groupType) {
+        super(name, rollNumber, email, password, groupType);
     }
 
     public  List<Event> getAllRequests() {

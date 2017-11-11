@@ -34,5 +34,7 @@
 
         <!--<mapping class="org.hibernate.tutorial.hbm.Event"/>-->
         <mapping class="api.Room"/>
+        <mapping class="api.User"/>
+        <mapping class="api.Course"/>
     </session-factory>
 </hibernate-configuration>

@@ -7,8 +7,9 @@ public class Student extends User {
 
     CourseStudentMap courseStudentMap;
 
-    public Student(String emailId) {
-        super(emailId);
+    public Student(String name, String rollNumber, String email, String password, Group groupType, CourseStudentMap courseStudentMap) {
+        super(name, rollNumber, email, password, groupType);
+        this.courseStudentMap = courseStudentMap;
     }
 
     public List<Course> getRegisterdCourses() {

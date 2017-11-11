@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Faculty extends User {
-    public Faculty(String emailId) {
-        super(emailId);
+
+
+    public Faculty(String name, String rollNumber, String email, String password, Group groupType) {
+        super(name, rollNumber, email, password, groupType);
     }
 
     public boolean addEvent(Event event) {

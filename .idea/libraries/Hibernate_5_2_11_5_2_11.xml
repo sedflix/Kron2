@@ -13,8 +13,10 @@
       <root url="jar://$PROJECT_DIR$/src/lib/javassist-3.20.0-GA.jar!/" />
       <root url="jar://$PROJECT_DIR$/src/lib/hibernate-core-5.2.11.Final.jar!/" />
       <root url="jar://$PROJECT_DIR$/src/lib/com.mysql.jdbc_5.1.5.jar!/" />
+      <root url="file://$PROJECT_DIR$/src/lib" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/src/lib" recursive="false" />
   </library>
 </component>
