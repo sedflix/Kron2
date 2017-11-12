@@ -4,9 +4,6 @@ package api;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class User {
@@ -28,8 +25,8 @@ public class User {
     @Column
     private Group groupType;
 
-    @OneToMany(mappedBy = "creators")
-    private List<Event> eventCreated = new ArrayList<>();
+//    @OneToMany(mappedBy = "creators")
+//    private List<Event> eventCreated = new ArrayList<>();
 
 
     public User(String name, String rollNumber, String email, String password, Group groupType) {

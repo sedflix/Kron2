@@ -36,7 +36,7 @@
         <mapping class="api.Admin"/>
         <mapping class="api.Faculty"/>
         <mapping class="api.Course"/>
-        <mapping class="api.Event"/>
+        <!--<mapping class="api.Event"/>-->
         <mapping class="api.CourseEvent"/>
 
     </session-factory>

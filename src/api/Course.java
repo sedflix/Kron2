@@ -54,7 +54,7 @@ public class Course {
     private List<Student> shoppingStudents = new ArrayList<>();
 
     @OneToMany(mappedBy = "course")
-    private List<Event> events = new ArrayList<>();
+    private List<CourseEvent> events = new ArrayList<>();
 
     public Course(String name, List<String> courseCode, List<Department> departments, List<Integer> courseNumber, List<Faculty> faculties, List<String> postConditions, int credits, String event) {
         this.name = name;
