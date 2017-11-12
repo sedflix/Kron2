@@ -1,15 +1,33 @@
 package api;
 
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Student extends User {
 
-    CourseStudentMap courseStudentMap;
 
-    public Student(String name, String rollNumber, String email, String password, Group groupType, CourseStudentMap courseStudentMap) {
+    @ManyToMany
+    private List<Course> auditedCourse = new ArrayList<>();
+
+    @ManyToMany
+    private List<Course> registeredCourse = new ArrayList<>();
+    ;
+
+    @ManyToMany
+    private List<Course> shoppingCourse = new ArrayList<>();
+
+
+    public Student(String name, String rollNumber, String email, String password, Group groupType) {
         super(name, rollNumber, email, password, groupType);
-        this.courseStudentMap = courseStudentMap;
+    }
+
+    public Student() {
     }
 
     public List<Course> getRegisterdCourses() {

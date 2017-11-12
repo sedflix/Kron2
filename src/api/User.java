@@ -5,6 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -12,28 +13,23 @@ public class User {
 
     @Column
     private String name;
+
     @Column(unique = true, nullable = true)
     private String rollNumber;
+
     @Id
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
+
+
     @Column
     private String password;
+
     @Column
     private Group groupType;
 
-    @Column
-    @OneToMany
-    private List<Course> auditedCourse;
-
-
-    @OneToMany
-    private List<Course> registeredCourse;
-
-    @OneToMany
-    private List<Course> shoppingCourse;
-
-
+    @OneToMany(mappedBy = "creators")
+    private List<Event> eventCreated = new ArrayList<>();
 
 
     public User(String name, String rollNumber, String email, String password, Group groupType) {

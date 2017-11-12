@@ -1,11 +1,7 @@
 package api;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,13 +10,13 @@ import java.util.List;
 public class Room {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int roomID;
 
     @Column(nullable = false)
     private String roomName;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private int capacity;
 
 

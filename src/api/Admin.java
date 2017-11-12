@@ -1,17 +1,26 @@
 package api;
 
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Admin extends User {
 
     public Admin(String name, String rollNumber, String email, String password, Group groupType) {
         super(name, rollNumber, email, password, groupType);
     }
 
+    public Admin() {
+    }
+
     public  List<Event> getAllRequests() {
         return new ArrayList<Event>();
     }
+
     public List<Event> getAllPendingRequests(){
         return new ArrayList<Event>();
     }

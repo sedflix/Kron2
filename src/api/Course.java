@@ -8,7 +8,7 @@ import java.util.List;
 public class Course {
 
     @Id
-    @GeneratedValue()
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int courseId;
 
     @Column
@@ -29,10 +29,6 @@ public class Course {
     @Column
     private List<Integer> courseNumber;
 
-    @Column
-    @ManyToMany
-    private List<User> faculties;
-
     @ElementCollection
     @CollectionTable
     @Column
@@ -44,7 +40,23 @@ public class Course {
     @Column
     private String event;
 
-    public Course(String name, List<String> courseCode, List<Department> departments, List<Integer> courseNumber, List<User> faculties, List<String> postConditions, int credits, String event) {
+    @ManyToMany(mappedBy = "coursesTaught")
+    private List<Faculty> faculties = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "registeredCourse")
+    private List<Student> registeredStudents = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "auditedCourse")
+    private List<Student> auditedStudents = new ArrayList<>();
+    ;
+
+    @ManyToMany(mappedBy = "shoppingCourse")
+    private List<Student> shoppingStudents = new ArrayList<>();
+
+    @OneToMany(mappedBy = "course")
+    private List<Event> events = new ArrayList<>();
+
+    public Course(String name, List<String> courseCode, List<Department> departments, List<Integer> courseNumber, List<Faculty> faculties, List<String> postConditions, int credits, String event) {
         this.name = name;
         this.courseCode = courseCode;
         this.departments = departments;
@@ -98,11 +110,11 @@ public class Course {
         this.courseNumber = courseNumber;
     }
 
-    public List<User> getFaculties() {
+    public List<Faculty> getFaculties() {
         return faculties;
     }
 
-    public void setFaculties(List<User> faculties) {
+    public void setFaculties(List<Faculty> faculties) {
         this.faculties = faculties;
     }
 

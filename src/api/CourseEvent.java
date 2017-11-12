@@ -13,6 +13,7 @@ import java.util.List;
 /**
  * The Fixed Weekly timetable will be taken from this table
  */
+@Entity
 public class CourseEvent {
     @Id
     @GeneratedValue
@@ -22,16 +23,19 @@ public class CourseEvent {
     private Time startTime;
     @Column
     private Time endTime;
-    @Column
+
+    @ManyToOne
     private Room room;
+
     @Column
     private String description;
+
     @Column
     private DayOfWeek dayOfWeek;
 
     @ManyToOne
-    @JoinColumn(name = "courseId")
     private Course course;
+
     @Column
     private int eventType; // 1 -> Class; 2 -> Lab; 3 -> TA ;
 
