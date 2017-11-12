@@ -21,6 +21,7 @@ public class CourseEvent {
 
     @Column
     private Time startTime;
+
     @Column
     private Time endTime;
 

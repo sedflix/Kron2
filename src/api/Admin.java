@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-
 public class Admin extends User {
 
     public Admin(String name, String rollNumber, String email, String password, Group groupType) {

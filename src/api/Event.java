@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -13,19 +13,13 @@ import java.util.List;
 public class Event {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int eventID;
-
-    @Column
-    @Temporal(TemporalType.TIMESTAMP)
-    private Calendar startTime;
-
-    @Column
-    @Temporal(TemporalType.TIMESTAMP)
-    private Calendar endTime;
 
     @ManyToOne
     private Room room;
+
+    @ManyToOne
+    private Course course;
 
     @Column
     private String tagline;
@@ -37,34 +31,33 @@ public class Event {
     private User creators;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Calendar creationTime;
+    private Date creationTime;
+
+    @Temporal(TemporalType.TIME)
+    private Date startTime;
+
+    @Temporal(TemporalType.TIME)
+    private Date endTime;
+
+    @Temporal(TemporalType.DATE)
+    private Date date;
+
 
     @Column
     private boolean isCancelled;
 
     @Column
     private boolean isPending;
-
     @Column
     private boolean isRejected;
-
     @Column
-    private boolean check;
-
+    private boolean checkWhy;
     @Column
     private boolean isCourseEvent;
 
-    @ManyToOne
-    private Course course;
-
-
-    public Event(int eventID) {
-        this.eventID = eventID;
-    }
 
     public Event() {
     }
-
 
 
     public boolean addEvent(Time startTime, Time endTime, Room room, String tagline, String description, User creators, Timestamp creationTime, boolean isCancelled, boolean isPending, boolean isRejected, boolean check, boolean isCourseEvent, Course course) {
@@ -87,21 +80,6 @@ public class Event {
         return new ArrayList<Event>();
     }
 
-    public Calendar getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(Calendar startTime) {
-        this.startTime = startTime;
-    }
-
-    public Calendar getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Calendar endTime) {
-        this.endTime = endTime;
-    }
 
     public Room getRoom() {
         return room;
@@ -109,6 +87,14 @@ public class Event {
 
     public void setRoom(Room room) {
         this.room = room;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     public String getTagline() {
@@ -135,12 +121,36 @@ public class Event {
         this.creators = creators;
     }
 
-    public Calendar getCreationTime() {
+    public Date getCreationTime() {
         return creationTime;
     }
 
-    public void setCreationTime(Calendar creationTime) {
+    public void setCreationTime(Date creationTime) {
         this.creationTime = creationTime;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public boolean isCancelled() {
@@ -167,12 +177,12 @@ public class Event {
         isRejected = rejected;
     }
 
-    public boolean isCheck() {
-        return check;
+    public boolean isCheckWhy() {
+        return checkWhy;
     }
 
-    public void setCheck(boolean check) {
-        this.check = check;
+    public void setCheckWhy(boolean checkWhy) {
+        this.checkWhy = checkWhy;
     }
 
     public boolean isCourseEvent() {
@@ -181,14 +191,6 @@ public class Event {
 
     public void setCourseEvent(boolean courseEvent) {
         isCourseEvent = courseEvent;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
     }
 }
 

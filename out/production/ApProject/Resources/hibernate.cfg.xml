@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQL55Dialect</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL57Dialect</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/spring</property>
         <property name="hibernate.connection.username">root</property>
@@ -25,7 +25,7 @@
 
         <!-- Drop the existing tables and create new one -->
 
-        <property name="hbm2ddl.auto">create</property>
+        <property name="hbm2ddl.auto">update</property>
 
         <!-- Mention here all the model classes along with their package name -->
 
@@ -36,7 +36,7 @@
         <mapping class="api.Admin"/>
         <mapping class="api.Faculty"/>
         <mapping class="api.Course"/>
-        <!--<mapping class="api.Event"/>-->
+        <mapping class="api.Event"/>
         <mapping class="api.CourseEvent"/>
 
     </session-factory>
