@@ -25,20 +25,10 @@ public class User {
     @Column
     private String password;
 
-    @Column
-    private Group groupType;
 
     @OneToMany(mappedBy = "creators")
     private List<Event> eventCreated = new ArrayList<>();
 
-
-    public User(String name, String rollNumber, String email, String password, Group groupType) {
-        this.name = name;
-        this.rollNumber = rollNumber;
-        this.email = email;
-        this.password = password;
-        this.groupType = groupType;
-    }
 
     public User() {
     }
@@ -75,12 +65,5 @@ public class User {
         this.password = password;
     }
 
-    public Group getGroupType() {
-        return groupType;
-    }
-
-    public void setGroupType(Group groupType) {
-        this.groupType = groupType;
-    }
 }
 

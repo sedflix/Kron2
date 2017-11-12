@@ -12,10 +12,6 @@ public class Faculty extends User {
     @ManyToMany
     private List<Course> coursesTaught = new ArrayList<Course>();
 
-    public Faculty(String name, String rollNumber, String email, String password, Group groupType) {
-        super(name, rollNumber, email, password, groupType);
-    }
-
     public Faculty() {
     }
 

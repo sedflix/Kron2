@@ -48,7 +48,6 @@ public class Course {
 
     @ManyToMany(mappedBy = "auditedCourse")
     private List<Student> auditedStudents = new ArrayList<>();
-    ;
 
     @ManyToMany(mappedBy = "shoppingCourse")
     private List<Student> shoppingStudents = new ArrayList<>();
