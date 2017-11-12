@@ -16,7 +16,7 @@ import java.util.List;
 @Entity
 public class CourseEvent {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int courseEventID;
 
     @Column

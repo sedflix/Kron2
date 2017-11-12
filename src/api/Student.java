@@ -14,15 +14,9 @@ public class Student extends User {
 
     @ManyToMany
     private List<Course> registeredCourse = new ArrayList<>();
-    ;
 
     @ManyToMany
     private List<Course> shoppingCourse = new ArrayList<>();
-
-
-    public Student(String name, String rollNumber, String email, String password, Group groupType) {
-        super(name, rollNumber, email, password, groupType);
-    }
 
     public Student() {
     }

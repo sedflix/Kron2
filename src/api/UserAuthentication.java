@@ -6,7 +6,6 @@ public class UserAuthentication {
     public void login(String email, String password) {
 
         User user;
-        Group group = null;
 //        switch (group) {
 //            case ADMIN:
 //                user = new Admin();

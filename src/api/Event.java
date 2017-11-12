@@ -13,6 +13,7 @@ import java.util.List;
 public class Event {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int eventID;
 
     @ManyToOne
