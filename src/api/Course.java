@@ -34,6 +34,11 @@ public class Course {
     @Column
     private List<String> postConditions;
 
+    @ElementCollection
+    @CollectionTable
+    @Column
+    private List<String> preConditions;
+
     @Column
     private int credits;
 
@@ -83,6 +88,14 @@ public class Course {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<String> getPreConditions() {
+        return preConditions;
+    }
+
+    public void setPreConditions(List<String> preConditions) {
+        this.preConditions = preConditions;
     }
 
     public List<String> getCourseCode() {
