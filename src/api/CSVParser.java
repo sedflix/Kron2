@@ -28,57 +28,53 @@ public class CSVParser {
         return ourSessionFactory.openSession();
     }
 
-    public static void main(String [] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         final Session session = getSession();
-        session.beginTransaction();
-        BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Abhishek Gupta\\Desktop\\cse2ndyear.csv"));
+        BufferedReader br = new BufferedReader(new FileReader("cse2ndyear.csv"));
         String line;
         line = br.readLine();
-        while((line = br.readLine())!=null){
+        while ((line = br.readLine()) != null) {
+            session.beginTransaction();
 //            line = line.replaceAll("\"*,*\""," ");
             System.out.println(line);
             Object[] b = line.split(",");
             Course course = new Course();
             String name = (String) b[1];
-            List<String> code = new ArrayList(1);
-            List<Integer> number = new ArrayList(1);
-            List<Faculty> faculty = new ArrayList(1);
-            List<Department> departments = new ArrayList(1);
-            List<String> postConditions = new ArrayList(1);
-            List<String> preConditions = new ArrayList(1);
-            String email=name+"@iiitd.ac.in";
-            int credits = Integer.parseInt(((String) b[4]).replaceAll(" ",""));
+            List<Integer> number = new ArrayList<>(1);
+            List<Faculty> faculty = new ArrayList<>(1);
+            List<Department> departments = new ArrayList<>(1);
+            List<String> postConditions = new ArrayList<>(1);
+            List<String> preConditions = new ArrayList<>(1);
+            String email = name + "@iiitd.ac.in";
+            int credits = Integer.parseInt(((String) b[4]).replaceAll(" ", ""));
             Faculty prof = new Faculty();
-            code.add((String) b[5]);
-            String tempCourseStream = ((String) b[2]).substring(0,3);
+            String tempCourseStream = ((String) b[2]).substring(0, 3);
             number.add(Integer.parseInt(((String) b[2]).substring(4)));
             prof.setName((String) b[3]);
             prof.setEmail(email);
+            session.saveOrUpdate(prof);
             faculty.add(prof);
-            if (tempCourseStream.equals("CSE")){
+            if (tempCourseStream.equals("CSE")) {
                 departments.add(Department.CSE);
-            }
-            else if(tempCourseStream.equals("HSS")){
+            } else if (tempCourseStream.equals("HSS")) {
                 departments.add(Department.HSS);
-            }
-            else if (tempCourseStream.equals("MTH")){
+            } else if (tempCourseStream.equals("MTH")) {
                 departments.add(Department.MTH);
             }
-            postConditions.add((String) b[14]);
-            preConditions.add((String) b[13]);
+            postConditions.add(((String) b[14]));
+            preConditions.add(((String) b[13]));
             course.setCredits(credits);
+            System.out.println((String) b[14]);
             course.setPreConditions(preConditions);
             course.setPostConditions(postConditions);
             course.setFaculties(faculty);
             course.setName(name);
             course.setDepartments(departments);
-            course.setCourseCode(code);
-            session.persist(course);
-            session.save(prof);
-
+            course.setCourseCode((String) b[5]);
+            session.saveOrUpdate(course);
+            session.getTransaction().commit();
 //            System.out.println(b[14]);
         }
-        session.getTransaction().commit();
         br.close();
 
 

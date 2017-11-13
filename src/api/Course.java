@@ -7,17 +7,13 @@ import java.util.List;
 @Entity
 public class Course {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int courseId;
 
     @Column
     private String name;
 
-    @ElementCollection
-    @CollectionTable
     @Column
-    private List<String> courseCode;
+    @Id
+    private String courseCode;
 
     @ElementCollection
     @CollectionTable
@@ -31,19 +27,16 @@ public class Course {
 
     @ElementCollection
     @CollectionTable
-    @Column
+    @Column(length = 10000)
     private List<String> postConditions;
 
     @ElementCollection
     @CollectionTable
-    @Column
+    @Column(length = 10000)
     private List<String> preConditions;
 
     @Column
     private int credits;
-
-    @Column
-    private String event;
 
     @ManyToMany(mappedBy = "coursesTaught")
     private List<Faculty> faculties = new ArrayList<>();
@@ -60,7 +53,7 @@ public class Course {
     @OneToMany(mappedBy = "course")
     private List<CourseEvent> events = new ArrayList<>();
 
-    public Course(String name, List<String> courseCode, List<Department> departments, List<Integer> courseNumber, List<Faculty> faculties, List<String> postConditions, int credits, String event) {
+    public Course(String name, String courseCode, List<Department> departments, List<Integer> courseNumber, List<Faculty> faculties, List<String> postConditions, int credits) {
         this.name = name;
         this.courseCode = courseCode;
         this.departments = departments;
@@ -68,18 +61,9 @@ public class Course {
         this.faculties = faculties;
         this.postConditions = postConditions;
         this.credits = credits;
-        this.event = event;
     }
 
     public Course() {
-    }
-
-    public int getCourseId() {
-        return courseId;
-    }
-
-    public void setCourseId(int courseId) {
-        this.courseId = courseId;
     }
 
     public String getName() {
@@ -98,11 +82,11 @@ public class Course {
         this.preConditions = preConditions;
     }
 
-    public List<String> getCourseCode() {
+    public String getCourseCode() {
         return courseCode;
     }
 
-    public void setCourseCode(List<String> courseCode) {
+    public void setCourseCode(String courseCode) {
         this.courseCode = courseCode;
     }
 
@@ -146,13 +130,6 @@ public class Course {
         this.credits = credits;
     }
 
-    public String getEvent() {
-        return event;
-    }
-
-    public void setEvent(String event) {
-        this.event = event;
-    }
 
     public List<Course> search(String query) {
         return new ArrayList<Course>();
