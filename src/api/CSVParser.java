@@ -7,6 +7,8 @@ import org.hibernate.cfg.Configuration;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.sql.Time;
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,11 +86,40 @@ public class CSVParser {
             course.setDepartments(departments);
             course.setCourseCode((String) b[5]);
 
+            for (int i = 0; i<5; i++) {
+                String timeRoomInfo = ((String) b[6+i]).replaceAll(" ","");
+                if (timeRoomInfo.length()<10){
+                    continue;
+                }
+                Time startTime = new Time(Integer.parseInt(timeRoomInfo.substring(0, 2)), Integer.parseInt(timeRoomInfo.substring(3, 5)), 00);
+                Time endTime = new Time(Integer.parseInt(timeRoomInfo.substring(6, 8)), Integer.parseInt(timeRoomInfo.substring(9, 11)), 00);
+                Room room = new Room(timeRoomInfo.substring(13));
+                DayOfWeek dayOfWeek = DayOfWeek.MONDAY;
+                if (i==0){
+                    dayOfWeek=DayOfWeek.MONDAY;
+                }
+                else if(i==1){
+                    dayOfWeek = DayOfWeek.TUESDAY;
+                }
+                else if(i==2){
+                    dayOfWeek = DayOfWeek.WEDNESDAY;
+                }
+                else if (i==3){
+                    dayOfWeek = DayOfWeek.THURSDAY;
+                }
+                else if (i==4){
+                    dayOfWeek = DayOfWeek.FRIDAY;
+                }
+                CourseEvent event = new CourseEvent(startTime, endTime, room, "Why the fuck do we have description?", dayOfWeek, course, 1);
+                session.saveOrUpdate(event);
+            }
             session.saveOrUpdate(prof);
             session.saveOrUpdate(course);
             session.getTransaction().commit();
         }
         br.close();
+        session.close();
+        ourSessionFactory.close();
 
 
     }

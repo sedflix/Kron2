@@ -27,7 +27,9 @@ public class Room {
         this.roomName = roomName;
         this.capacity = capacity;
     }
-
+    public Room(String roomName){
+        this.roomName = roomName;
+    }
     public int getRoomID() {
         return roomID;
     }
