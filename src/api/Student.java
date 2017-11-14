@@ -48,6 +48,10 @@ public class Student extends User {
         return getShoppingCourse().contains(course);
     }
 
+
+    /*
+
+     */
     public boolean createEventRequest(Session session, String name, Room room, String description, Date startTime, Date endTime) {
 
         if (new Date().before(startTime)) {

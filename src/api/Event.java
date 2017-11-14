@@ -34,10 +34,10 @@ public class Event {
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationTime;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIME)
     private Date startTime;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIME)
     private Date endTime;
 
     @Temporal(TemporalType.DATE)
