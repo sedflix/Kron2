@@ -108,6 +108,22 @@ public class CSVParser {
                     dayOfWeek = DayOfWeek.FRIDAY;
                 }
                 CourseEvent event = new CourseEvent(startTime, endTime, room, "Why the fuck do we have description?", dayOfWeek, course, 1);
+                Event event1 = new Event();
+                event1.setCourse(course);
+                event1.setCourseEvent(true);
+                event1.setRoom(room);
+                event1.setTagline("Class aa jaya karo bc");
+                event1.setDescription("useless as fuck");
+                event1.setCreators((User) faculty.get(0));
+                event1.setStartTime(startTime);
+                event1.setEndTime(endTime);
+                event1.setDate(startTime);
+                event1.setPending(true);
+                event1.setCancelled(false);
+                event1.setRejected(false);
+                event1.setCheckWhy(false);
+
+                session.saveOrUpdate(event1);
                 session.saveOrUpdate(room);
                 session.saveOrUpdate(event);
             }

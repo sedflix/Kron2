@@ -1,5 +1,7 @@
 package api;
 
+import org.hibernate.Session;
+
 import javax.persistence.*;
 import java.sql.Time;
 import java.time.DayOfWeek;
@@ -51,6 +53,23 @@ public class CourseEvent {
     }
 
     public CourseEvent() {
+    }
+
+
+    public boolean add() {
+        return true;
+    }
+
+    public boolean update() {
+        return true;
+    }
+
+    public List<Event> getAllCourseEvents(Session session) {
+        return new ArrayList<Event>();
+    }
+
+    public List<Event> getCourseOn(Date date) {
+        return new ArrayList<Event>();
     }
 
     public int getCourseEventID() {
@@ -117,21 +136,6 @@ public class CourseEvent {
         this.eventType = eventType;
     }
 
-    public boolean add() {
-        return true;
-    }
-
-    public boolean update() {
-        return true;
-    }
-
-    public List<Event> getAllCourseEvents() {
-        return new ArrayList<Event>();
-    }
-
-    public List<Event> getCourseOn(Date date) {
-        return new ArrayList<Event>();
-    }
 
 
 }

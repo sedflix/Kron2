@@ -4,6 +4,8 @@ import org.hibernate.Session;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -50,7 +52,7 @@ public class Course {
     private List<Student> shoppingStudents = new ArrayList<>();
 
     @OneToMany(mappedBy = "course")
-    private List<CourseEvent> events = new ArrayList<>();
+    private List<CourseEvent> courseEvents = new ArrayList<>();
 
     public Course(String name, String courseCode, List<Department> departments, List<Integer> courseNumber, List<Faculty> faculties, String postConditions, int credits) {
         this.name = name;
@@ -75,14 +77,28 @@ public class Course {
 
     }
 
+    public List<Event> getThisWeekEvents(Session session) {
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(calendar.getWeekYear(), calendar.getWeeksInWeekYear(), 0);
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.set(calendar.getWeekYear(), calendar.getWeeksInWeekYear(), 6);
+        return getEventInTimeSpan(session, calendar.getTime(), calendar2.getTime());
+    }
+
+    public List<Event> getEventInTimeSpan(Session session, Date start, Date end) {
+        Query query = session.createQuery("FROM Event event where event.course = :nocourse and ( event.date >= :startDate and event.date <= :endDate )", Event.class);
+        query.setParameter("nocourse", this);
+        query.setParameter("startDate", start);
+        query.setParameter("endDate", end);
+        List<Event> list = query.getResultList();
+        return list;
+    }
+
     public static void main(String[] args) {
         Session session = CSVParser.getSession();
         Course.search(session, "Major schools of poetry post 19th century");
         session.close();
-    }
-
-    public List<CourseEvent> getCourseEvents() {
-        return new ArrayList<CourseEvent>();
     }
 
 
@@ -94,9 +110,6 @@ public class Course {
         this.name = name;
     }
 
-    public List<Event> getThisWeekEvents() {
-        return new ArrayList<Event>();
-    }
 
     public String getPreConditions() {
         return preConditions;

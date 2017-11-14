@@ -27,9 +27,33 @@ public class Room {
         this.roomName = roomName;
         this.capacity = capacity;
     }
+
+
+    public List<Room> getAllRooms() {
+        return new ArrayList<Room>();
+    }
+
+    public List<Room> getAvailableRooms(Date date) {
+        return new ArrayList<Room>();
+    }
+
+    public List<Room> getAvailableRooms(Date date, Time startTime, Time endTime) {
+        return new ArrayList<Room>();
+    }
+
+    public List<Room> getAvailableRoomOnwardsNow() {
+        return new ArrayList<Room>();
+    }
+
+    public List<Room> getAvailableRoomOnwards(Date date, Time startTime) {
+        return new ArrayList<Room>();
+    }
+
+
     public Room(String roomName){
         this.roomName = roomName;
     }
+
     public int getRoomID() {
         return roomID;
     }
@@ -54,23 +78,4 @@ public class Room {
         this.capacity = capacity;
     }
 
-    public List<Room> getAllRooms() {
-        return new ArrayList<Room>();
-    }
-
-    public List<Room> getAvailableRooms(Date date) {
-        return new ArrayList<Room>();
-    }
-
-    public List<Room> getAvailableRooms(Date date, Time startTime, Time endTime) {
-        return new ArrayList<Room>();
-    }
-
-    public List<Room> getAvailableRoomOnwardsNow(){
-        return new ArrayList<Room>();
-    }
-
-    public List<Room> getAvailableRoomOnwards(Date date, Time startTime){
-        return new ArrayList<Room>();
-    }
 }
