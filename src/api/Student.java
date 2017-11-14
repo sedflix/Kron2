@@ -4,6 +4,7 @@ import org.hibernate.Session;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -61,7 +62,9 @@ public class Student extends User {
         Event event = new Event();
         event.setTagline(name);
         event.setDescription(description);
+
         event.setRoom(room);
+
         event.setStartTime(startTime);
         event.setEndTime(endTime);
         event.setCancelled(false);
@@ -84,19 +87,25 @@ public class Student extends User {
 
     }
 
-    public boolean requestEvent(Event event) {
-        return true;
+//    public boolean requestEvent(Event event) {
+//        return true;
+//    }
+
+    public List<Event> getAllEventRequests(Session session) {
+
+        Query query = session.createQuery("FROM Event event where event.creators = :user");
+        query.setParameter("user", this);
+        return (List<Event>) query.getResultList();
     }
 
-    public List<Event> getAllEventRequests() {
-        return new ArrayList<Event>();
+    public List<Event> getPendingEventRequests(Session session) {
+        Query query = session.createQuery("FROM Event event where event.creators = :user and event.isPending = :pending");
+        query.setParameter("user", this);
+        query.setParameter("pending", true);
+        return (List<Event>) query.getResultList();
     }
 
-    public List<Event> getPendingEventRequests() {
-        return new ArrayList<Event>();
-    }
-
-    public boolean cancelEvenntRequest(Event event) {
+    public boolean cancelEventRequest(Session session, Event event) {
         return true;
     }
 
