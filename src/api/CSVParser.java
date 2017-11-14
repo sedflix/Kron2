@@ -7,6 +7,7 @@ import org.hibernate.cfg.Configuration;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.sql.Date;
 import java.sql.Time;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
@@ -117,14 +118,18 @@ public class CSVParser {
                 event1.setCreators((User) faculty.get(0));
                 event1.setStartTime(startTime);
                 event1.setEndTime(endTime);
-                event1.setDate(startTime);
+                event1.setDate(new Date(startTime.getTime()));
                 event1.setPending(true);
                 event1.setCancelled(false);
                 event1.setRejected(false);
                 event1.setCheckWhy(false);
 
                 session.saveOrUpdate(event1);
-                session.saveOrUpdate(room);
+                try {
+                    session.saveOrUpdate(room);
+                } catch (Exception e) {
+
+                }
                 session.saveOrUpdate(event);
             }
             session.saveOrUpdate(prof);

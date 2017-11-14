@@ -1,15 +1,18 @@
 package api;
 
+import org.hibernate.CacheMode;
 import org.hibernate.Session;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Query;
+import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class Room {
@@ -23,7 +26,7 @@ public class Room {
     private int capacity;
 
 
-    public  Room() {
+    public Room() {
     }
 
     public Room(String roomName, int capacity) {
@@ -37,33 +40,42 @@ public class Room {
         return (List<Room>) query.getResultList();
     }
 
+    public Room(String roomName) {
+        this.roomName = roomName;
+    }
+
     /**
      * @param session Hibernate session
      * @param date    date
      * @return list of rooms that don't have any event on date
      */
     public static List<Room> getAvailableRoomsOn(Session session, Date date) {
-        Query query = session.createQuery("select Room from Room, Event inner join Event.room where not (Event.date = :dateE)");
-        query.setParameter("dateE", date);
-        return (List<Room>) query.getResultList();
+
+        Calendar fromDate = Calendar.getInstance();
+        fromDate.setTime(date);
+        fromDate.set(Calendar.HOUR_OF_DAY, 0);
+        fromDate.set(Calendar.MINUTE, 0);
+        fromDate.set(Calendar.SECOND, 0);
+        fromDate.set(Calendar.MILLISECOND, 0);
+
+        Calendar toDate = Calendar.getInstance();
+        toDate.setTime(date);
+        toDate.set(Calendar.HOUR_OF_DAY, 23);
+        toDate.set(Calendar.MINUTE, 59);
+        toDate.set(Calendar.SECOND, 59);
+        toDate.set(Calendar.MILLISECOND, 0);
+
+        return getAvailableRoomsBetween(session, new Time(fromDate.getTimeInMillis()), new Time(toDate.getTimeInMillis()), new Date(fromDate.getTimeInMillis()));
     }
 
-    public static List<Room> getAvailableRoomsBetween(Session session, Date startTime, Date endTime, Date date) {
-        Query query = session.createQuery("select Room from Room, Event inner join Event.room where not ( Event.startTime >= :start and Event.endTime <= :endT and Event.date = :dateE )");
-        query.setParameter("start", startTime);
-        query.setParameter("endT", endTime);
-        query.setParameter("dateE", date);
-        return (List<Room>) query.getResultList();
-    }
+    public static List<Room> getAvailableRoomsBetween(Session session, Time startTime, Time endTime, Date date) {
 
+        return Room.getAllRooms(session)
+                .stream()
+                .filter((o) ->
+                        o.isFreeBetween(session, startTime, endTime, date))
+                .collect(Collectors.toList());
 
-    public boolean isFreeBetween(Session session, Date startTime, Date endTime, Date date) {
-        Query query = session.createQuery("from Event where Event.room = :room and (Event.startTime >= :start and Event.endTime <= :endT) and Event.date = :dateE");
-        query.setParameter("room", this);
-        query.setParameter("start", startTime);
-        query.setParameter("endT", endTime);
-        query.setParameter("dateE", date);
-        return query.getResultList().size() == 0;
     }
 
     public static List<Room> getAvailableRoomOnwardsNow() {
@@ -76,14 +88,32 @@ public class Room {
 
     public static void main(String[] args) {
         Session session = CSVParser.getSession();
+        session.setCacheMode(CacheMode.GET);
 
-        Room.getAllRooms(session).forEach((o) -> {
+        List<Room> rooms = Room.getAllRooms(session);
+        rooms.forEach((o) -> {
             System.out.println(o.getRoomName());
+//            System.out.print("--");
+//            System.out.println(o.isFreeBetween(session, Time.valueOf("01:00:00"), Time.valueOf("23:00:00"), Date.valueOf("2017-11-15")));
+
         });
+
+//        rooms = Room.getAvailableRoomsBetween(session, Time.valueOf("01:00:00"), Time.valueOf("23:00:00"), Date.valueOf("2017-11-15"));
+//        rooms.forEach(o -> System.out.println(o.getRoomName()));
+        rooms = Room.getAvailableRoomsOn(session, Date.valueOf("2017-11-15"));
+        rooms.forEach(o -> System.out.println(o.getRoomName()));
+
     }
 
-    public Room(String roomName){
-        this.roomName = roomName;
+    public boolean isFreeBetween(Session session, Time startTime, Time endTime, Date date) {
+
+        Query query = session.createQuery("select event from Event as event where event.room = :room and (event.startTime >= :start and event.endTime <= :endT) and event.date = :dateE");
+        query.setParameter("room", this);
+        query.setParameter("start", startTime);
+        query.setParameter("endT", endTime);
+        query.setParameter("dateE", date);
+        return query.getResultList().size() == 0;
+
     }
 
 

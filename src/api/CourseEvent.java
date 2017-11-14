@@ -3,10 +3,10 @@ package api;
 import org.hibernate.Session;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.sql.Time;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 

@@ -1,10 +1,10 @@
 package api;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -31,16 +31,16 @@ public class Event {
     @ManyToOne
     private User creators;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date creationTime;
+    @Basic
+    private Timestamp creationTime;
 
-    @Temporal(TemporalType.TIME)
-    private Date startTime;
+    @Basic
+    private Time startTime;
 
-    @Temporal(TemporalType.TIME)
-    private Date endTime;
+    @Basic
+    private Time endTime;
 
-    @Temporal(TemporalType.DATE)
+    @Basic
     private Date date;
 
     @Column
@@ -121,27 +121,27 @@ public class Event {
         this.creators = creators;
     }
 
-    public Date getCreationTime() {
+    public Timestamp getCreationTime() {
         return creationTime;
     }
 
-    public void setCreationTime(Date creationTime) {
+    public void setCreationTime(Timestamp creationTime) {
         this.creationTime = creationTime;
     }
 
-    public Date getStartTime() {
+    public Time getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(Time startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public Time getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(Time endTime) {
         this.endTime = endTime;
     }
 

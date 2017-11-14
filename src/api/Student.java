@@ -5,6 +5,8 @@ import org.hibernate.Session;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Query;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -69,13 +71,13 @@ public class Student extends User {
 
         event.setRoom(room);
 
-        event.setStartTime(startTime);
-        event.setEndTime(endTime);
+        event.setStartTime(new Time(startTime.getTime()));
+        event.setEndTime(new Time(endTime.getTime()));
         event.setCancelled(false);
         event.setRejected(false);
         event.setPending(true);
         event.setCourseEvent(false);
-        event.setCreationTime(new Date());
+        event.setCreationTime(new Timestamp(new Date().getTime()));
         event.setCreators(this);
 
         try {
