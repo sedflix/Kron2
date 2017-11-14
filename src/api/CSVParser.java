@@ -17,10 +17,7 @@ public class CSVParser {
 
     static {
         try {
-            Configuration configuration = new Configuration();
-            configuration.configure();
-
-            ourSessionFactory = configuration.buildSessionFactory();
+            ourSessionFactory = new Configuration().configure().buildSessionFactory();
         } catch (Throwable ex) {
             throw new ExceptionInInitializerError(ex);
         }
@@ -44,19 +41,21 @@ public class CSVParser {
 
             session.beginTransaction();
 
+            //breaking line into stuffs
             Object[] b = line.split(",");
             String name = (String) b[1];
             String email = name + "@iiitd.ac.in";
             int credits = Integer.parseInt(((String) b[4]).replaceAll(" ", ""));
             String tempCourseStream = ((String) b[2]).substring(0, 3);
 
+            System.out.println(line);
 
+
+            //initialisation of required objects
             Course course = new Course();
             List<Integer> number = new ArrayList<>(1);
             List<Faculty> faculty = new ArrayList<>(1);
             List<Department> departments = new ArrayList<>(1);
-            List<String> postConditions = new ArrayList<>(1);
-            List<String> preConditions = new ArrayList<>(1);
             Faculty prof = new Faculty();
 
 
@@ -74,13 +73,11 @@ public class CSVParser {
                 departments.add(Department.MTH);
             }
 
-            postConditions.add(((String) b[14]));
-            preConditions.add(((String) b[13]));
 
 
             course.setCredits(credits);
-            course.setPreConditions(preConditions);
-            course.setPostConditions(postConditions);
+            course.setPreConditions((String) b[13]);
+            course.setPostConditions((String) b[14]);
             course.setFaculties(faculty);
             course.setName(name);
             course.setDepartments(departments);

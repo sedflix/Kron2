@@ -3,21 +3,19 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="271.9007595772787" y="398.09973579920745">api.Student</node>
+    <node x="324.7128467635402" y="308.82215984147956">api.Student</node>
     <node x="711.0" y="1407.0">api.CSVParser</node>
     <node x="508.0" y="1407.0">api.exceptions</node>
-    <node x="0.0" y="596.0">api.Event</node>
+    <node x="-84.24785336856013" y="612.3465984147953">api.Event</node>
     <node x="680.0" y="311.5">api.Faculty</node>
     <node x="500.0" y="1090.0">api.Room</node>
     <node x="886.0" y="596.0">api.Course</node>
     <node x="293.0" y="1407.0">api.ScheduleGenerator</node>
     <node x="0.0" y="1407.0">api.UserAuthentication</node>
     <node x="345.4007595772788" y="-95.56472919418759">api.User</node>
-    <node x="0.0" y="1090.0">api.CourseEvent</node>
-    <node x="329.0" y="1090.0">api.Department</node>
-    <node x="945.0" y="1090.0">api.Group</node>
+    <node x="82.99042272126815" y="930.3063077939233">api.CourseEvent</node>
+    <node x="409.47556142668435" y="1180.5350066050198">api.Department</node>
     <node x="0.0" y="289.5">api.Admin</node>
-    <node x="1179.0" y="1090.0">api.CourseStudentMap</node>
   </nodes>
   <notes />
   <edges>
@@ -38,9 +36,9 @@
       <point x="0.0" y="81.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.7952724885095206" x="617.6906373844122" y="310.73852377807134" />
+  <settings layout="Hierarchic Group" zoom="0.7952724885095206" x="433.8337186261559" y="1282.8926684280054" />
   <SelectedNodes>
-    <node>api.Student</node>
+    <node>api.CourseEvent</node>
   </SelectedNodes>
   <Categories>
     <Category>Fields</Category>

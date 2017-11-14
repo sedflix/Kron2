@@ -1,5 +1,8 @@
 package api;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,15 +28,12 @@ public class Course {
     @Column
     private List<Integer> courseNumber;
 
-    @ElementCollection
-    @CollectionTable
-    @Column(length = 10000)
-    private List<String> postConditions;
+    @Column(length = 50000)
+    private String postConditions;
 
-    @ElementCollection
-    @CollectionTable
+
     @Column(length = 10000)
-    private List<String> preConditions;
+    private String preConditions;
 
     @Column
     private int credits;
@@ -53,7 +53,7 @@ public class Course {
     @OneToMany(mappedBy = "course")
     private List<CourseEvent> events = new ArrayList<>();
 
-    public Course(String name, String courseCode, List<Department> departments, List<Integer> courseNumber, List<Faculty> faculties, List<String> postConditions, int credits) {
+    public Course(String name, String courseCode, List<Department> departments, List<Integer> courseNumber, List<Faculty> faculties, String postConditions, int credits) {
         this.name = name;
         this.courseCode = courseCode;
         this.departments = departments;
@@ -66,6 +66,31 @@ public class Course {
     public Course() {
     }
 
+
+    public static List<Course> search(Session session, String searchTerm) {
+
+        Criteria crit = session.createCriteria(Course.class);
+//        Restrictions.
+//        List<Course> results = crit.list();
+//        results.forEach((Course o) ->{
+//            System.out.println(o.getCourseCode());
+//        });
+
+
+        return new ArrayList<Course>();
+    }
+
+    public static void main(String[] args) {
+        Session session = CSVParser.getSession();
+        Course.search(session, "CSE");
+        session.close();
+    }
+
+    public List<CourseEvent> getCourseEvents() {
+        return new ArrayList<CourseEvent>();
+    }
+
+
     public String getName() {
         return name;
     }
@@ -74,12 +99,12 @@ public class Course {
         this.name = name;
     }
 
-    public List<String> getPreConditions() {
-        return preConditions;
+    public List<Event> getThisWeekEvents() {
+        return new ArrayList<Event>();
     }
 
-    public void setPreConditions(List<String> preConditions) {
-        this.preConditions = preConditions;
+    public String getPreConditions() {
+        return preConditions;
     }
 
     public String getCourseCode() {
@@ -114,12 +139,12 @@ public class Course {
         this.faculties = faculties;
     }
 
-    public List<String> getPostConditions() {
-        return postConditions;
+    public void setPreConditions(String preConditions) {
+        this.preConditions = preConditions;
     }
 
-    public void setPostConditions(List<String> postConditions) {
-        this.postConditions = postConditions;
+    public String getPostConditions() {
+        return postConditions;
     }
 
     public int getCredits() {
@@ -130,16 +155,7 @@ public class Course {
         this.credits = credits;
     }
 
-
-    public List<Course> search(String query) {
-        return new ArrayList<Course>();
-    }
-
-    public List<CourseEvent> getCourseEvents() {
-        return new ArrayList<CourseEvent>();
-    }
-
-    public List<Event> getThisWeekEvents() {
-        return new ArrayList<Event>();
+    public void setPostConditions(String postConditions) {
+        this.postConditions = postConditions;
     }
 }
