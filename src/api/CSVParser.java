@@ -111,6 +111,7 @@ public class CSVParser {
                     dayOfWeek = DayOfWeek.FRIDAY;
                 }
                 CourseEvent event = new CourseEvent(startTime, endTime, room, "Why the fuck do we have description?", dayOfWeek, course, 1);
+                session.saveOrUpdate(room);
                 session.saveOrUpdate(event);
             }
             session.saveOrUpdate(prof);
