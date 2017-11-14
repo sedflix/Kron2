@@ -1,6 +1,8 @@
 package api;
 
 
+import org.hibernate.Session;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -31,6 +33,23 @@ public class User {
 
 
     public User() {
+    }
+
+    public boolean deleteEventRequest(Session session, Event event) {
+        try {
+
+            if (event.getCreators().getEmail().equals(this.getEmail())) {
+                session.beginTransaction();
+                session.delete(event);
+                session.getTransaction().commit();
+            } else {
+                throw new Exception("The event was not created by you");
+            }
+        } catch (Exception e) {
+            System.out.println("failed to delete " + e.getMessage());
+            return false;
+        }
+        return true;
     }
 
     public String getName() {

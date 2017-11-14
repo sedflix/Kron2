@@ -63,8 +63,9 @@ public class Faculty extends User {
         return true;
     }
 
-    public boolean cancelEvent(Event event) {
-        return true;
+    public boolean addEvent(Session session, String name, Room room, String description, Time startTime, Time endTime, Date date) {
+
+        return addEvent(session, name, room, description, startTime, endTime, date, null);
     }
 
     public boolean updateEvent(Event event) {

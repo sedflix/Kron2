@@ -50,10 +50,6 @@ public class Student extends User {
         return getShoppingCourse().contains(course);
     }
 
-
-    /*
-
-     */
     public boolean createEventRequest(Session session, String name, Room room, String description, Time startTime, Time endTime, Date date) {
 
         if (new java.util.Date().before(startTime)) {
@@ -96,10 +92,6 @@ public class Student extends User {
 
     }
 
-//    public boolean requestEvent(Event event) {
-//        return true;
-//    }
-
     public List<Event> getAllEventRequests(Session session) {
 
         Query query = session.createQuery("FROM Event event where event.creators = :user");
@@ -112,10 +104,6 @@ public class Student extends User {
         query.setParameter("user", this);
         query.setParameter("pending", true);
         return (List<Event>) query.getResultList();
-    }
-
-    public boolean cancelEventRequest(Session session, Event event) {
-        return true;
     }
 
 
