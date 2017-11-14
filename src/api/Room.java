@@ -2,7 +2,10 @@ package api;
 
 import org.hibernate.Session;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Query;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,10 +14,8 @@ import java.util.List;
 @Entity
 public class Room {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int roomID;
 
+    @Id
     @Column(nullable = false)
     private String roomName;
 
@@ -55,17 +56,6 @@ public class Room {
         return (List<Room>) query.getResultList();
     }
 
-    public static List<Room> getAvailableRoomOnwardsNow() {
-        return new ArrayList<Room>();
-    }
-
-    public static List<Room> getAvailableRoomOnwards(Date date, Time startTime) {
-        return new ArrayList<Room>();
-    }
-
-    public static void main(String[] args) {
-
-    }
 
     public boolean isFreeBetween(Session session, Date startTime, Date endTime, Date date) {
         Query query = session.createQuery("from Event where Event.room = :room and (Event.startTime >= :start and Event.endTime <= :endT) and Event.date = :dateE");
@@ -76,18 +66,26 @@ public class Room {
         return query.getResultList().size() == 0;
     }
 
+    public static List<Room> getAvailableRoomOnwardsNow() {
+        return new ArrayList<Room>();
+    }
+
+    public static List<Room> getAvailableRoomOnwards(Date date, Time startTime) {
+        return new ArrayList<Room>();
+    }
+
+    public static void main(String[] args) {
+        Session session = CSVParser.getSession();
+
+        Room.getAllRooms(session).forEach((o) -> {
+            System.out.println(o.getRoomName());
+        });
+    }
 
     public Room(String roomName){
         this.roomName = roomName;
     }
 
-    public int getRoomID() {
-        return roomID;
-    }
-
-    public void setRoomID(int roomID) {
-        this.roomID = roomID;
-    }
 
     public String getRoomName() {
         return roomName;
