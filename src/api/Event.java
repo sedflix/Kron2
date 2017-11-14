@@ -34,15 +34,14 @@ public class Event {
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationTime;
 
-    @Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.DATE)
     private Date startTime;
 
-    @Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.DATE)
     private Date endTime;
 
     @Temporal(TemporalType.DATE)
     private Date date;
-
 
     @Column
     private boolean isCancelled;

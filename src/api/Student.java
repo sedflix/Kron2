@@ -1,8 +1,11 @@
 package api;
 
+import org.hibernate.Session;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -21,36 +24,64 @@ public class Student extends User {
     public Student() {
     }
 
-    public List<Course> getRegisterdCourses() {
-        return new ArrayList<Course>();
-    }
 
-    public List<Course> getAuditCourses() {
-        return new ArrayList<Course>();
-    }
 
-    public List<Course> getShoppingCoures() {
-        return new ArrayList<Course>();
-    }
 
     public List<Course> getAllCourses() {
-        return new ArrayList<Course>();
+        List<Course> allCourses = new ArrayList<>();
+        allCourses.addAll(getRegisteredCourse());
+        allCourses.addAll(getAuditedCourse());
+        allCourses.addAll(getShoppingCourse());
+        return allCourses;
     }
 
-    public boolean registerCourse(Course course) {
-        return true;
+    public boolean hasRegisteredForCourse(Course course) {
+        return getRegisteredCourse().contains(course);
     }
 
-    public boolean auditCourse(Course course) {
-        return true;
+    public boolean hasAuditedCourse(Course course) {
+        return getAuditedCourse().contains(course);
     }
 
-    public boolean addShoppingCourse(Course course) {
-        return true;
+    public boolean hasShoppedForCourse(Course course) {
+        return getShoppingCourse().contains(course);
     }
 
-    public boolean createEventRequest(Event event) {
+    public boolean createEventRequest(Session session, String name, Room room, String description, Date startTime, Date endTime) {
+
+        if (new Date().before(startTime)) {
+            System.out.println("Make a time machine first");
+            return false;
+        }
+        if (startTime.after(endTime)) {
+            System.out.println("Make a time machine first");
+            return false;
+        }
+
+        Event event = new Event();
+        event.setTagline(name);
+        event.setDescription(description);
+        event.setRoom(room);
+        event.setStartTime(startTime);
+        event.setEndTime(endTime);
+        event.setCancelled(false);
+        event.setRejected(false);
+        event.setPending(true);
+        event.setCourseEvent(false);
+        event.setCreationTime(new Date());
+        event.setCreators(this);
+
+        try {
+            session.beginTransaction();
+            session.saveOrUpdate(event);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("Saving event failed");
+            return false;
+        }
+
         return true;
+
     }
 
     public boolean requestEvent(Event event) {
@@ -67,5 +98,30 @@ public class Student extends User {
 
     public boolean cancelEvenntRequest(Event event) {
         return true;
+    }
+
+
+    public List<Course> getAuditedCourse() {
+        return auditedCourse;
+    }
+
+    public void setAuditedCourse(List<Course> auditedCourse) {
+        this.auditedCourse = auditedCourse;
+    }
+
+    public List<Course> getRegisteredCourse() {
+        return registeredCourse;
+    }
+
+    public void setRegisteredCourse(List<Course> registeredCourse) {
+        this.registeredCourse = registeredCourse;
+    }
+
+    public List<Course> getShoppingCourse() {
+        return shoppingCourse;
+    }
+
+    public void setShoppingCourse(List<Course> shoppingCourse) {
+        this.shoppingCourse = shoppingCourse;
     }
 }
