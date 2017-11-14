@@ -1,6 +1,5 @@
 package api;
 
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 
 import javax.persistence.*;
@@ -69,20 +68,16 @@ public class Course {
 
     public static List<Course> search(Session session, String searchTerm) {
 
-        Criteria crit = session.createCriteria(Course.class);
-//        Restrictions.
-//        List<Course> results = crit.list();
-//        results.forEach((Course o) ->{
-//            System.out.println(o.getCourseCode());
-//        });
+        Query query = session.createQuery("FROM Course course where course.postConditions like :postCondition");
+        query.setParameter("postCondition", "%" + searchTerm + "%");
+        List<Course> list = query.getResultList();
+        return list;
 
-
-        return new ArrayList<Course>();
     }
 
     public static void main(String[] args) {
         Session session = CSVParser.getSession();
-        Course.search(session, "CSE");
+        Course.search(session, "Major schools of poetry post 19th century");
         session.close();
     }
 
