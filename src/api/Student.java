@@ -5,10 +5,10 @@ import org.hibernate.Session;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Query;
+import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -54,9 +54,9 @@ public class Student extends User {
     /*
 
      */
-    public boolean createEventRequest(Session session, String name, Room room, String description, Date startTime, Date endTime) {
+    public boolean createEventRequest(Session session, String name, Room room, String description, Time startTime, Time endTime, Date date) {
 
-        if (new Date().before(startTime)) {
+        if (new java.util.Date().before(startTime)) {
             System.out.println("Make a time machine first");
             return false;
         }
@@ -71,21 +71,24 @@ public class Student extends User {
 
         event.setRoom(room);
 
-        event.setStartTime(new Time(startTime.getTime()));
-        event.setEndTime(new Time(endTime.getTime()));
+        event.setStartTime(startTime);
+        event.setEndTime(endTime);
+        event.setDate(date);
         event.setCancelled(false);
         event.setRejected(false);
         event.setPending(true);
         event.setCourseEvent(false);
-        event.setCreationTime(new Timestamp(new Date().getTime()));
+        event.setCreationTime(new Timestamp(new java.util.Date().getTime()));
         event.setCreators(this);
 
         try {
             session.beginTransaction();
             session.saveOrUpdate(event);
             session.getTransaction().commit();
+
         } catch (Exception e) {
-            System.out.println("Saving event failed");
+
+            System.out.println("Saving event failed because" + e.getMessage());
             return false;
         }
 
