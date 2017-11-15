@@ -100,6 +100,14 @@ public class Course {
 
     }
 
+    public static List<Course> getAllCourses() {
+        Session session = MySession.getSession();
+        Query query = session.createQuery("FROM Course");
+        List<Course> list = query.getResultList();
+        session.close();
+        return list;
+    }
+
     public List<Event> getThisWeekEvents(Session session) {
 
         Calendar calendar = Calendar.getInstance();
