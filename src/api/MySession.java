@@ -29,16 +29,12 @@ public class MySession {
         if (ourSessionFactory == null) {
             return false;
         }
-
-        if (ourSessionFactory.isOpen()) {
-            ourSessionFactory.getCurrentSession().close();
-            return true;
-        } else {
-            return true;
-        }
+        ourSessionFactory.getCurrentSession().close();
+        return true;
     }
 
     public static boolean closeSessionFactory() {
+
         if (ourSessionFactory == null) {
             return false;
         }

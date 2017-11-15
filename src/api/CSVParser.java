@@ -1,9 +1,6 @@
 package api;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -14,25 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CSVParser {
-    private static final SessionFactory ourSessionFactory;
-
-
-    static {
-        try {
-            ourSessionFactory = new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
-
-    public static Session getSession() throws HibernateException {
-        return ourSessionFactory.openSession();
-    }
 
     public static void main(String[] args) throws Exception {
 
 
-        final Session session = getSession();
+        final Session session = MySession.getSession();
 
 
         BufferedReader br = new BufferedReader(new FileReader("cse2ndyear.csv"));
@@ -143,7 +126,7 @@ public class CSVParser {
         }
         br.close();
         session.close();
-        ourSessionFactory.close();
+        MySession.closeSessionFactory();
 
 
     }
