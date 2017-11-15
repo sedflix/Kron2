@@ -111,7 +111,7 @@ public class Course {
     public static Course getCourseByName(String name) {
         Session session = MySession.getSession();
         Query query = session.createQuery("FROM Course course where course.name = :nameC");
-        query.setParameter("nameC", name.trim());
+        query.setParameter("nameC", name);
         Course courseX = (Course) query.getResultList().get(0);
         session.close();
         return courseX;
