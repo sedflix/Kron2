@@ -3,10 +3,7 @@ package api;
 import org.hibernate.Session;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class Course {
@@ -68,11 +65,35 @@ public class Course {
     }
 
 
-    public static List<Course> search(Session session, String searchTerm) {
+    /**
+     * It will break the search term using the space as a delimiter.
+     *
+     * @param searchTerm string consisting of keywords
+     * @return List of Course whose precondition contains *any of the word* in search term
+     */
+    public static List<Course> search(String searchTerm) {
 
+        String sp[] = searchTerm.split(" ");
+        List<Course> listOfAllCourses = new ArrayList<>();
+
+        Arrays.stream(sp).parallel().forEach(str -> {
+            listOfAllCourses.addAll(searchByKeyword(str));
+        });
+
+        return listOfAllCourses;
+    }
+
+    /**
+     * @param searchTerm search for <b>exact</b> occurrence of searchTerm in postCondition
+     * @return List of Course whose precondition contains <b>exactly</b> the search term
+     */
+    public static List<Course> searchByKeyword(String searchTerm) {
+
+        Session session = MySession.getSession();
         Query query = session.createQuery("FROM Course course where course.postConditions like :postCondition");
         query.setParameter("postCondition", "%" + searchTerm + "%");
         List<Course> list = query.getResultList();
+        session.close();
         return list;
 
     }
@@ -97,7 +118,7 @@ public class Course {
 
     public static void main(String[] args) {
         Session session = MySession.getSession();
-        Course.search(session, "Major schools of poetry post 19th century");
+        Course.search("Major schools of poetry post 19th century");
         session.close();
     }
 
