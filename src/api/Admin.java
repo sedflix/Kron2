@@ -19,19 +19,21 @@ public class Admin extends Faculty {
     }
 
 
-    public List<Event> getAllPendingRequests(Session session) {
+    public List<Event> getAllPendingRequests() {
+        Session session = MySession.getSession();
         Query query = session.createQuery("select event from Event as event where event.isPending = true");
         return (List<Event>) query.getResultList();
     }
 
-    public List<Event> getAllRejectdRequests(Session session) {
+    public List<Event> getAllRejectdRequests() {
+        Session session = MySession.getSession();
         Query query = session.createQuery("select event from Event as event where event.isRejected = true");
         return (List<Event>) query.getResultList();
     }
 
 
-    public boolean approveEventRequest(Session session, Event event) {
-
+    public boolean approveEventRequest(Event event) {
+        Session session = MySession.getSession();
         if (!event.getRoom().isFreeBetween(session, event.getStartTime(), event.getEndTime(), event.getDate())) {
             System.out.println("Room is occupied");
             return false;
@@ -49,8 +51,8 @@ public class Admin extends Faculty {
         return true;
     }
 
-    public boolean rejectEventRequest(Session session, Event event) {
-
+    public boolean rejectEventRequest(Event event) {
+        Session session = MySession.getSession();
         try {
             session.beginTransaction();
             event.setPending(false);
@@ -65,7 +67,8 @@ public class Admin extends Faculty {
     }
 
 
-    public boolean cancelEvent(Session session, Event event) {
+    public boolean cancelEvent(Event event) {
+        Session session = MySession.getSession();
         try {
             session.beginTransaction();
             event.setPending(false);

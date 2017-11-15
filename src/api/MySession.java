@@ -22,11 +22,7 @@ public class MySession {
             }
         }
 
-        if (ourSessionFactory.isOpen()) {
-            return ourSessionFactory.getCurrentSession();
-        } else {
-            return ourSessionFactory.openSession();
-        }
+        return ourSessionFactory.getCurrentSession();
     }
 
     public static boolean closeSession() {
@@ -40,5 +36,14 @@ public class MySession {
         } else {
             return true;
         }
+    }
+
+    public static boolean closeSessionFactory() {
+        if (ourSessionFactory == null) {
+            return false;
+        }
+
+        ourSessionFactory.close();
+        return true;
     }
 }

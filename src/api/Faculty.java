@@ -20,8 +20,9 @@ public class Faculty extends User {
     public Faculty() {
     }
 
-    public boolean addEvent(Session session, String name, Room room, String description, Time startTime, Time endTime, Date date, Course course) {
+    public boolean addEvent(String name, Room room, String description, Time startTime, Time endTime, Date date, Course course) {
 
+        Session session = MySession.getSession();
         if (new java.util.Date().before(startTime)) {
             System.out.println("Make a time machine first");
             return false;
@@ -63,9 +64,9 @@ public class Faculty extends User {
         return true;
     }
 
-    public boolean addEvent(Session session, String name, Room room, String description, Time startTime, Time endTime, Date date) {
-
-        return addEvent(session, name, room, description, startTime, endTime, date, null);
+    public boolean addEvent(String name, Room room, String description, Time startTime, Time endTime, Date date) {
+        Session session = MySession.getSession();
+        return addEvent(name, room, description, startTime, endTime, date, null);
     }
 
     public boolean updateEvent(Event event) {

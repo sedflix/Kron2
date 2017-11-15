@@ -45,11 +45,12 @@ public class Room {
     }
 
     /**
-     * @param session Hibernate session
      * @param date    date
      * @return list of rooms that don't have any event on date
      */
-    public static List<Room> getAvailableRoomsOn(Session session, Date date) {
+    public static List<Room> getAvailableRoomsOn(Date date) {
+
+        Session session = MySession.getSession();
 
         Calendar fromDate = Calendar.getInstance();
         fromDate.setTime(date);
@@ -65,11 +66,12 @@ public class Room {
         toDate.set(Calendar.SECOND, 59);
         toDate.set(Calendar.MILLISECOND, 0);
 
-        return getAvailableRoomsBetween(session, new Time(fromDate.getTimeInMillis()), new Time(toDate.getTimeInMillis()), new Date(fromDate.getTimeInMillis()));
+        return getAvailableRoomsBetween(new Time(fromDate.getTimeInMillis()), new Time(toDate.getTimeInMillis()), new Date(fromDate.getTimeInMillis()));
     }
 
-    public static List<Room> getAvailableRoomsBetween(Session session, Time startTime, Time endTime, Date date) {
+    public static List<Room> getAvailableRoomsBetween(Time startTime, Time endTime, Date date) {
 
+        Session session = MySession.getSession();
         return Room.getAllRooms(session)
                 .stream()
                 .filter((o) ->
@@ -87,7 +89,7 @@ public class Room {
     }
 
     public static void main(String[] args) {
-        Session session = CSVParser.getSession();
+        Session session = MySession.getSession();
         session.setCacheMode(CacheMode.GET);
 
         List<Room> rooms = Room.getAllRooms(session);
@@ -100,7 +102,7 @@ public class Room {
 
 //        rooms = Room.getAvailableRoomsBetween(session, Time.valueOf("01:00:00"), Time.valueOf("23:00:00"), Date.valueOf("2017-11-15"));
 //        rooms.forEach(o -> System.out.println(o.getRoomName()));
-        rooms = Room.getAvailableRoomsOn(session, Date.valueOf("2017-11-15"));
+        rooms = Room.getAvailableRoomsOn(Date.valueOf("2017-11-15"));
         rooms.forEach(o -> System.out.println(o.getRoomName()));
 
     }
