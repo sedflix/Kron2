@@ -108,6 +108,15 @@ public class Course {
         return list;
     }
 
+    public static Course getCourseByName(String name) {
+        Session session = MySession.getSession();
+        Query query = session.createQuery("FROM Course course where course.name = :nameC");
+        query.setParameter("nameC", name.trim());
+        Course courseX = (Course) query.getResultList().get(0);
+        session.close();
+        return courseX;
+    }
+
     public List<Event> getThisWeekEvents(Session session) {
 
         Calendar calendar = Calendar.getInstance();
