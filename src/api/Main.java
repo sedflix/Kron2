@@ -24,7 +24,7 @@ public class Main {
             }
         } finally {
             session.close();
-            ourSessionFactory.close();
+            MySession.closeSessionFactory();
         }
     }
 }
