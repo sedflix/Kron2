@@ -96,7 +96,7 @@ public class Course {
     }
 
     public static void main(String[] args) {
-        Session session = CSVParser.getSession();
+        Session session = MySession.getSession();
         Course.search(session, "Major schools of poetry post 19th century");
         session.close();
     }

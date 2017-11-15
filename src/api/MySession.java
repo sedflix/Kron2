@@ -6,7 +6,15 @@ import org.hibernate.cfg.Configuration;
 
 public class MySession {
 
-    private static SessionFactory ourSessionFactory;
+    private static final SessionFactory ourSessionFactory;
+
+    static {
+        try {
+            ourSessionFactory = new Configuration().configure().buildSessionFactory();
+        } catch (Throwable ex) {
+            throw new ExceptionInInitializerError(ex);
+        }
+    }
 
     private MySession() {
 
@@ -14,30 +22,11 @@ public class MySession {
 
     public static Session getSession() {
 
-        if (ourSessionFactory == null) {
-            try {
-                ourSessionFactory = new Configuration().configure().buildSessionFactory();
-            } catch (Throwable ex) {
-                throw new ExceptionInInitializerError(ex);
-            }
-        }
-
-        return ourSessionFactory.getCurrentSession();
+        return ourSessionFactory.openSession();
     }
 
-    public static boolean closeSession() {
-        if (ourSessionFactory == null) {
-            return false;
-        }
-        ourSessionFactory.getCurrentSession().close();
-        return true;
-    }
 
     public static boolean closeSessionFactory() {
-
-        if (ourSessionFactory == null) {
-            return false;
-        }
 
         ourSessionFactory.close();
         return true;
