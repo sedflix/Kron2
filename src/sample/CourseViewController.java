@@ -2,30 +2,21 @@ package sample;
 
 import api.Course;
 import api.Faculty;
-import api.Room;
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
 import org.hibernate.Hibernate;
 
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.security.Key;
 import java.util.List;
 import java.util.Set;
 
@@ -48,8 +39,7 @@ public class CourseViewController extends Application{
         comboBox.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
             comboBox.getItems().clear();
-            Course temp=new Course();
-            List<Course> listOfCourseWithKeyWords = temp.search(comboBox.getValue());
+                List<Course> listOfCourseWithKeyWords = Course.search(comboBox.getValue());
             listOfCourseWithKeyWords.forEach(course -> comboBox.getItems().add(course.getName()));
         }});
 
@@ -61,14 +51,17 @@ public class CourseViewController extends Application{
                     setText(empty ? null : item);
                 }
             };
+
             cell.setOnMousePressed(e -> {
                 if (! cell.isEmpty()) {
                     Course forInfo = Course.getCourseByName(cell.getItem());
                     String facultyString = "Faculty: ";
                     Set<Faculty> temp = forInfo.getFaculties();
+
                     Hibernate.initialize(temp);
+
                     if (!temp.isEmpty()) {
-                        for (Faculty fac : forInfo.getFaculties()) {
+                        for (Faculty fac : temp) {
                             Hibernate.initialize(fac);
                             facultyString += fac.getName();
                         }

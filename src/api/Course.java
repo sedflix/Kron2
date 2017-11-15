@@ -36,7 +36,7 @@ public class Course {
     @Column
     private int credits;
 
-    @ManyToMany(mappedBy = "coursesTaught")
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Faculty> faculties = new HashSet<>();
 
     @ManyToMany(mappedBy = "registeredCourse")
@@ -137,7 +137,14 @@ public class Course {
 
     public static void main(String[] args) {
         Session session = MySession.getSession();
-        Course.search("Major schools of poetry post 19th century");
+        List<Course> course = Course.search("Students");
+        course.forEach(o -> {
+            o.getFaculties().forEach(
+                    faculty -> {
+                        System.out.println(faculty.getName());
+                    }
+            );
+        });
         session.close();
     }
 

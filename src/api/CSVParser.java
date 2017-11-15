@@ -41,7 +41,7 @@ public class CSVParser {
             //initialisation of required objects
             Course course = new Course();
             Set<Integer> number = new HashSet<>(1);
-            Set<Faculty> faculty = new HashSet<>(1);
+            Set<Faculty> faculty = new HashSet<>();
             List<Department> departments = new ArrayList<>(1);
             Faculty prof = new Faculty();
 
