@@ -1,50 +1,55 @@
 package sample;
 
+import api.Course;
+import api.Room;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
-public class CourseViewController extends Application {
+import java.security.Key;
+import java.util.List;
+
+public class CourseViewController extends Application{
 
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) throws Exception  {
 
-
-//        ObservableList<String> options =
-//                FXCollections.observableArrayList(
-//                        "1",
-//                        "2",
-//                        "3"
-//                );
         /**
          * Couse Description
          */
         Parent courseDescription = FXMLLoader.load(getClass().getResource("/sample/course_view.fxml"));
 
-//        Text courseHeading = new Text("Course Name");
-//        courseHeading.setId("course_heading");
-//        TextFlow txetflow = (TextFlow) courseDescription.lookup("#course_heading");
-//        txetflow.getChildren().add(courseHeading);
-
         ComboBox<String> comboBox = (ComboBox<String>) courseDescription.lookup("#search");
-        comboBox.getItems().addAll(
-                "Advance Programming : CS121 : AP",
-                "5",
-                "6"
-        );
 
+        comboBox.setOnKeyPressed(new EventHandler<KeyEvent>(){
+            @Override
+            public void handle(KeyEvent e){
+                if (e.getCode() == KeyCode.ENTER) {
+                    comboBox.getItems().clear();
+                    Course temp=new Course();
+                    List<Course> listOfCourseWithKeyWords = temp.search(comboBox.getValue());
+                    listOfCourseWithKeyWords.forEach(course -> comboBox.getItems().add(course.getName()));
+                }
+            }
+        });
 
 
         Text faculty = new Text("Faculty: Vivek Gupta, Anubha");
@@ -76,9 +81,6 @@ public class CourseViewController extends Application {
                 "CO 3: fhsdkcakgweb kwhjgvjbbjkslnvljfdvrvh kgmwilbejvnflkhb wkgljbkjflnvlbkh frwkhgphilivjnbjkgb. \n" +
                 "CO 4: fhsdkcakgweb kwhjgvjbbjkslnvljfdvrvh kgmwilbejvnflkhb wkgljbkjflnvlbkh frwkhgphilivjnbjkgb. \n" +
                 "CO 5: fhsdkcakgweb kwhjgvjbbjkslnvljfdvrvh kgmwilbejvnflkhb wkgljbkjflnvlbkh frwkhgphilivjnbjkgb. \n ");
-
-//        co.setId("co");
-
 
         ScrollPane scrollPane = (ScrollPane) courseDescription.lookup("#scroll_time_table");
         Node timeTable = FXMLLoader.load(getClass().getResource("/sample/TimeTable.fxml"));
