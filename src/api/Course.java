@@ -72,9 +72,11 @@ public class Course {
      * @return List of Course whose precondition contains *any of the word* in search term
      */
     public static List<Course> search(String searchTerm) {
-
-        String sp[] = searchTerm.split(" ");
         List<Course> listOfAllCourses = new ArrayList<>();
+        if (searchTerm == null) {
+            return listOfAllCourses;
+        }
+        String sp[] = searchTerm.split(" ");
 
         Arrays.stream(sp).parallel().forEach(str -> {
             listOfAllCourses.addAll(searchByKeyword(str));

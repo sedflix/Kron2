@@ -3,6 +3,8 @@ package sample;
 import api.Course;
 import api.Room;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
@@ -16,10 +18,13 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.security.Key;
 import java.util.List;
 
@@ -50,6 +55,16 @@ public class CourseViewController extends Application{
                 }
             }
         });
+
+        comboBox.setOnMouseClicked(
+                new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        System.out.println(comboBox.getSelectionModel().getSelectedItem());
+                    }
+                }
+        );
+
 
 
         Text faculty = new Text("Faculty: Vivek Gupta, Anubha");
