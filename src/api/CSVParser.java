@@ -82,7 +82,7 @@ public class CSVParser {
             course.setFaculties(faculty);
             course.setName(name);
             course.setDepartments(departments);
-            course.setCourseCode((String) b[5]);
+            course.setCourseCode(((String) b[5]).trim());
 
             for (int i = 0; i<5; i++) {
                 String timeRoomInfo = ((String) b[6+i]).replaceAll(" ","");
@@ -91,7 +91,7 @@ public class CSVParser {
                 }
                 Time startTime = new Time(Integer.parseInt(timeRoomInfo.substring(0, 2)), Integer.parseInt(timeRoomInfo.substring(3, 5)), 00);
                 Time endTime = new Time(Integer.parseInt(timeRoomInfo.substring(6, 8)), Integer.parseInt(timeRoomInfo.substring(9, 11)), 00);
-                Room room = new Room(timeRoomInfo.substring(13));
+                Room room = new Room(timeRoomInfo.substring(12));
                 DayOfWeek dayOfWeek = DayOfWeek.MONDAY;
                 if (i==0){
                     dayOfWeek=DayOfWeek.MONDAY;
@@ -132,6 +132,10 @@ public class CSVParser {
                 }
                 session.saveOrUpdate(event);
             }
+
+            // Tutorial Information
+            extraInformation(session, b[11], course,3);
+            extraInformation(session, b[12], course,2);
             session.saveOrUpdate(prof);
             session.saveOrUpdate(course);
             session.getTransaction().commit();
@@ -141,5 +145,61 @@ public class CSVParser {
         ourSessionFactory.close();
 
 
+    }
+
+    private static void extraInformation(Session session, Object o, Course course, int type) {
+        String tutDayTimeInfo = ((String) o).replaceAll(" ","");
+        System.out.println(tutDayTimeInfo);
+        while (tutDayTimeInfo.length()>1){
+//                System.out.println("whatthefuck");
+
+            int tempFirstDollarIndex = tutDayTimeInfo.indexOf("$");
+            int tempSecondDollarIndex = tutDayTimeInfo.indexOf("$", tempFirstDollarIndex+1);
+            int tempHashIndex = tutDayTimeInfo.indexOf("#",tempSecondDollarIndex+1);
+
+            String day = tutDayTimeInfo.substring(0,tempFirstDollarIndex);
+            String timeInfo = tutDayTimeInfo.substring(tempFirstDollarIndex+1,tempSecondDollarIndex);
+            String roomInfo = tutDayTimeInfo.substring(tempSecondDollarIndex+1,tempHashIndex);
+
+            Time startTime = new Time(Integer.parseInt(timeInfo.substring(0,2)),Integer.parseInt(timeInfo.substring(3,5)),00);
+            Time endTime = new Time(Integer.parseInt(timeInfo.substring(6,8)),Integer.parseInt(timeInfo.substring(9,11)),00);
+
+            DayOfWeek dayOfWeek = DayOfWeek.MONDAY;
+            if (day.equals("Monday")){
+                dayOfWeek=DayOfWeek.MONDAY;
+            }
+            if (day.equals("Tuesday")){
+                dayOfWeek=DayOfWeek.TUESDAY;
+            }
+            if (day.equals("Wednesday")){
+                dayOfWeek=DayOfWeek.WEDNESDAY;
+            }
+            if (day.equals("Thursday")){
+                dayOfWeek=DayOfWeek.THURSDAY;
+            }
+            if (day.equals("Friday")){
+                dayOfWeek=DayOfWeek.FRIDAY;
+            }
+
+            while (roomInfo.length()>2){
+                int semi = roomInfo.indexOf(";");
+                if (semi<0){
+                    break;
+                }
+                String tempRoom = roomInfo.substring(0,semi);
+                Room room = new Room(tempRoom);
+                CourseEvent event = new CourseEvent(startTime,endTime,room,"description", dayOfWeek,course, type);
+                roomInfo = roomInfo.substring(semi+1);
+
+                try {
+                    session.saveOrUpdate(room);
+                } catch (Exception e) {
+
+                }
+                session.saveOrUpdate(event);
+            }
+
+            tutDayTimeInfo = tutDayTimeInfo.substring(tempHashIndex+1);
+        }
     }
 }

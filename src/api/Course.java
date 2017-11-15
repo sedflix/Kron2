@@ -29,7 +29,7 @@ public class Course {
     @Column
     private List<Integer> courseNumber;
 
-    @Column(length = 50000)
+    @Column(length = 10000)
     private String postConditions;
 
 
