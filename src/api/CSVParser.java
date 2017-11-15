@@ -50,7 +50,7 @@ public class CSVParser {
             int credits = Integer.parseInt(((String) b[4]).replaceAll(" ", ""));
             String tempCourseStream = ((String) b[2]).substring(0, 3);
 
-            System.out.println(line);
+//            System.out.println(line);
 
 
             //initialisation of required objects
@@ -150,7 +150,7 @@ public class CSVParser {
 
     private static void extraInformation(Session session, Object o, Course course, int type) {
         String tutDayTimeInfo = ((String) o).replaceAll(" ","");
-        System.out.println(tutDayTimeInfo);
+//        System.out.println(tutDayTimeInfo);
         while (tutDayTimeInfo.length()>1){
 //                System.out.println("whatthefuck");
 
