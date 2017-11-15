@@ -16,6 +16,7 @@ import java.util.List;
 public class CSVParser {
     private static final SessionFactory ourSessionFactory;
 
+
     static {
         try {
             ourSessionFactory = new Configuration().configure().buildSessionFactory();
