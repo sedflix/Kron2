@@ -7,8 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -29,7 +29,7 @@ public class User {
 
 
     @OneToMany(mappedBy = "creators")
-    private List<Event> eventCreated = new ArrayList<>();
+    private Set<Event> eventCreated = new HashSet<>();
 
 
     public User() {

@@ -8,7 +8,9 @@ import java.sql.Date;
 import java.sql.Time;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class CSVParser {
 
@@ -38,8 +40,8 @@ public class CSVParser {
 
             //initialisation of required objects
             Course course = new Course();
-            List<Integer> number = new ArrayList<>(1);
-            List<Faculty> faculty = new ArrayList<>(1);
+            Set<Integer> number = new HashSet<>(1);
+            Set<Faculty> faculty = new HashSet<>(1);
             List<Department> departments = new ArrayList<>(1);
             Faculty prof = new Faculty();
 
@@ -99,7 +101,7 @@ public class CSVParser {
                 event1.setRoom(room);
                 event1.setTagline("Class aa jaya karo bc");
                 event1.setDescription("useless as fuck");
-                event1.setCreators((User) faculty.get(0));
+                event1.setCreators((User) prof);
                 event1.setStartTime(startTime);
                 event1.setEndTime(endTime);
                 event1.setDate(new Date(startTime.getTime()));

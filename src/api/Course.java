@@ -37,21 +37,21 @@ public class Course {
     private int credits;
 
     @ManyToMany(mappedBy = "coursesTaught")
-    private List<Faculty> faculties = new ArrayList<>();
+    private Set<Faculty> faculties = new HashSet<>();
 
     @ManyToMany(mappedBy = "registeredCourse")
-    private List<Student> registeredStudents = new ArrayList<>();
+    private Set<Student> registeredStudents = new HashSet<>();
 
     @ManyToMany(mappedBy = "auditedCourse")
-    private List<Student> auditedStudents = new ArrayList<>();
+    private Set<Student> auditedStudents = new HashSet<>();
 
     @ManyToMany(mappedBy = "shoppingCourse")
-    private List<Student> shoppingStudents = new ArrayList<>();
+    private Set<Student> shoppingStudents = new HashSet<>();
 
     @OneToMany(mappedBy = "course")
-    private List<CourseEvent> courseEvents = new ArrayList<>();
+    private Set<CourseEvent> courseEvents = new HashSet<>();
 
-    public Course(String name, String courseCode, List<Department> departments, List<Integer> courseNumber, List<Faculty> faculties, String postConditions, int credits) {
+    public Course(String name, String courseCode, List<Department> departments, List<Integer> courseNumber, Set<Faculty> faculties, String postConditions, int credits) {
         this.name = name;
         this.courseCode = courseCode;
         this.departments = departments;
@@ -162,11 +162,11 @@ public class Course {
         this.courseNumber = courseNumber;
     }
 
-    public List<Faculty> getFaculties() {
+    public Set<Faculty> getFaculties() {
         return faculties;
     }
 
-    public void setFaculties(List<Faculty> faculties) {
+    public void setFaculties(Set<Faculty> faculties) {
         this.faculties = faculties;
     }
 

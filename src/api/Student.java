@@ -9,20 +9,22 @@ import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Student extends User {
 
 
     @ManyToMany
-    private List<Course> auditedCourse = new ArrayList<>();
+    private Set<Course> auditedCourse = new HashSet<>();
 
     @ManyToMany
-    private List<Course> registeredCourse = new ArrayList<>();
+    private Set<Course> registeredCourse = new HashSet<>();
 
     @ManyToMany
-    private List<Course> shoppingCourse = new ArrayList<>();
+    private Set<Course> shoppingCourse = new HashSet<>();
 
     public Student() {
     }
@@ -107,27 +109,27 @@ public class Student extends User {
     }
 
 
-    public List<Course> getAuditedCourse() {
+    public Set<Course> getAuditedCourse() {
         return auditedCourse;
     }
 
-    public void setAuditedCourse(List<Course> auditedCourse) {
+    public void setAuditedCourse(Set auditedCourse) {
         this.auditedCourse = auditedCourse;
     }
 
-    public List<Course> getRegisteredCourse() {
+    public Set<Course> getRegisteredCourse() {
         return registeredCourse;
     }
 
-    public void setRegisteredCourse(List<Course> registeredCourse) {
+    public void setRegisteredCourse(Set<Course> registeredCourse) {
         this.registeredCourse = registeredCourse;
     }
 
-    public List<Course> getShoppingCourse() {
+    public Set<Course> getShoppingCourse() {
         return shoppingCourse;
     }
 
-    public void setShoppingCourse(List<Course> shoppingCourse) {
+    public void setShoppingCourse(Set<Course> shoppingCourse) {
         this.shoppingCourse = shoppingCourse;
     }
 }
