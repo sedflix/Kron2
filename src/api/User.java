@@ -13,6 +13,9 @@ import java.util.Set;
 @Entity
 public class User {
 
+    @Column(insertable = false, updatable = false)
+    private String dtype;
+
     @Column
     private String name;
 
@@ -35,6 +38,10 @@ public class User {
     public User() {
     }
 
+    public static User getUserByEmail(String email) {
+        return MySession.getSession().get(User.class, email.trim());
+    }
+
     public boolean deleteEventRequest(Session session, Event event) {
         try {
 
@@ -50,6 +57,22 @@ public class User {
             return false;
         }
         return true;
+    }
+
+    public String getDtype() {
+        return dtype;
+    }
+
+    public void setDtype(String dtype) {
+        this.dtype = dtype;
+    }
+
+    public Set<Event> getEventCreated() {
+        return eventCreated;
+    }
+
+    public void setEventCreated(Set<Event> eventCreated) {
+        this.eventCreated = eventCreated;
     }
 
     public String getName() {
