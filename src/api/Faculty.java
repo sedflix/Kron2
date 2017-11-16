@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-
 public class Faculty extends User {
 
     @ManyToMany(mappedBy = "faculties")
