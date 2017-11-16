@@ -27,6 +27,8 @@
 
         <property name="hbm2ddl.auto">update</property>
 
+        <!--<property name="hibernate.current_session_context_class">thread</property>-->
+
         <!-- Mention here all the model classes along with their package name -->
 
         <!--<mapping class="org.hibernate.tutorial.hbm.Event"/>-->

@@ -43,6 +43,20 @@ public class Student extends User {
     }
 
 
+    public boolean insertRegisteredCourse(String name) {
+        Course course = Course.getCourseByName("Advanced Programming");
+        return insertRegisteredCourse(course);
+    }
+
+    public boolean insertAuditedCourse(String name) {
+        Course course = Course.getCourseByName("Advanced Programming");
+        return insertAuditedCourse(course);
+    }
+
+    public boolean insertShoppingCourse(String name) {
+        Course course = Course.getCourseByName("Advanced Programming");
+        return insertShoppingCourse(course);
+    }
     /**
      * Give a course, it adds as a registered course
      *
@@ -75,7 +89,6 @@ public class Student extends User {
         Session session = MySession.getSession();
 
         session.beginTransaction();
-
         this.getShoppingCourse().add(course);
         course.getShoppingStudents().add(this);
         session.saveOrUpdate(this);
