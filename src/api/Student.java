@@ -2,6 +2,7 @@ package api;
 
 import org.hibernate.Session;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Query;
@@ -20,7 +21,7 @@ public class Student extends User {
     @ManyToMany(mappedBy = "auditedStudents")
     private Set<Course> auditedCourse = new HashSet<>();
 
-    @ManyToMany(mappedBy = "registeredStudents")
+    @ManyToMany(mappedBy = "registeredStudents", cascade = CascadeType.PERSIST)
     private Set<Course> registeredCourse = new HashSet<>();
 
 

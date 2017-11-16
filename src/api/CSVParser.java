@@ -224,7 +224,7 @@ public class CSVParser {
             session.update(course);
         }
         temp.setRegisteredCourse(cse);
-        session.persist(temp);
+        session.saveOrUpdate(temp);
         session.getTransaction().commit();
 
 
@@ -241,10 +241,10 @@ public class CSVParser {
         csam.add(Course.getCourseByName("Introduction to Psychology"));
         for (Course course : csam) {
             course.getRegisteredStudents().add(temp1);
-            session.update(course);
+            session.saveOrUpdate(course);
         }
         temp1.setRegisteredCourse(csam);
-        session.persist(temp1);
+        session.saveOrUpdate(temp1);
         session.getTransaction().commit();
 
 

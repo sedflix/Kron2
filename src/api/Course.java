@@ -45,7 +45,7 @@ public class Course {
     private Set<Faculty> faculties = new HashSet<>();
 
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "Students_RegisteredCourse",
             joinColumns = {@JoinColumn(name = "courseCode")},
@@ -53,7 +53,7 @@ public class Course {
     )
     private Set<Student> registeredStudents = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "Students_AuditedCourse",
             joinColumns = {@JoinColumn(name = "courseCode")},
@@ -168,11 +168,19 @@ public class Course {
 //        });
 
 
-        Course x = Course.getCourseByName("Number Theory");
-        x.getFaculties().stream().forEach(o -> {
+        Course course = Course.getCourseByName("Advanced Programming");
+        course.getFaculties().stream().forEach(o -> {
             System.out.println(o.getEmail());
         });
 
+
+        session.beginTransaction();
+        Student student = session.get(Student.class, "siddharth16268@iiitd.ac.in");
+        student.getAuditedCourse().add(course);
+        course.getAuditedStudents().add(student);
+        session.saveOrUpdate(student);
+        session.saveOrUpdate(course);
+        session.getTransaction().commit();
         session.close();
     }
 
