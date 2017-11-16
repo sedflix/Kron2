@@ -43,6 +43,77 @@ public class Student extends User {
     }
 
 
+    /**
+     * Give a course, it adds as a registered course
+     *
+     * @param course course that needs to be added
+     * @return true if successful
+     */
+    public boolean insertRegisteredCourse(Course course) {
+
+        Session session = MySession.getSession();
+
+        session.beginTransaction();
+
+        this.getRegisteredCourse().add(course);
+        course.getRegisteredStudents().add(this);
+        session.saveOrUpdate(this);
+        session.saveOrUpdate(course);
+        session.getTransaction().commit();
+
+        session.close();
+
+        return true;
+    }
+
+    /**
+     * Give a course, it adds as a registered course
+     *
+     * @param course course that needs to be added
+     * @return true if successful
+     */
+    public boolean insertShoppingCourse(Course course) {
+
+        Session session = MySession.getSession();
+
+        session.beginTransaction();
+
+        this.getShoppingCourse().add(course);
+        course.getShoppingStudents().add(this);
+        session.saveOrUpdate(this);
+        session.saveOrUpdate(course);
+        session.getTransaction().commit();
+
+        session.close();
+
+        return true;
+    }
+
+    /**
+     * Give a course, it adds as a registered course
+     *
+     * @param course course that needs to be added
+     * @return true if successful
+     */
+    public boolean insertAuditedCourse(Course course) {
+
+        Session session = MySession.getSession();
+
+        session.beginTransaction();
+
+        this.getAuditedCourse().add(course);
+        course.getAuditedStudents().add(this);
+        session.saveOrUpdate(this);
+        session.saveOrUpdate(course);
+        session.getTransaction().commit();
+
+        session.close();
+
+        return true;
+    }
+
+
+
     public boolean hasRegisteredForCourse(Course course) {
         return getRegisteredCourse().contains(course);
     }
