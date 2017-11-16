@@ -8,6 +8,9 @@ public class UserAuthentication {
     public static User login(String email, String password) {
 
         User user = User.getUserByEmail(email);
+        if (user==null){
+            return null;
+        }
         if (!user.getPassword().equals(password)) {
             return null;
         }
