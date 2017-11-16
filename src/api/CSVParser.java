@@ -124,9 +124,12 @@ public class CSVParser {
             extraInformation(session, b[12], course,2);
             session.merge(prof);
 //            session.saveOrUpdate(prof);
-            session.saveOrUpdate(course);
+//            session.saveOrUpdate(course);
             session.getTransaction().commit();
+
         }
+
+
         faltu(session);
         br.close();
         session.close();
@@ -193,19 +196,23 @@ public class CSVParser {
 
     public static void faltu(Session session){
 
+        session.beginTransaction();
+
         Student temp = new Student();
         temp.setName("Siddharth Yadav");
         temp.setEmail("siddharth16268@iiitd.ac.in");
         temp.setRollNumber("2016268");
         temp.setPassword("[{Sid@123}]");
 
-        Set<Course> cse = new HashSet<>();
-        cse.add(Course.getCourseByName("Advanced Programming"));
+        List<Course> cse = new ArrayList<>();
         cse.add(Course.getCourseByName("Discrete Mathematics"));
-
+        cse.add(Course.getCourseByName("Advanced Programming"));
         temp.setRegisteredCourse(cse);
 
         session.saveOrUpdate(temp);
+
+        session.getTransaction().commit();
+        session.beginTransaction();
 
         Student temp1 = new Student();
         temp1.setName("Siddhartha Jain");
@@ -213,13 +220,24 @@ public class CSVParser {
         temp1.setRollNumber("2016269");
         temp1.setPassword("g-Y87^k)");
 
-        Set<Course> csam = new HashSet<>();
-        csam.add(Course.getCourseByName("Number Theory"));
-        csam.add(Course.getCourseByName("Introduction to Psychology"));
-
+        List<Course> csam = new ArrayList<>();
+        Course x = Course.getCourseByName("Number Theory");
+        x.getFaculties().stream().forEach(o -> {
+            System.out.println(o.getEmail());
+        });
+        csam.add(x);
+        x = Course.getCourseByName("Introduction to Psychology");
+        x.getFaculties().stream().forEach(o -> {
+            System.out.println(o.getEmail());
+        });
+        csam.add(x);
         temp1.setRegisteredCourse(csam);
 
         session.saveOrUpdate(temp1);
+
+        session.flush();
+        session.getTransaction().commit();
+        session.beginTransaction();
 
         Admin one = new Admin();
         one.setName("Ravi Bhasin");
@@ -228,6 +246,7 @@ public class CSVParser {
 
         session.saveOrUpdate(one);
 
+        session.getTransaction().commit();
         return;
     }
 }

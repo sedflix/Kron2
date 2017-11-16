@@ -2,6 +2,7 @@ package api;
 
 import org.hibernate.Session;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Query;
@@ -17,13 +18,14 @@ import java.util.Set;
 public class Student extends User {
 
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "auditedStudents")
     private Set<Course> auditedCourse = new HashSet<>();
 
-    @ManyToMany
-    private Set<Course> registeredCourse = new HashSet<>();
+    @ManyToMany(mappedBy = "registeredStudents", cascade = {CascadeType.MERGE})
+    private List<Course> registeredCourse = new ArrayList<>();
 
-    @ManyToMany
+
+    @ManyToMany(mappedBy = "shoppingStudents")
     private Set<Course> shoppingCourse = new HashSet<>();
 
     public Student() {
@@ -39,6 +41,7 @@ public class Student extends User {
         allCourses.addAll(getShoppingCourse());
         return allCourses;
     }
+
 
     public boolean hasRegisteredForCourse(Course course) {
         return getRegisteredCourse().contains(course);
@@ -117,11 +120,11 @@ public class Student extends User {
         this.auditedCourse = auditedCourse;
     }
 
-    public Set<Course> getRegisteredCourse() {
+    public List<Course> getRegisteredCourse() {
         return registeredCourse;
     }
 
-    public void setRegisteredCourse(Set<Course> registeredCourse) {
+    public void setRegisteredCourse(List<Course> registeredCourse) {
         this.registeredCourse = registeredCourse;
     }
 

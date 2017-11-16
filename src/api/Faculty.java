@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Faculty extends User {
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "faculties")
     private List<Course> coursesTaught = new ArrayList<Course>();
 
     public Faculty() {

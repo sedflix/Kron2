@@ -36,16 +36,37 @@ public class Course {
     @Column
     private int credits;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "Faculty_Project",
+            joinColumns = {@JoinColumn(name = "courseCode")},
+            inverseJoinColumns = {@JoinColumn(name = "email")}
+    )
     private Set<Faculty> faculties = new HashSet<>();
 
-    @ManyToMany(mappedBy = "registeredCourse")
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "Students_RegisteredCourse",
+            joinColumns = {@JoinColumn(name = "courseCode")},
+            inverseJoinColumns = {@JoinColumn(name = "email")}
+    )
     private Set<Student> registeredStudents = new HashSet<>();
 
-    @ManyToMany(mappedBy = "auditedCourse")
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "Students_AuditedCourse",
+            joinColumns = {@JoinColumn(name = "courseCode")},
+            inverseJoinColumns = {@JoinColumn(name = "email")}
+    )
     private Set<Student> auditedStudents = new HashSet<>();
 
-    @ManyToMany(mappedBy = "shoppingCourse")
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "Students_ShoppingCourse",
+            joinColumns = {@JoinColumn(name = "courseCode")},
+            inverseJoinColumns = {@JoinColumn(name = "email")}
+    )
     private Set<Student> shoppingStudents = new HashSet<>();
 
     @OneToMany(mappedBy = "course")
@@ -113,6 +134,7 @@ public class Course {
         Query query = session.createQuery("FROM Course course where course.name = :nameC");
         query.setParameter("nameC", name);
         Course courseX = (Course) query.getResultList().get(0);
+
         session.close();
         return courseX;
     }
@@ -137,13 +159,19 @@ public class Course {
 
     public static void main(String[] args) {
         Session session = MySession.getSession();
-        List<Course> course = Course.search("Students");
-        course.forEach(o -> {
-            o.getFaculties().forEach(
-                    faculty -> {
-                        System.out.println(faculty.getName());
-                    }
-            );
+//        List<Course> course = Course.search("Students");
+//        course.forEach(o -> {
+//            o.getFaculties().forEach(
+//                    faculty -> {
+//                        System.out.println(faculty.getName());
+//                    }
+//            );
+//        });
+
+
+        Course x = Course.getCourseByName("Number Theory");
+        x.getFaculties().stream().forEach(o -> {
+            System.out.println(o.getEmail());
         });
         session.close();
     }
@@ -212,5 +240,37 @@ public class Course {
 
     public void setPostConditions(String postConditions) {
         this.postConditions = postConditions;
+    }
+
+    public Set<Student> getRegisteredStudents() {
+        return registeredStudents;
+    }
+
+    public void setRegisteredStudents(Set<Student> registeredStudents) {
+        this.registeredStudents = registeredStudents;
+    }
+
+    public Set<Student> getAuditedStudents() {
+        return auditedStudents;
+    }
+
+    public void setAuditedStudents(Set<Student> auditedStudents) {
+        this.auditedStudents = auditedStudents;
+    }
+
+    public Set<Student> getShoppingStudents() {
+        return shoppingStudents;
+    }
+
+    public void setShoppingStudents(Set<Student> shoppingStudents) {
+        this.shoppingStudents = shoppingStudents;
+    }
+
+    public Set<CourseEvent> getCourseEvents() {
+        return courseEvents;
+    }
+
+    public void setCourseEvents(Set<CourseEvent> courseEvents) {
+        this.courseEvents = courseEvents;
     }
 }
