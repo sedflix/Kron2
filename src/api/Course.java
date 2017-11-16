@@ -36,7 +36,7 @@ public class Course {
     @Column
     private int credits;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "Faculty_Project",
             joinColumns = {@JoinColumn(name = "courseCode")},
@@ -45,7 +45,7 @@ public class Course {
     private Set<Faculty> faculties = new HashSet<>();
 
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "Students_RegisteredCourse",
             joinColumns = {@JoinColumn(name = "courseCode")},
@@ -134,7 +134,6 @@ public class Course {
         Query query = session.createQuery("FROM Course course where course.name = :nameC");
         query.setParameter("nameC", name);
         Course courseX = (Course) query.getResultList().get(0);
-
         session.close();
         return courseX;
     }
@@ -173,6 +172,7 @@ public class Course {
         x.getFaculties().stream().forEach(o -> {
             System.out.println(o.getEmail());
         });
+
         session.close();
     }
 
@@ -272,5 +272,10 @@ public class Course {
 
     public void setCourseEvents(Set<CourseEvent> courseEvents) {
         this.courseEvents = courseEvents;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return (this.courseCode.equals(((Course) o).courseCode));
     }
 }

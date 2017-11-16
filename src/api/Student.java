@@ -2,7 +2,6 @@ package api;
 
 import org.hibernate.Session;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Query;
@@ -21,8 +20,8 @@ public class Student extends User {
     @ManyToMany(mappedBy = "auditedStudents")
     private Set<Course> auditedCourse = new HashSet<>();
 
-    @ManyToMany(mappedBy = "registeredStudents", cascade = {CascadeType.MERGE})
-    private List<Course> registeredCourse = new ArrayList<>();
+    @ManyToMany(mappedBy = "registeredStudents")
+    private Set<Course> registeredCourse = new HashSet<>();
 
 
     @ManyToMany(mappedBy = "shoppingStudents")
@@ -120,11 +119,11 @@ public class Student extends User {
         this.auditedCourse = auditedCourse;
     }
 
-    public List<Course> getRegisteredCourse() {
+    public Set<Course> getRegisteredCourse() {
         return registeredCourse;
     }
 
-    public void setRegisteredCourse(List<Course> registeredCourse) {
+    public void setRegisteredCourse(Set<Course> registeredCourse) {
         this.registeredCourse = registeredCourse;
     }
 

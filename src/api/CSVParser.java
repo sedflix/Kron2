@@ -26,7 +26,7 @@ public class CSVParser {
 
         while ((line = br.readLine()) != null) {
 
-            session.beginTransaction();
+
 
             //breaking line into stuffs
             Object[] b = line.split(",");
@@ -50,6 +50,12 @@ public class CSVParser {
             prof.setName(((String) b[3]).trim());
             prof.setEmail(email);
 
+            session.beginTransaction();
+            session.saveOrUpdate(prof);
+            session.getTransaction().commit();
+            session.evict(prof);
+
+
             faculty.add(prof);
 
             if (tempCourseStream.equals("CSE")) {
@@ -70,6 +76,11 @@ public class CSVParser {
             course.setDepartments(departments);
             course.setCourseCode(((String) b[5]).trim());
 
+            session.beginTransaction();
+            session.saveOrUpdate(course);
+            session.getTransaction().commit();
+            session.evict(course);
+
             for (int i = 0; i<5; i++) {
                 String timeRoomInfo = ((String) b[6+i]).replaceAll(" ","");
                 if (timeRoomInfo.length()<10){
@@ -77,7 +88,13 @@ public class CSVParser {
                 }
                 Time startTime = new Time(Integer.parseInt(timeRoomInfo.substring(0, 2)), Integer.parseInt(timeRoomInfo.substring(3, 5)), 00);
                 Time endTime = new Time(Integer.parseInt(timeRoomInfo.substring(6, 8)), Integer.parseInt(timeRoomInfo.substring(9, 11)), 00);
+
                 Room room = new Room(timeRoomInfo.substring(12));
+                session.beginTransaction();
+                session.saveOrUpdate(room);
+                session.getTransaction().commit();
+                session.evict(room);
+
                 DayOfWeek dayOfWeek = DayOfWeek.MONDAY;
                 if (i==0){
                     dayOfWeek=DayOfWeek.MONDAY;
@@ -110,22 +127,15 @@ public class CSVParser {
                 event1.setRejected(false);
                 event1.setCheckWhy(false);
 
-                session.saveOrUpdate(event1);
-                try {
-                    session.saveOrUpdate(room);
-                } catch (Exception e) {
-
-                }
+                session.beginTransaction();
                 session.saveOrUpdate(event);
+                session.saveOrUpdate(event1);
+                session.getTransaction().commit();
             }
 
             // Tutorial Information
             extraInformation(session, b[11], course,3);
             extraInformation(session, b[12], course,2);
-            session.merge(prof);
-//            session.saveOrUpdate(prof);
-//            session.saveOrUpdate(course);
-            session.getTransaction().commit();
 
         }
 
@@ -182,12 +192,13 @@ public class CSVParser {
                 CourseEvent event = new CourseEvent(startTime,endTime,room,"description", dayOfWeek,course, type);
                 roomInfo = roomInfo.substring(semi+1);
 
-                try {
-                    session.saveOrUpdate(room);
-                } catch (Exception e) {
-
-                }
+                session.beginTransaction();
+                session.saveOrUpdate(room);
                 session.saveOrUpdate(event);
+                session.getTransaction().commit();
+
+                session.evict(room);
+                session.evict(event);
             }
 
             tutDayTimeInfo = tutDayTimeInfo.substring(tempHashIndex+1);
@@ -204,14 +215,19 @@ public class CSVParser {
         temp.setRollNumber("2016268");
         temp.setPassword("[{Sid@123}]");
 
-        List<Course> cse = new ArrayList<>();
+        Set<Course> cse = new HashSet<>();
         cse.add(Course.getCourseByName("Discrete Mathematics"));
         cse.add(Course.getCourseByName("Advanced Programming"));
         temp.setRegisteredCourse(cse);
-
-        session.saveOrUpdate(temp);
-
+        for (Course course : cse) {
+            course.getRegisteredStudents().add(temp);
+            session.update(course);
+        }
+        temp.setRegisteredCourse(cse);
+        session.persist(temp);
         session.getTransaction().commit();
+
+
         session.beginTransaction();
 
         Student temp1 = new Student();
@@ -220,23 +236,18 @@ public class CSVParser {
         temp1.setRollNumber("2016269");
         temp1.setPassword("g-Y87^k)");
 
-        List<Course> csam = new ArrayList<>();
-        Course x = Course.getCourseByName("Number Theory");
-        x.getFaculties().stream().forEach(o -> {
-            System.out.println(o.getEmail());
-        });
-        csam.add(x);
-        x = Course.getCourseByName("Introduction to Psychology");
-        x.getFaculties().stream().forEach(o -> {
-            System.out.println(o.getEmail());
-        });
-        csam.add(x);
+        Set<Course> csam = new HashSet<>();
+        csam.add(Course.getCourseByName("Number Theory"));
+        csam.add(Course.getCourseByName("Introduction to Psychology"));
+        for (Course course : csam) {
+            course.getRegisteredStudents().add(temp1);
+            session.update(course);
+        }
         temp1.setRegisteredCourse(csam);
-
-        session.saveOrUpdate(temp1);
-
-        session.flush();
+        session.persist(temp1);
         session.getTransaction().commit();
+
+
         session.beginTransaction();
 
         Admin one = new Admin();
