@@ -31,7 +31,7 @@ public class CSVParser {
             //breaking line into stuffs
             Object[] b = line.split(",");
             String name = (String) b[1];
-            String email = name + "@iiitd.ac.in";
+            String email = ((String) b[3]).trim().toLowerCase() + "@iiitd.ac.in";
             int credits = Integer.parseInt(((String) b[4]).replaceAll(" ", ""));
             String tempCourseStream = ((String) b[2]).substring(0, 3);
 
@@ -47,7 +47,7 @@ public class CSVParser {
 
 
             number.add(Integer.parseInt(((String) b[2]).substring(4)));
-            prof.setName((String) b[3]);
+            prof.setName(((String) b[3]).trim());
             prof.setEmail(email);
 
             faculty.add(prof);
@@ -122,7 +122,8 @@ public class CSVParser {
             // Tutorial Information
             extraInformation(session, b[11], course,3);
             extraInformation(session, b[12], course,2);
-            session.saveOrUpdate(prof);
+            session.merge(prof);
+//            session.saveOrUpdate(prof);
             session.saveOrUpdate(course);
             session.getTransaction().commit();
         }
