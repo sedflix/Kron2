@@ -122,11 +122,11 @@ public class CSVParser {
             // Tutorial Information
             extraInformation(session, b[11], course,3);
             extraInformation(session, b[12], course,2);
-            faltu(session);
             session.saveOrUpdate(prof);
             session.saveOrUpdate(course);
             session.getTransaction().commit();
         }
+        faltu(session);
         br.close();
         session.close();
         MySession.closeSessionFactory();
@@ -199,87 +199,33 @@ public class CSVParser {
         temp.setPassword("[{Sid@123}]");
 
         Set<Course> cse = new HashSet<>();
-        Course course=new Course();
-        List<String> code = new ArrayList(1);
-        List<Integer> number = new ArrayList<>(1);
-        Set<Faculty> faculty = new HashSet<>(1);
-        List<Department> departments = new ArrayList<>(1);
-        String postConditions;
-        String preConditions;
+        cse.add(Course.getCourseByName("Advanced Programming"));
+        cse.add(Course.getCourseByName("Discrete Mathematics"));
 
-        Faculty prof = new Faculty();
-        prof.setName("Vivek Kumar");
-        prof.setEmail("vivekk@iiitd.ac.in");
-        prof.setPassword("vivekk");
-        code.add("CSE201");
-        number.add(201);
-        faculty.add(prof);
-        departments.add(Department.CSE);
-        course.setCourseCode("AP");
-        course.setName("Advanced Programming");
-        postConditions="";
-        postConditions+="Students are able to demonstrate the knowledge of basic principles of Object Oriented Programming such as encapsulation (classes and objects), interfaces, polymorphism and inheritance; by implementing programs ranging over few hundreds lines of code.";
-        postConditions+=" Implement basic event driven programming, exception handling, and threading.";
-        postConditions+=" Students are able to analyze the problem in terms of use cases and create object oriented design for it. Students are able to present the design in UML.";
-        postConditions+=" Students are able to select and use a few key design pattern to solve a given problem in hand.";
-        postConditions+=" Students are able to use common tools for testing (e.g., JUnit), debugging, and source code control as an integral part of program development.";
-        preConditions="";
-        preConditions+="CSE101";
-        preConditions+="CSE102";
-        course.setCredits(4);
-        course.setFaculties(faculty);
-        course.setCourseNumber(number);
-        course.setDepartments(departments);
-        course.setPostConditions(postConditions);
-        course.setPreConditions(preConditions);
-        cse.add(course);
         temp.setRegisteredCourse(cse);
-        session.saveOrUpdate(prof);
-        session.saveOrUpdate(course);
+
         session.saveOrUpdate(temp);
 
         Student temp1 = new Student();
         temp1.setName("Siddhartha Jain");
         temp1.setEmail("siddhartha16269@iiitd.ac.in");
         temp1.setRollNumber("2016269");
-        temp1.setPassword("G-k%Q29Y");
-
+        temp1.setPassword("g-Y87^k)");
 
         Set<Course> csam = new HashSet<>();
-        Course course1=new Course();
-        List<String> code1 = new ArrayList(1);
-        List<Integer> number1 = new ArrayList<>(1);
-        Set<Faculty> faculty1 = new HashSet<>(1);
-        List<Department> departments1 = new ArrayList<>(1);
-        String postConditions1;
-        String preConditions1;
+        csam.add(Course.getCourseByName("Number Theory"));
+        csam.add(Course.getCourseByName("Introduction to Psychology"));
 
-        Faculty prof1 = new Faculty();
-        prof1.setName("Anuradha Sharma");
-        prof1.setEmail("anu@iiitd.ac.in");
-        prof1.setPassword("anuradha");
-        code1.add("MTH270");
-        number1.add(270);
-        faculty1.add(prof1);
-        departments1.add(Department.MTH);
-        course1.setCourseCode("NT");
-        course1.setName("Number Theory");
-        postConditions1="";
-        postConditions1+="Something about number Theory";
-        postConditions1+=" Linear Congruences";
-        postConditions1+=" certain non linear diophantine equations";
-        preConditions1="";
-        course1.setCredits(4);
-        course1.setFaculties(faculty1);
-        course1.setCourseNumber(number1);
-        course1.setDepartments(departments1);
-        course1.setPostConditions(postConditions1);
-        course1.setPreConditions(preConditions1);
         temp1.setRegisteredCourse(csam);
 
-        session.saveOrUpdate(prof1);
-        session.saveOrUpdate(course1);
         session.saveOrUpdate(temp1);
+
+        Admin one = new Admin();
+        one.setName("Ravi Bhasin");
+        one.setEmail("ravi@iiitd.ac.in");
+        one.setPassword("RaVi");
+
+        session.saveOrUpdate(one);
 
         return;
     }

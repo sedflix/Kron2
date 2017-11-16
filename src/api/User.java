@@ -20,7 +20,7 @@ public class User {
     private String rollNumber;
 
     @Id
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
     private String email;
 
 
