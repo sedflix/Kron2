@@ -134,7 +134,6 @@ public class Course {
         Query query = session.createQuery("FROM Course course where course.name = :nameC");
         query.setParameter("nameC", name);
         Course courseX = (Course) query.getResultList().get(0);
-        session.close();
         return courseX;
     }
 
@@ -174,14 +173,8 @@ public class Course {
         });
 
 
-        session.beginTransaction();
         Student student = session.get(Student.class, "siddharth16268@iiitd.ac.in");
-        student.getAuditedCourse().add(course);
-        course.getAuditedStudents().add(student);
-        session.saveOrUpdate(student);
-        session.saveOrUpdate(course);
-        session.getTransaction().commit();
-        session.close();
+        student.insertAuditedCourse(course);
     }
 
 

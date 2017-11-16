@@ -61,8 +61,6 @@ public class Student extends User {
         session.saveOrUpdate(course);
         session.getTransaction().commit();
 
-        session.close();
-
         return true;
     }
 
@@ -84,8 +82,6 @@ public class Student extends User {
         session.saveOrUpdate(course);
         session.getTransaction().commit();
 
-        session.close();
-
         return true;
     }
 
@@ -106,8 +102,6 @@ public class Student extends User {
         session.saveOrUpdate(this);
         session.saveOrUpdate(course);
         session.getTransaction().commit();
-
-        session.close();
 
         return true;
     }
