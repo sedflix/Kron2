@@ -137,16 +137,18 @@ public class Course {
         return courseX;
     }
 
-    public List<Event> getThisWeekEvents(Session session) {
+    public List<Event> getThisWeekEvents() {
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(calendar.getWeekYear(), calendar.getWeeksInWeekYear(), 0);
         Calendar calendar2 = Calendar.getInstance();
         calendar2.set(calendar.getWeekYear(), calendar.getWeeksInWeekYear(), 6);
-        return getEventInTimeSpan(session, calendar.getTime(), calendar2.getTime());
+        return getEventInTimeSpan(calendar.getTime(), calendar2.getTime());
     }
 
-    public List<Event> getEventInTimeSpan(Session session, Date start, Date end) {
+
+    public List<Event> getEventInTimeSpan(Date start, Date end) {
+        Session session = MySession.getSession();
         Query query = session.createQuery("FROM Event event where event.course = :nocourse and ( event.date >= :startDate and event.date <= :endDate )", Event.class);
         query.setParameter("nocourse", this);
         query.setParameter("startDate", start);

@@ -2,7 +2,6 @@ package sample.timetable;
 
 import api.Course;
 import api.CourseEvent;
-import api.MySession;
 import api.Student;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,7 +13,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import org.hibernate.Session;
 import sample.CourseViewController;
 
 import java.util.ArrayList;
@@ -29,20 +27,26 @@ public class TimeTableGridPane {
     private int[][] clashingEvents;
     private StackPane[] times;
     private StackPane[] days;
-
+    private GridPane gridPane;
     public TimeTableGridPane() {
         this.startTime = 8;
         this.endTime = 17;
+        makeGridPane();
     }
 
     public TimeTableGridPane(int startTime, int endTime) {
         this.startTime = startTime;
         this.endTime = endTime;
+        makeGridPane();
     }
 
-    public GridPane getTimeTableGridPane() {
+    public GridPane getGridPane() {
+        return gridPane;
+    }
 
-        GridPane gridPane = new GridPane();
+    public GridPane makeGridPane() {
+
+        gridPane = new GridPane();
         gridPane.setHgap(0);
         gridPane.setVgap(5);
         gridPane.setGridLinesVisible(false);
@@ -114,10 +118,6 @@ public class TimeTableGridPane {
         }
 
 
-        Session session = MySession.getSession();
-        Student student = session.get(Student.class, "siddharth16268@iiitd.ac.in");
-        addAllCoureseOfStudent(student);
-
         return gridPane;
     }
 
@@ -143,12 +143,12 @@ public class TimeTableGridPane {
     }
 
     public void addAllCoureseOfStudent(Student student) {
-        student.getAllCourses().parallelStream().forEach(this::addCourse);
+        student.getAllCourses().forEach(this::addCourse);
 
     }
 
     public void addCourse(Course course) {
-        course.getCourseEvents().parallelStream().forEach(this::addCourseEvent);
+        course.getCourseEvents().forEach(this::addCourseEvent);
     }
 
     public void addCourseEvent(CourseEvent courseEvent) {

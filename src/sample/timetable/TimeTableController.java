@@ -1,8 +1,11 @@
 package sample.timetable;
 
+import api.MySession;
+import api.Student;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.hibernate.Session;
 
 
 public class TimeTableController extends Application {
@@ -18,7 +21,10 @@ public class TimeTableController extends Application {
         primaryStage.setTitle("Calendar");
 
         TimeTableGridPane gridPane = new TimeTableGridPane();
-        Scene scene = new Scene(gridPane.getTimeTableGridPane(), 1200, 480);
+        Session session = MySession.getSession();
+        Student student = session.get(Student.class, "siddharth16268@iiitd.ac.in");
+        gridPane.addAllCoureseOfStudent(student);
+        Scene scene = new Scene(gridPane.getGridPane(), 1200, 480);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

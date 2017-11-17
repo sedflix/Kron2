@@ -136,7 +136,9 @@ public class CourseEvent {
         this.eventType = eventType;
     }
 
-
+    public boolean isLecture() {
+        return eventType == 1;
+    }
 
 }
 

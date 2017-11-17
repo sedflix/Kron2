@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -43,39 +44,26 @@ public class Student extends User {
     }
 
 
+    public static void main(String[] args) {
+        Session session = MySession.getSession();
+        Student student = session.get(Student.class, "siddharth16268@iiitd.ac.in");
+
+//        System.out.println(student.hasAnyClashWithLecturesOf(session.get(Course.class, "ISI")));
+    }
+
     public boolean insertRegisteredCourse(String name) {
-        Course course = Course.getCourseByName("Advanced Programming");
+        Course course = Course.getCourseByName(name);
         return insertRegisteredCourse(course);
     }
 
     public boolean insertAuditedCourse(String name) {
-        Course course = Course.getCourseByName("Advanced Programming");
+        Course course = Course.getCourseByName(name);
         return insertAuditedCourse(course);
     }
 
     public boolean insertShoppingCourse(String name) {
-        Course course = Course.getCourseByName("Advanced Programming");
+        Course course = Course.getCourseByName(name);
         return insertShoppingCourse(course);
-    }
-    /**
-     * Give a course, it adds as a registered course
-     *
-     * @param course course that needs to be added
-     * @return true if successful
-     */
-    public boolean insertRegisteredCourse(Course course) {
-
-        Session session = MySession.getSession();
-
-        session.beginTransaction();
-
-        this.getRegisteredCourse().add(course);
-        course.getRegisteredStudents().add(this);
-        session.saveOrUpdate(this);
-        session.saveOrUpdate(course);
-        session.getTransaction().commit();
-
-        return true;
     }
 
     /**
@@ -104,7 +92,37 @@ public class Student extends User {
      * @param course course that needs to be added
      * @return true if successful
      */
+    public boolean insertRegisteredCourse(Course course) {
+
+        if (hasAnyCourseThatClashWith(course)) {
+            System.out.println("Clashing");
+            return false;
+        }
+
+        Session session = MySession.getSession();
+
+        session.beginTransaction();
+        this.getRegisteredCourse().add(course);
+        course.getRegisteredStudents().add(this);
+        session.saveOrUpdate(this);
+        session.saveOrUpdate(course);
+        session.getTransaction().commit();
+
+        return true;
+    }
+
+    /**
+     * Give a course, it adds as a registered course
+     *
+     * @param course course that needs to be added
+     * @return true if successful
+     */
     public boolean insertAuditedCourse(Course course) {
+
+        if (hasAnyCourseThatClashWith(course)) {
+            System.out.println("Clashing");
+            return false;
+        }
 
         Session session = MySession.getSession();
 
@@ -119,7 +137,32 @@ public class Student extends User {
         return true;
     }
 
+    public boolean hasAnyCourseThatClashWith(Course course) {
 
+        return course.getCourseEvents().stream().
+                filter(CourseEvent::isLecture).
+                filter(o -> isAnyLectureBetween(o.getStartTime(), o.getEndTime(), o.getDayOfWeek()))
+                .count() != 0;
+
+    }
+
+    public boolean isAnyLectureBetween(Time startTime, Time endTime, DayOfWeek dayOfWeek) {
+
+        Session session = MySession.getSession();
+        Query query = session.createQuery("select distinct event.course from CourseEvent as event " +
+                "where (:thisStudent in elements(event.course.registeredStudents) " +
+                "or :thisStudent in elements(event.course.auditedStudents))" +
+                "and ( (event.startTime between :startT and :endT) or (event.startTime between :startT and :endT) )" +
+                "and event.dayOfWeek = :EdayOfWeek and  event.eventType = 1");
+
+        query.setParameter("thisStudent", this);
+        query.setParameter("startT", startTime);
+        query.setParameter("endT", endTime);
+        query.setParameter("EdayOfWeek", dayOfWeek);
+
+        return query.getResultList().size() != 0;
+
+    }
 
     public boolean hasRegisteredForCourse(Course course) {
         return getRegisteredCourse().contains(course);
