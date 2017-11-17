@@ -3,6 +3,7 @@ package sample.timetable;
 import api.Course;
 import api.CourseEvent;
 import api.MySession;
+import api.Student;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,7 +25,8 @@ public class TimeTableController extends Application {
 
 
     private static int startTime = 8;
-    private static int endTime = 18;
+    private static int endTime = 17;
+    private String dayName[] = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
     private ListView<CourseEvent>[][] calendar;
     private ObservableList<CourseEvent>[][] calenderList;
     private int[][] clashingEvents;
@@ -32,7 +34,7 @@ public class TimeTableController extends Application {
     private StackPane[] days;
 
     public static int getX(CourseEvent course) {
-        return course.getDayOfWeek().getValue() + 1;
+        return course.getDayOfWeek().getValue();
     }
 
     public static int[] getY(CourseEvent courseEvent) {
@@ -88,10 +90,10 @@ public class TimeTableController extends Application {
         GridPane gridPane = new GridPane();
         gridPane.setHgap(0);
         gridPane.setVgap(5);
-//        gridPane.setGridLinesVisible(true);
+        gridPane.setGridLinesVisible(true);
 
         RowConstraints rc = new RowConstraints();
-        rc.setPercentHeight(100 / 7);
+        rc.setPercentHeight(100 / 6);
         rc.setFillHeight(true);
         rc.setVgrow(Priority.ALWAYS);
         ColumnConstraints cc = new ColumnConstraints();
@@ -100,11 +102,11 @@ public class TimeTableController extends Application {
         cc.setHgrow(Priority.ALWAYS);
 
 
-        days = new StackPane[7];
-        for (int i = 0; i < 7; i++) {
+        days = new StackPane[6];
+        for (int i = 0; i < 6; i++) {
             if (i != 0) {
                 days[i] = new StackPane();
-                days[i].getChildren().add(new Label(i + " . "));
+                days[i].getChildren().add(new Label(dayName[i - 1]));
                 gridPane.add(days[i], 0, i);
             }
             gridPane.getRowConstraints().add(rc);
@@ -112,12 +114,11 @@ public class TimeTableController extends Application {
 
 
         times = new StackPane[2 * (endTime - startTime + 1)];
-        for (int i = 0; i < times.length; i++) {
-            if (i != 0) {
-                times[i] = new StackPane();
-                times[i].getChildren().addAll(new Label(startTime + (int) (i / 2) + " - " + i));
-                gridPane.add(times[i], i, 0);
-            }
+        gridPane.getColumnConstraints().add(cc);
+        for (int i = 1; i < times.length; i++) {
+            times[i] = new StackPane();
+            times[i].getChildren().addAll(new Label(startTime + (int) (i / 2) + ""));
+            gridPane.add(times[i], i, 0);
             gridPane.getColumnConstraints().add(cc);
         }
 
@@ -127,22 +128,36 @@ public class TimeTableController extends Application {
         calenderList = new ObservableList[calendar.length][calendar[0].length];
         for (int i = 1; i < calendar.length; i++) {
             for (int j = 1; j < calendar[0].length; j++) {
+
                 calendar[i][j] = new ListView<CourseEvent>();
                 calenderList[i][j] = FXCollections.observableList(new ArrayList<>());
                 calendar[i][j].setItems(calenderList[i][j]);
-                calendar[i][j].setCellFactory(list -> new ColorRectCell());
+
+
+                calendar[i][j].setCellFactory(list -> new CourseItem());
+
+
+                calendar[i][j].getSelectionModel().selectedItemProperty().addListener(
+                        (ov, old_val, new_val) -> {
+                            System.out.println(ov.getValue().getCourse().getName());
+                        });
                 gridPane.add(calendar[i][j], j, i);
             }
         }
 
-        Session session = MySession.getSession();
-        addCourse(session.get(Course.class, "NT"));
-        addCourse(session.get(Course.class, "AP"));
-        addCourse(session.get(Course.class, "CO"));
 
-        Scene scene = new Scene(gridPane, 480, 200);
+        Session session = MySession.getSession();
+        Student student = session.get(Student.class, "siddharth16268@iiitd.ac.in");
+        addAllCoureseOfStudent(student);
+
+        Scene scene = new Scene(gridPane, 1200, 480);
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    public void addAllCoureseOfStudent(Student student) {
+        student.getAllCourses().parallelStream().forEach(this::addCourse);
+
     }
 
     public void addCourse(Course course) {
@@ -157,6 +172,8 @@ public class TimeTableController extends Application {
             clashingEvents[x][i]++;
             calenderList[x][i].add(courseEvent);
             calendar[x][i].setItems(calenderList[x][i]);
+
+
         }
     }
 
@@ -184,14 +201,23 @@ public class TimeTableController extends Application {
         this.days = days;
     }
 
-    static class ColorRectCell extends ListCell<CourseEvent> {
+    static class CourseItem extends ListCell<CourseEvent> {
         @Override
         public void updateItem(CourseEvent item, boolean empty) {
             super.updateItem(item, empty);
             if (item != null) {
-                Label x = new Label(item.getCourse().getCourseCode());
+                Label x = new Label(item.getCourse().getCourseCode() + "-" + item.getRoom().getRoomName());
+                x.setStyle("-fx-background-color: " + calculateColorBase(item.getCourse().getName()));
                 setGraphic(x);
             }
+        }
+
+        public String calculateColorBase(String name) {
+            String opacity = "#99"; //opacity between 00-ff
+            String hexColor = String.format(
+                    opacity + "%06X", (0xeeeeee & name.hashCode()));
+
+            return hexColor;
         }
     }
 }
