@@ -35,7 +35,8 @@ public class Room {
     }
 
 
-    public static List<Room> getAllRooms(Session session) {
+    public static List<Room> getAllRooms() {
+        Session session = MySession.getSession();
         Query query = session.createQuery("FROM Room");
         return (List<Room>) query.getResultList();
     }
@@ -45,7 +46,7 @@ public class Room {
     }
 
     /**
-     * @param date    date
+     * @param date date
      * @return list of rooms that don't have any event on date
      */
     public static List<Room> getAvailableRoomsOn(Date date) {
@@ -71,11 +72,10 @@ public class Room {
 
     public static List<Room> getAvailableRoomsBetween(Time startTime, Time endTime, Date date) {
 
-        Session session = MySession.getSession();
-        return Room.getAllRooms(session)
+        return Room.getAllRooms()
                 .stream()
                 .filter((o) ->
-                        o.isFreeBetween(session, startTime, endTime, date))
+                        o.isFreeBetween(startTime, endTime, date))
                 .collect(Collectors.toList());
 
     }
@@ -92,7 +92,7 @@ public class Room {
         Session session = MySession.getSession();
         session.setCacheMode(CacheMode.GET);
 
-        List<Room> rooms = Room.getAllRooms(session);
+        List<Room> rooms = Room.getAllRooms();
         rooms.forEach((o) -> {
             System.out.println(o.getRoomName());
 //            System.out.print("--");
@@ -107,25 +107,27 @@ public class Room {
 
     }
 
-    public boolean isFreeBetween(Session session, Time startTime, Time endTime, Date date) {
-
-        Query query = session.createQuery("select event from Event as event where event.room = :room and (event.startTime >= :start and event.endTime <= :endT) and event.date = :dateE");
-        query.setParameter("room", this);
-        query.setParameter("start", startTime);
-        query.setParameter("endT", endTime);
-        query.setParameter("dateE", date);
-        return query.getResultList().size() == 0;
-
+    public static boolean isFreeBetween(String roomName, Time startTime, Time endTime, Date date) {
+        Session session = MySession.getSession();
+        Room room = session.get(Room.class, roomName.trim());
+        return room.isFreeBetween(startTime, endTime, date);
     }
 
-    public static boolean isFreeBetween(String roomName, Time startTime, Time endTime, Date date){
+    public boolean isFreeBetween(Time startTime, Time endTime, Date date) {
         Session session = MySession.getSession();
-        Query query = session.createQuery("select event from Event as event where event.room = :room and (event.startTime>= :start and event.endTime<= :end) and event.date = :date");
-        query.setParameter("room",new Room(roomName));
-        query.setParameter("start", startTime);
-        query.setParameter("end", endTime);
-        query.setParameter("date", date);
-        return query.getResultList().size()==0;
+
+        Query query = session.createQuery("select event from Event as event where event.room = :room " +
+                "and (event.startTime>= :startT and event.endTime<= :endT) " +
+                "and event.date = :dateT and event.isPending = false  " +
+                "and event.isRejected = false  " +
+                "and event.isCancelled = false ");
+
+        query.setParameter("room", this);
+        query.setParameter("startT", startTime);
+        query.setParameter("endT", endTime);
+        query.setParameter("dateT", date);
+        return query.getResultList().size() == 0;
+
     }
 
     public String getRoomName() {

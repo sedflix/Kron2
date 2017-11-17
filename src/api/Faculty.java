@@ -21,7 +21,6 @@ public class Faculty extends User {
 
     public boolean addEvent(String name, Room room, String description, Time startTime, Time endTime, Date date, Course course) {
 
-        Session session = MySession.getSession();
         if (new java.util.Date().before(startTime)) {
             System.out.println("Make a time machine first");
             return false;
@@ -30,7 +29,7 @@ public class Faculty extends User {
             System.out.println("Make a time machine first");
             return false;
         }
-        if (!room.isFreeBetween(session, startTime, endTime, date)) {
+        if (!room.isFreeBetween(startTime, endTime, date)) {
             System.out.println("Room not free");
             return false;
         }
@@ -52,6 +51,7 @@ public class Faculty extends User {
         event.setCreators(this);
 
         try {
+            Session session = MySession.getSession();
             session.beginTransaction();
             session.saveOrUpdate(event);
             session.getTransaction().commit();

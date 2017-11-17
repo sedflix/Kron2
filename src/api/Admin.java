@@ -34,7 +34,7 @@ public class Admin extends Faculty {
 
     public boolean approveEventRequest(Event event) {
         Session session = MySession.getSession();
-        if (!event.getRoom().isFreeBetween(session, event.getStartTime(), event.getEndTime(), event.getDate())) {
+        if (!event.getRoom().isFreeBetween(event.getStartTime(), event.getEndTime(), event.getDate())) {
             System.out.println("Room is occupied");
             return false;
         }

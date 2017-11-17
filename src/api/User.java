@@ -3,7 +3,10 @@ package api;
 
 import org.hibernate.Session;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -85,7 +88,7 @@ public class User {
     }
 
     public void setRollNumber(String rollNumber) {
-        this.rollNumber = rollNumber;
+        this.rollNumber = rollNumber.toUpperCase();
     }
 
     public String getEmail() {
@@ -93,7 +96,7 @@ public class User {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email.toLowerCase();
     }
 
     public String getPassword() {
