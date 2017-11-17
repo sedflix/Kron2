@@ -1,96 +1,154 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
-<?import java.lang.*?>
-<?import java.net.URL?>
-<GridPane xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity"
-          minHeight="-Infinity" minWidth="-Infinity" vgap="10.0" xmlns="http://javafx.com/javafx/8.0.121">
+
+<GridPane alignment="CENTER" hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" vgap="10.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="217.0"/>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="533.0" minWidth="10.0" prefWidth="383.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="217.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="533.0" minWidth="10.0" prefWidth="383.0" />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints minHeight="10.0" percentHeight="12.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints minHeight="10.0" percentHeight="50.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints minHeight="10.0" percentHeight="12.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" percentHeight="14.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" percentHeight="9.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" percentHeight="9.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" percentHeight="9.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" percentHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" percentHeight="9.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" percentHeight="9.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" percentHeight="9.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" percentHeight="14.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER" GridPane.columnSpan="2147483647"
-                  GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="BOTTOM"
-                  GridPane.vgrow="ALWAYS">
+        <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
             <children>
-                <Text fx:id="h1" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Event(Book Room) | Edit"
-                      textAlignment="CENTER"/>
+                <Text fx:id="h1" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Event(Book Room) | Edit" textAlignment="CENTER" />
             </children>
             <GridPane.margin>
-                <Insets top="20.0"/>
+                <Insets top="20.0" />
             </GridPane.margin>
         </TextFlow>
-        <Label alignment="CENTER" prefWidth="1000.0" text="Choose a starting date" textAlignment="CENTER"
-               GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER"
-               GridPane.vgrow="ALWAYS"/>
-        <DatePicker prefWidth="1000.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS"
-                    GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+        <Label alignment="CENTER" prefWidth="1000.0" text="Choose a starting date" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+        <DatePicker fx:id="eventDatePicker" prefWidth="1000.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
             <GridPane.margin>
-                <Insets right="20.0"/>
+                <Insets right="20.0" />
             </GridPane.margin>
         </DatePicker>
-        <Label alignment="CENTER" layoutX="10.0" layoutY="90.0" prefWidth="1000.0" text="Choose approx time"
-               textAlignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS"/>
-        <ChoiceBox prefWidth="1000.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS"
-                   GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+        <Label alignment="CENTER" layoutX="10.0" layoutY="90.0" prefWidth="1000.0" text="Choose Start and End Time" textAlignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
+        <ChoiceBox fx:id="eventStartTimePicker" prefHeight="25.0" prefWidth="175.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <GridPane.margin>
-                <Insets right="20.0"/>
+                <Insets />
             </GridPane.margin>
 
             <items>
                 <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="8"/>
-                    <String fx:value="9"/>
-                    <String fx:value="10"/>
-                    <String fx:value="11"/>
-                    <String fx:value="12"/>
-                    <String fx:value="1"/>
-                    <String fx:value="2"/>
-                    <String fx:value="3"/>
-                    <String fx:value="4"/>
-                    <String fx:value="5"/>
-                    <String fx:value="6"/>
+                    <String fx:value="8:00" />
+                    <String fx:value="8:30" />
+                    <String fx:value="9:00" />
+                    <String fx:value="9:30" />
+                    <String fx:value="10:00" />
+                    <String fx:value="10:30" />
+                    <String fx:value="11:00" />
+                    <String fx:value="11:30" />
+                    <String fx:value="12:00" />
+                    <String fx:value="12:30" />
+                    <String fx:value="13:00" />
+                    <String fx:value="13:30" />
+                    <String fx:value="14:00" />
+                    <String fx:value="14:30" />
+                    <String fx:value="15:00" />
+                    <String fx:value="15:30" />
+                    <String fx:value="16:00" />
+                    <String fx:value="16:30" />
+                    <String fx:value="17:00" />
+                    <String fx:value="17:30" />
+                    <String fx:value="18:00" />
+                    <String fx:value="18:30" />
                 </FXCollections>
             </items>
         </ChoiceBox>
-        <ScrollPane fx:id="scroll_time_table" fitToHeight="true" fitToWidth="true" GridPane.columnSpan="2147483647"
-                    GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3"
-                    GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS"/>
-        <Label alignment="CENTER" layoutX="10.0" layoutY="104.0" prefWidth="1000.0" text="Event Name"
-               textAlignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS"/>
-        <Label alignment="CENTER" layoutX="10.0" layoutY="332.0" prefWidth="1000.0" text="Crowd Size"
-               textAlignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS"/>
-        <Label alignment="CENTER" layoutX="10.0" layoutY="332.0" prefWidth="1000.0" text="Event Description"
-               textAlignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6"/>
-        <TextField GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS"/>
-        <TextField GridPane.columnIndex="1" GridPane.rowIndex="5"/>
-        <TextField GridPane.columnIndex="1" GridPane.rowIndex="6"/>
-        <Button mnemonicParsing="false" text="Request | Edit | Book" GridPane.columnSpan="2147483647"
-                GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.valignment="CENTER"
-                GridPane.vgrow="ALWAYS">
+        <ScrollPane fx:id="scroll_time_table" fitToHeight="true" fitToWidth="true" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+        <Label alignment="CENTER" layoutX="10.0" layoutY="104.0" prefWidth="1000.0" text="Event Name" textAlignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS" />
+        <Label alignment="CENTER" layoutX="10.0" layoutY="332.0" prefWidth="1000.0" text="Crowd Size" textAlignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" GridPane.vgrow="ALWAYS" />
+        <Label alignment="CENTER" layoutX="10.0" layoutY="332.0" prefWidth="1000.0" text="Event Description" textAlignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" />
+        <TextField fx:id="eventNameField" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS" />
+        <TextField fx:id="crowdSizeField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+        <TextField fx:id="eventDescriptionField" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+        <Button fx:id="requestButton" mnemonicParsing="false" text="Request | Edit | Book" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <padding>
-                <Insets bottom="10.0" left="50.0" right="50.0" top="10.0"/>
+                <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
             </padding>
         </Button>
+      <TextFlow prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER" GridPane.rowIndex="3">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Room" textAlignment="CENTER" />
+         </children>
+      </TextFlow>
+      <ChoiceBox fx:id="eventEndTimePicker" prefHeight="25.0" prefWidth="175.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
+          <items>
+              <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="8:00" />
+                  <String fx:value="8:30" />
+                  <String fx:value="9:00" />
+                  <String fx:value="9:30" />
+                  <String fx:value="10:00" />
+                  <String fx:value="10:30" />
+                  <String fx:value="11:00" />
+                  <String fx:value="11:30" />
+                  <String fx:value="12:00" />
+                  <String fx:value="12:30" />
+                  <String fx:value="13:00" />
+                  <String fx:value="13:30" />
+                  <String fx:value="14:00" />
+                  <String fx:value="14:30" />
+                  <String fx:value="15:00" />
+                  <String fx:value="15:30" />
+                  <String fx:value="16:00" />
+                  <String fx:value="16:30" />
+                  <String fx:value="17:00" />
+                  <String fx:value="17:30" />
+                  <String fx:value="18:00" />
+                  <String fx:value="18:30" />
+              </FXCollections>
+          </items>
+      </ChoiceBox>
+        <ComboBox fx:id="roomNumberField" prefHeight="25.0" prefWidth="175.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="C01" />
+                    <String fx:value="C02" />
+                    <String fx:value="C03" />
+                    <String fx:value="C11" />
+                    <String fx:value="C12" />
+                    <String fx:value="C13" />
+                    <String fx:value="C21" />
+                    <String fx:value="C22" />
+                    <String fx:value="C23" />
+                    <String fx:value="S01" />
+                    <String fx:value="S02" />
+                </FXCollections>
+            </items>
+        </ComboBox>
     </children>
 
     <stylesheets>
-        <URL value="@css/main.css"/>
+        <URL value="@css/main.css" />
     </stylesheets>
 </GridPane>

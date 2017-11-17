@@ -7,7 +7,7 @@ import org.hibernate.cfg.Configuration;
 public class MySession {
 
     private static final SessionFactory ourSessionFactory;
-    private static final Session session;
+    private static Session session;
 
     static {
         try {
@@ -23,7 +23,12 @@ public class MySession {
     }
 
     public static Session getSession() {
-        return session;
+        if (session.isOpen()) {
+            return session;
+        } else {
+            session = ourSessionFactory.openSession();
+            return session;
+        }
     }
 
 
