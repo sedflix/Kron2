@@ -77,7 +77,7 @@ public class CreateEvent extends Application {
                     createEvent.setEndTime(new Time(endTimeHour,endTimeMinute,00));
 
                     createEvent.setDescription(description);
-                    createEvent.setDate(new Date(day,month,year));
+                    createEvent.setDate(new Date(year,month,day));
 
                     Session session = MySession.getSession();
                     session.beginTransaction();
