@@ -118,6 +118,15 @@ public class Room {
 
     }
 
+    public static boolean isFreeBetween(String roomName, Time startTime, Time endTime, Date date){
+        Session session = MySession.getSession();
+        Query query = session.createQuery("select event from Event as event where event.room = :room and (event.startTime>= :start and event.endTime<= :end) and event.date = :date");
+        query.setParameter("room",new Room(roomName));
+        query.setParameter("start", startTime);
+        query.setParameter("end", endTime);
+        query.setParameter("date", date);
+        return query.getResultList().size()==0;
+    }
 
     public String getRoomName() {
         return roomName;
