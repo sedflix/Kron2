@@ -7,6 +7,8 @@ import api.Student;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -14,6 +16,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import org.hibernate.Session;
+import sample.CourseViewController;
 
 import java.util.ArrayList;
 
@@ -139,7 +142,17 @@ public class TimeTableController extends Application {
 
                 calendar[i][j].getSelectionModel().selectedItemProperty().addListener(
                         (ov, old_val, new_val) -> {
-                            System.out.println(ov.getValue().getCourse().getName());
+                            CourseViewController courseViewController = new CourseViewController();
+                            Stage tempStage = new Stage();
+                            try {
+                                Parent parent = FXMLLoader.load(getClass().getResource("/sample/course_view.fxml"));
+                                courseViewController.setData(parent,ov.getValue().getCourse());
+                                tempStage.setScene(new Scene(parent));
+                                tempStage.show();
+                            }catch (Exception e){
+
+                            }
+//                            System.out.println(ov.getValue().getCourse().getName());
                         });
                 gridPane.add(calendar[i][j], j, i);
             }

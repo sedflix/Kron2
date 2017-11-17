@@ -9,12 +9,15 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
+
+import javax.persistence.OneToOne;
 import java.io.IOException;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.sql.Date;
 
 public class ViewRoomController extends Application {
+    @Override
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/sample/ViewRoom.fxml"));
         primaryStage.setTitle("Kron2");

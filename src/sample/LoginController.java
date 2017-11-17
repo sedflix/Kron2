@@ -19,9 +19,8 @@ import java.io.IOException;
 
 public class LoginController extends Application{
    @Override
-    public void start(Stage primaryStage) throws IOException{
+    public void start(Stage primaryStage) throws Exception{
        Parent root = FXMLLoader.load(getClass().getResource("/sample/Login.fxml"));
-       primaryStage.setTitle("Kron2");
        primaryStage.setScene(new Scene(root, 600, 350));
        primaryStage.show();
 

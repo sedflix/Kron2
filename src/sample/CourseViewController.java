@@ -55,39 +55,8 @@ public class CourseViewController extends Application{
             cell.setOnMousePressed(e -> {
                 if (! cell.isEmpty()) {
                     Course forInfo = Course.getCourseByName(cell.getItem());
-                    String facultyString = "Faculty: ";
-                    Set<Faculty> temp = forInfo.getFaculties();
-                    Hibernate.initialize(temp);
 
-                    if (!temp.isEmpty()) {
-                        for (Faculty fac : temp) {
-                            Hibernate.initialize(fac);
-                            facultyString += fac.getName();
-                        }
-                    }
-
-                    Text faculty = new Text(facultyString);
-                    faculty.setId("faculty");
-                    TextFlow facultyTF = (TextFlow) courseDescription.lookup("#faculty");
-                    facultyTF.getChildren().clear();
-                    facultyTF.getChildren().add(faculty);
-
-                    String preReq = forInfo.getPreConditions();
-                    Text pre = new Text(preReq);
-                    pre.setId("prereq");
-                    TextFlow preTF = (TextFlow) courseDescription.lookup("#prereq");
-                    preTF.getChildren().clear();
-                    preTF.getChildren().add(pre);
-
-                    Text credits = new Text("Credits: "+Integer.toString(forInfo.getCredits()));
-                    credits.setId("credits");
-                    TextFlow creditsTF = (TextFlow) courseDescription.lookup("#credits");
-                    creditsTF.getChildren().clear();
-                    creditsTF.getChildren().add(credits);
-
-                    TextArea coTA = (TextArea) courseDescription.lookup("#co");
-                    coTA.clear();
-                    coTA.setText(forInfo.getPostConditions());
+                    setData(courseDescription, forInfo);
                 }
             });
             return cell ;
@@ -103,5 +72,40 @@ public class CourseViewController extends Application{
         primaryStage.setTitle("Kron2");
         primaryStage.setScene(new Scene(courseDescription, 700, 900));
         primaryStage.show();
+    }
+
+    public void setData(Parent courseDescription, Course forInfo) {
+        String facultyString = "Faculty: ";
+        Set<Faculty> temp = forInfo.getFaculties();
+        Hibernate.initialize(temp);
+
+        if (!temp.isEmpty()) {
+            for (Faculty fac : temp) {
+                Hibernate.initialize(fac);
+                facultyString += fac.getName();
+            }
+        }
+        Text faculty = new Text(facultyString);
+        faculty.setId("faculty");
+        TextFlow facultyTF = (TextFlow) courseDescription.lookup("#faculty");
+        facultyTF.getChildren().clear();
+        facultyTF.getChildren().add(faculty);
+
+        String preReq = forInfo.getPreConditions();
+        Text pre = new Text(preReq);
+        pre.setId("prereq");
+        TextFlow preTF = (TextFlow) courseDescription.lookup("#prereq");
+        preTF.getChildren().clear();
+        preTF.getChildren().add(pre);
+
+        Text credits = new Text("Credits: "+Integer.toString(forInfo.getCredits()));
+        credits.setId("credits");
+        TextFlow creditsTF = (TextFlow) courseDescription.lookup("#credits");
+        creditsTF.getChildren().clear();
+        creditsTF.getChildren().add(credits);
+
+        TextArea coTA = (TextArea) courseDescription.lookup("#co");
+        coTA.clear();
+        coTA.setText(forInfo.getPostConditions());
     }
 }
