@@ -109,6 +109,7 @@ public class TimeTableGridPane {
                             }
 //                            System.out.println(ov.getValue().getCourse().getName());
                         });
+                gridPane.add(calendar[i][j], j, i);
             }
         }
 
