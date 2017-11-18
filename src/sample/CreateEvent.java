@@ -2,13 +2,10 @@ package sample;
 
 import api.*;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import org.hibernate.Session;
 import sample.timetable.TimeTableController;
 import sample.timetable.TimeTableGridPane;
 
@@ -19,6 +16,9 @@ import java.time.LocalDate;
 public class CreateEvent extends Application {
     private User user;
     private Parent root;
+    private Event event;
+    private boolean edit = false;
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -38,45 +38,76 @@ public class CreateEvent extends Application {
 
         Button button = (Button) root.lookup("#requestButton");
 
-        button.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-
-                DatePicker datePicker = (DatePicker) root.lookup("#eventDatePicker");
-                ChoiceBox<String> startBox  =   (ChoiceBox<String>) root.lookup("#eventStartTimePicker");
-                ChoiceBox<String> endBox    =   (ChoiceBox<String>) root.lookup("#eventEndTimePicker");
-                TextField eventName         =   (TextField) root.lookup("#eventNameField");
-                TextField eventDescription  =   (TextField) root.lookup("#eventDescriptionField") ;
-                TextField crowdSize         =   (TextField) root.lookup("#crowdSizeField");
-                ComboBox<String> roomNumber =   (ComboBox<String>) root.lookup("#roomNumberField");
-
-                LocalDate temp = datePicker.getValue();
-                String startTime = startBox.getValue();
-                String endTime = endBox.getValue();
-                String name = eventName.getText();
-                String description = eventDescription.getText();
-                String size = crowdSize.getText();
-                String room = roomNumber.getValue();
+        if (edit) {
+            if (user.getDtype().equals("Student")) {
+                button.setText("Edit Event/Book");
+            } else {
+                button.setText("Edit Event");
+            }
+        } else {
+            if (user.getDtype().equals("Student")) {
+                button.setText("Request Event/Book");
+            } else {
+                button.setText("Book Room");
+            }
+        }
 
 
-                if (temp!=null && name!=null && description!=null && size!=null && startTime!=null && endTime!=null && room!=null) {
-                    int day = temp.getDayOfMonth();
-                    int month = temp.getMonthValue();
-                    int year = temp.getYear();
+        if (edit) {
+            DatePicker datePicker = (DatePicker) root.lookup("#eventDatePicker");
+            ChoiceBox<String> startBox = (ChoiceBox<String>) root.lookup("#eventStartTimePicker");
+            ChoiceBox<String> endBox = (ChoiceBox<String>) root.lookup("#eventEndTimePicker");
+            TextField eventName = (TextField) root.lookup("#eventNameField");
+            TextField eventDescription = (TextField) root.lookup("#eventDescriptionField");
+            TextField crowdSize = (TextField) root.lookup("#crowdSizeField");
+            ComboBox<String> roomNumber = (ComboBox<String>) root.lookup("#roomNumberField");
 
-                    int tempIndex = startTime.indexOf(":");
-                    int startTimeHour = Integer.parseInt(startTime.substring(0,tempIndex));
-                    int startTimeMinute = Integer.parseInt(startTime.substring(tempIndex+1));
+            datePicker.setUserData(event.getDate());
+            startBox.setValue(event.getStartTime().toString());
+            endBox.setValue(event.getEndTime().toString());
+            eventName.setText(event.getTagline());
+            eventDescription.setText(event.getDescription());
+            crowdSize.setText(event.getRoom().getCapacity() + "");
+            roomNumber.setValue(event.getRoom().getRoomName());
+        }
+        button.setOnMouseClicked(event -> {
 
-                    tempIndex = endTime.indexOf(":");
-                    int endTimeHour = Integer.parseInt(endTime.substring(0,tempIndex));
-                    int endTimeMinute = Integer.parseInt(endTime.substring(tempIndex+1));
+            DatePicker datePicker = (DatePicker) root.lookup("#eventDatePicker");
+            ChoiceBox<String> startBox = (ChoiceBox<String>) root.lookup("#eventStartTimePicker");
+            ChoiceBox<String> endBox = (ChoiceBox<String>) root.lookup("#eventEndTimePicker");
+            TextField eventName = (TextField) root.lookup("#eventNameField");
+            TextField eventDescription = (TextField) root.lookup("#eventDescriptionField");
+            TextField crowdSize = (TextField) root.lookup("#crowdSizeField");
+            ComboBox<String> roomNumber = (ComboBox<String>) root.lookup("#roomNumberField");
 
-                    Time starttime = new Time(startTimeHour,startTimeMinute,00);
-                    Time endtime = new Time(endTimeHour,endTimeMinute,00);
-                    Date date = new Date(year,month,day);
-                    Room rooms = new Room(room);
-                    setUser(user,starttime,endtime,date,description,name,rooms);
+            LocalDate temp1 = datePicker.getValue();
+            String startTime = startBox.getValue();
+            String endTime = endBox.getValue();
+            String name = eventName.getText();
+            String description = eventDescription.getText();
+            String size = crowdSize.getText();
+            String room = roomNumber.getValue();
+
+
+            if (temp1 != null && name != null && description != null && size != null && startTime != null && endTime != null && room != null) {
+                int day = temp1.getDayOfMonth();
+                int month = temp1.getMonthValue();
+                int year = temp1.getYear();
+
+                int tempIndex = startTime.indexOf(":");
+                int startTimeHour = Integer.parseInt(startTime.substring(0, tempIndex));
+                int startTimeMinute = Integer.parseInt(startTime.substring(tempIndex + 1));
+
+                tempIndex = endTime.indexOf(":");
+                int endTimeHour = Integer.parseInt(endTime.substring(0, tempIndex));
+                int endTimeMinute = Integer.parseInt(endTime.substring(tempIndex + 1));
+
+                Time starttime = new Time(startTimeHour, startTimeMinute, 00);
+                Time endtime = new Time(endTimeHour, endTimeMinute, 00);
+                Date date = new Date(year, month, day);
+                Room rooms = new Room(room);
+                if (addEventNow(user, starttime, endtime, date, description, name, rooms)) {
+
                 }
             }
         });
@@ -97,14 +128,33 @@ public class CreateEvent extends Application {
     public User getUser() {
         return user;
     }
-    public void setUser(User user,Time startTime, Time endTime, Date date, String description,String name,Room room) {
+
+    public boolean addEventNow(User user, Time startTime, Time endTime, Date date, String description, String name, Room room) {
         this.user = user;
         if (user.getDtype().equals("Student")) {
-            ((Student) user).createEventRequest(name,room,description,startTime,endTime,date);
+            return ((Student) user).createEventRequest(name, room, description, startTime, endTime, date);
         } else if (user.getDtype().equals("Faculty")) {
-            ((Faculty) user).addEvent(name,room,description,startTime,endTime,date);
+            return ((Faculty) user).addEvent(name, room, description, startTime, endTime, date);
         } else if (user.getDtype().equals("Admin")) {
-            ((Admin) user).addEvent(name,room,description,startTime,endTime,date);
+            return ((Admin) user).addEvent(name, room, description, startTime, endTime, date);
         }
+
+        return false;
+    }
+
+    public boolean isEdit() {
+        return edit;
+    }
+
+    public void setEdit(boolean edit) {
+        this.edit = edit;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
     }
 }
