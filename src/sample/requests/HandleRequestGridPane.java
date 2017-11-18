@@ -6,11 +6,15 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.*;
+import javafx.stage.Stage;
+import org.hibernate.Session;
+import sample.CreateEvent;
 
 public class HandleRequestGridPane {
 
@@ -137,10 +141,10 @@ public class HandleRequestGridPane {
 
     public void update() {
         listView.setItems(this.data);
-        System.out.println(data);
         listView.setCellFactory(list -> new EventItem());
         listView.autosize();
     }
+
 
     public void setData() {
         if (pendinng) {
@@ -188,6 +192,7 @@ public class HandleRequestGridPane {
                         Button approve = new Button("Approve");
                         approve.setOnAction(actionEvent -> {
                             admin.approveEventRequest(item);
+                            update();
                         });
                         right.getChildren().add(approve);
                     }
@@ -195,6 +200,7 @@ public class HandleRequestGridPane {
                         Button reject = new Button("Reject");
                         reject.setOnAction(actionEvent -> {
                             admin.rejectEventRequest(item);
+                            update();
                         });
                         right.getChildren().add(reject);
                     }
@@ -208,6 +214,36 @@ public class HandleRequestGridPane {
                 */
                 Button edit = new Button("Edit");
                 //TODO: Add listner for edit
+                edit.setOnAction(actionEvent -> {
+                    CreateEvent createEventController = new CreateEvent();
+                    createEventController.setEdit(true);
+                    createEventController.setUser(user);
+                    createEventController.setEvent(item);
+                    Stage tempStage = new Stage();
+                    try {
+                        createEventController.start(tempStage);
+                        Scene scene = new Scene(createEventController.getRoot(), 1360, 768);
+                        tempStage.setScene(scene);
+                        tempStage.show();
+
+                        /**
+                         * bad code
+                         */
+                        Session session = MySession.getSession();
+                        session.beginTransaction();
+                        session.delete(item);
+                        session.getTransaction().commit();
+                        /**
+                         * Bad code
+                         */
+
+
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                    update();
+                });
+
 
                 if ((!item.isPending() && student != null) || (faculty != null) || (admin != null)) {
                     right.getChildren().add(edit);
@@ -219,6 +255,8 @@ public class HandleRequestGridPane {
                 Button delete = new Button("Delete");
                 delete.setOnAction(actionEvent -> {
                     user.deleteEventRequest(item);
+                    data.removeAll(item);
+                    update();
                 });
                 right.getChildren().add(delete);
 
