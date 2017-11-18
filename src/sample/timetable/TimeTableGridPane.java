@@ -3,6 +3,7 @@ package sample.timetable;
 import api.Course;
 import api.CourseEvent;
 import api.Student;
+import api.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import sample.courseview.CourseViewController;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TimeTableGridPane {
@@ -28,6 +30,7 @@ public class TimeTableGridPane {
     private StackPane[] times;
     private StackPane[] days;
     private GridPane gridPane;
+    private User user;
 
     public TimeTableGridPane() {
         this.startTime = 8;
@@ -102,15 +105,24 @@ public class TimeTableGridPane {
                 //EventListener this is
                 calendar[i][j].getSelectionModel().selectedItemProperty().addListener(
                         (ov, old_val, new_val) -> {
-                            CourseViewController courseViewController = new CourseViewController();
+                            CourseViewController courseViewController = null;
+                            try {
+                                courseViewController = new CourseViewController();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            ;
                             Stage tempStage = new Stage();
                             try {
+                                System.out.println("New Stuffs");
                                 Parent parent = FXMLLoader.load(getClass().getResource("/sample/courseview/fxml/course_view.fxml"));
+                                courseViewController.setUser(this.user);
                                 courseViewController.setData(parent, ov.getValue().getCourse());
-                                tempStage.setScene(new Scene(parent));
+                                tempStage.setScene(new Scene(parent, 1360, 768));
                                 tempStage.show();
+                                courseViewController.setData(parent, ov.getValue().getCourse());
                             } catch (Exception e) {
-
+                                e.printStackTrace();
                             }
 //                            System.out.println(ov.getValue().getCourse().getName());
                         });
@@ -143,6 +155,7 @@ public class TimeTableGridPane {
     }
 
     public void addAllCoureseOfStudent(Student student) {
+        user = student;
         student.getAllCourses().forEach(this::addCourse);
     }
 
@@ -230,6 +243,14 @@ public class TimeTableGridPane {
         this.days = days;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     static class CourseItem extends ListCell<CourseEvent> {
         @Override
         public void updateItem(CourseEvent item, boolean empty) {
@@ -237,8 +258,8 @@ public class TimeTableGridPane {
             if (item != null) {
                 Label x = new Label(item.getCourse().getCourseCode() + "-" + item.getRoom().getRoomName());
                 x.setStyle("-fx-background-color: " + calculateColorBase(item.getCourse().getName()));
-
-                x.setStyle("-fx-text-fill: ");
+//TODO: Change coloring for audit shopping and register
+//                x.setStyle("-fx-text-fill: red ");
                 setGraphic(x);
             }
         }

@@ -15,6 +15,8 @@ import sample.requests.HandleRequestsController;
 import sample.timetable.TimeTableController;
 import sample.viewroom.ViewRoomController;
 
+import java.io.IOException;
+
 public class StudentPage extends Application{
     private User user;
     @Override
@@ -26,7 +28,12 @@ public class StudentPage extends Application{
 
         Button viewCourse = (Button) menuBar.getMenus().get(0).getGraphic();
         viewCourse.setOnAction(event -> {
-            CourseViewController courseViewController = new CourseViewController();
+            CourseViewController courseViewController = null;
+            try {
+                courseViewController = new CourseViewController();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             courseViewController.setUser(user);
 //            System.out.println("34");
             try{

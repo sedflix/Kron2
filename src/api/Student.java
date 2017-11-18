@@ -91,7 +91,7 @@ public class Student extends User {
     }
 
     /**
-     * Given a course, it adds as a registered course
+     * Given a course, it adds as a shopping course
      *
      * @param course course that needs to be added
      * @return true if successful, otherwise false
@@ -136,7 +136,7 @@ public class Student extends User {
     }
 
     /**
-     * Give a course, it adds as a registered course
+     * Give a course, it adds as a audited course
      *
      * @param course course that needs to be added
      * @return true if successful
@@ -162,6 +162,67 @@ public class Student extends User {
         return true;
     }
 
+    /**
+     * Given a course, it adds from registered  course
+     *
+     * @param course course that needs to be deleted
+     * @return true if successful, otherwise false
+     */
+    public boolean deleteShoppingCourse(Course course) {
+
+        Session session = MySession.getSession();
+
+        session.beginTransaction();
+        this.getShoppingCourse().remove(course);
+        course.getShoppingStudents().remove(this);
+        session.saveOrUpdate(this);
+        session.saveOrUpdate(course);
+        session.getTransaction().commit();
+
+        return true;
+    }
+
+    /**
+     * Give a course, it deletes it from registered course
+     *
+     * @param course course that needs to be deleted
+     * @return true if successful
+     */
+    public boolean deleteRegisteredCourse(Course course) {
+
+        Session session = MySession.getSession();
+
+        session.beginTransaction();
+        this.getRegisteredCourse().remove(course);
+        course.getRegisteredStudents().remove(this);
+        session.saveOrUpdate(this);
+        session.saveOrUpdate(course);
+        session.getTransaction().commit();
+
+        return true;
+    }
+
+    /**
+     * Give a course, it removes from a audited courses
+     *
+     * @param course course that needs to be removed
+     * @return true if successful
+     */
+    public boolean deleteAuditedCourse(Course course) {
+
+        Session session = MySession.getSession();
+
+        session.beginTransaction();
+
+        this.getAuditedCourse().remove(course);
+        course.getAuditedStudents().remove(this);
+        session.evict(this);
+        session.saveOrUpdate(this);
+        session.saveOrUpdate(course);
+        session.getTransaction().commit();
+
+        return true;
+    }
     /**
      * Finds if the given course has any clashes with the current lectures(of audited and registered courses only)
      * of the students. It only considers lecture od the given course
