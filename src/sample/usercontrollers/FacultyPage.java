@@ -10,6 +10,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import sample.createevent.CreateEvent;
+import sample.requests.HandleRequestsController;
 import sample.viewroom.ViewRoomController;
 
 public class FacultyPage extends Application {
@@ -50,6 +51,20 @@ public class FacultyPage extends Application {
                 borderPane.getChildren().addAll(createEvent1.getRoot());
             } catch (Exception e) {
 
+            }
+        });
+
+
+        Button requestManagement = (Button) menuBar.getMenus().get(2).getGraphic();
+        requestManagement.setOnAction(event -> {
+            HandleRequestsController handleRequestsController = new HandleRequestsController();
+            handleRequestsController.setUser(user);
+            try {
+                handleRequestsController.start(primaryStage);
+                borderPane.setCenter(handleRequestsController.getRoot());
+                borderPane.getChildren().add(handleRequestsController.getRoot());
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
 

@@ -5,11 +5,11 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import sample.timetable.TimeTableController;
 import sample.timetable.TimeTableGridPane;
 
-import javafx.scene.text.Text;
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
@@ -66,7 +66,7 @@ public class CreateEvent extends Application {
             ComboBox<String> roomNumber = (ComboBox<String>) root.lookup("#roomNumberField");
 
 
-            datePicker.setUserData(LocalDate.of(event.getDate().getYear(),event.getDate().getMonth(),event.getDate().getDate()));
+            datePicker.setUserData(LocalDate.of(event.getDate().getYear(), event.getDate().getMonth() + 1, event.getDate().getDate()));
             startBox.setValue(removeLastThree(event.getStartTime().toString()));
             endBox.setValue(removeLastThree(event.getEndTime().toString()));
             eventName.setText(event.getTagline());
