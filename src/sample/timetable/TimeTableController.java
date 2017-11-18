@@ -4,11 +4,8 @@ import api.MySession;
 import api.Student;
 import api.User;
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.hibernate.Session;
-
-import java.sql.Time;
 
 
 public class TimeTableController extends Application {
@@ -21,10 +18,13 @@ public class TimeTableController extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        primaryStage.setTitle("Calendar");
+        primaryStage.setTitle("Kron2 : Calendar");
 
         gridPane = new TimeTableGridPane();
         Session session = MySession.getSession();
+
+        //TODO: Remove this line
+        //TODO: Integrate it with Student, Faculty and Admin
         Student student = session.get(Student.class, "siddharth16268@iiitd.ac.in");
         gridPane.addAllCoureseOfStudent(student);
 //        Scene scene = new Scene(gridPane.getGridPane(), 1200, 480);
