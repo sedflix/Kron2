@@ -55,7 +55,7 @@ public class ViewRoomController extends Application {
                 Time startTime = new Time(startHour,startMinute,00);
                 Time endTime = new Time(endHour,endMinute,00);
 
-                Date date = new Date(year,month,day);
+                Date date = new Date(year-1900,month,day);
                 System.out.println(date.getYear());
 
                 System.out.println(Room.isFreeBetween(room,startTime,endTime,date));

@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import sample.timetable.TimeTableController;
 import sample.timetable.TimeTableGridPane;
 
-import javax.xml.soap.Text;
+import javafx.scene.text.Text;
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
@@ -41,14 +41,14 @@ public class CreateEvent extends Application {
         Button button = (Button) root.lookup("#requestButton");
 
         if (edit) {
-            text.setTextContent("Edit Event");
+            text.setText("Edit Event");
             if (user.getDtype().equals("Student")) {
                 button.setText("Edit Event/Book");
             } else {
                 button.setText("Edit Event");
             }
         } else {
-            text.setTextContent("Create Event Request");
+            text.setText("Create Event Request");
             if (user.getDtype().equals("Student")) {
                 button.setText("Request Event/Book");
             } else {
@@ -68,8 +68,8 @@ public class CreateEvent extends Application {
 
             //TODO: string manipulation for data and time
             datePicker.setUserData(event.getDate());
-            startBox.setValue(event.getStartTime().toString());
-            endBox.setValue(event.getEndTime().toString());
+            startBox.setValue(removeLastThree(event.getStartTime().toString()));
+            endBox.setValue(removeLastThree(event.getEndTime().toString()));
             eventName.setText(event.getTagline());
             eventDescription.setText(event.getDescription());
             crowdSize.setText(event.getRoom().getCapacity() + "");
@@ -99,6 +99,7 @@ public class CreateEvent extends Application {
                 int day = temp1.getDayOfMonth();
                 int month = temp1.getMonthValue();
                 int year = temp1.getYear();
+                System.out.println(day+":"+month+":"+year);
 
                 int tempIndex = startTime.indexOf(":");
                 int startTimeHour = Integer.parseInt(startTime.substring(0, tempIndex));
@@ -110,7 +111,7 @@ public class CreateEvent extends Application {
 
                 Time starttime = new Time(startTimeHour, startTimeMinute, 00);
                 Time endtime = new Time(endTimeHour, endTimeMinute, 00);
-                Date date = new Date(year, month, day);
+                Date date = new Date(year-1900, month, day);
                 Room rooms = new Room(room);
                 if (addEventNow(user, starttime, endtime, date, description, name, rooms)) {
                     button.setStyle("-fx-text-fill:  greenyellow");
@@ -154,7 +155,9 @@ public class CreateEvent extends Application {
     public boolean isEdit() {
         return edit;
     }
-
+    public String removeLastThree(String toRemove){
+        return toRemove.substring(0,toRemove.length()-3);
+    }
     public void setEdit(boolean edit) {
         this.edit = edit;
     }
