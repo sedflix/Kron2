@@ -13,7 +13,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import sample.CourseViewController;
+import sample.courseview.CourseViewController;
 
 import java.util.ArrayList;
 
@@ -105,7 +105,7 @@ public class TimeTableGridPane {
                             CourseViewController courseViewController = new CourseViewController();
                             Stage tempStage = new Stage();
                             try {
-                                Parent parent = FXMLLoader.load(getClass().getResource("/sample/course_view.fxml"));
+                                Parent parent = FXMLLoader.load(getClass().getResource("/sample/courseview/fxml/course_view.fxml"));
                                 courseViewController.setData(parent, ov.getValue().getCourse());
                                 tempStage.setScene(new Scene(parent));
                                 tempStage.show();

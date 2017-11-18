@@ -1,17 +1,15 @@
-package sample;
+package sample.viewroom;
 
 import api.Room;
 import api.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 
-import javax.persistence.OneToOne;
 import java.io.IOException;
 import java.sql.Time;
 import java.time.LocalDate;
@@ -22,7 +20,7 @@ public class ViewRoomController extends Application {
     private User user;
     @Override
     public void start(Stage primaryStage) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/sample/ViewRoom.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/sample/viewroom/fxml/ViewRoom.fxml"));
 //        primaryStage.setTitle("Kron2");
 //        primaryStage.setScene(new Scene(root, 600, 350));
         primaryStage.show();

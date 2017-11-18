@@ -47,7 +47,7 @@
       <Button fx:id="signUpRedirect" mnemonicParsing="false" text="Signup" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
       <ImageView fitHeight="121.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
          <image>
-            <Image url="@../logo.jpg" />
+            <Image url="@../../../logo.jpg" />
          </image>
       </ImageView>
    </children>

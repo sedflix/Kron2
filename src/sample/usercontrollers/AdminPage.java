@@ -1,6 +1,5 @@
-package sample;
+package sample.usercontrollers;
 
-import api.Admin;
 import api.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,14 +9,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import sample.timetable.TimeTableController;
+import sample.createevent.CreateEvent;
+import sample.viewroom.ViewRoomController;
 
 public class AdminPage extends Application{
     private User user;
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Student Dashboard");
-        Parent menu = FXMLLoader.load(getClass().getResource("/sample/menuAdmin.fxml"));
+        Parent menu = FXMLLoader.load(getClass().getResource("/sample/usercontrollers/fxml/menuAdmin.fxml"));
         BorderPane borderPane = (BorderPane)menu.lookup("#borderPane");
         MenuBar menuBar =(MenuBar) borderPane.getTop();
 

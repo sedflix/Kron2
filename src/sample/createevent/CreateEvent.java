@@ -1,4 +1,4 @@
-package sample;
+package sample.createevent;
 
 import api.*;
 import javafx.application.Application;
@@ -26,10 +26,9 @@ public class CreateEvent extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        root = FXMLLoader.load(getClass().getResource("/sample/create_event.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/sample/createevent/fxml/create_event.fxml"));
 
         ScrollPane scrollPane = (ScrollPane) root.lookup("#scroll_time_table");
-//        Node timeTable = FXMLLoader.load(getClass().getResource("/sample/TimeTable.fxml"));
         TimeTableController temp = new TimeTableController();
         temp.start(primaryStage);
         TimeTableGridPane timeTable = temp.getGridPane();

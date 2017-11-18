@@ -1,4 +1,4 @@
-package sample;
+package sample.login;
 
 import api.*;
 import javafx.application.Application;
@@ -11,15 +11,15 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
-
-import java.io.IOException;
+import sample.usercontrollers.AdminPage;
+import sample.usercontrollers.FacultyPage;
+import sample.usercontrollers.StudentPage;
 
 
 public class LoginController extends Application{
    @Override
     public void start(Stage primaryStage) throws Exception{
-       Parent root = FXMLLoader.load(getClass().getResource("/sample/Login.fxml"));
+       Parent root = FXMLLoader.load(getClass().getResource("/sample/login/fxml/Login.fxml"));
        primaryStage.setScene(new Scene(root, 600, 350));
        primaryStage.show();
 

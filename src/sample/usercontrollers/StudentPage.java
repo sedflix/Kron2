@@ -1,28 +1,25 @@
-package sample;
+package sample.usercontrollers;
 
-import api.Course;
-import api.Student;
 import api.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import sample.courseview.CourseViewController;
+import sample.createevent.CreateEvent;
+import sample.viewroom.ViewRoomController;
 import sample.timetable.TimeTableController;
-
-import java.beans.EventHandler;
-import java.util.concurrent.ExecutionException;
 
 public class StudentPage extends Application{
     private User user;
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Student Dashboard");
-        Parent menu = FXMLLoader.load(getClass().getResource("/sample/menu.fxml"));
+        Parent menu = FXMLLoader.load(getClass().getResource("/sample/usercontrollers/fxml/menu.fxml"));
         BorderPane borderPane = (BorderPane)menu.lookup("#borderPane");
         MenuBar menuBar =(MenuBar) borderPane.getTop();
 

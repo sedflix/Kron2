@@ -1,4 +1,4 @@
-package sample;
+package sample.courseview;
 
 import api.Course;
 import api.Faculty;
@@ -35,7 +35,7 @@ public class CourseViewController extends Application{
         /**
          * Couse Description
          */
-        courseDescription = FXMLLoader.load(getClass().getResource("/sample/course_view.fxml"));
+        courseDescription = FXMLLoader.load(getClass().getResource("/sample/courseview/fxml/course_view.fxml"));
 
         ComboBox<String> comboBox = (ComboBox<String>) courseDescription.lookup("#search");
 

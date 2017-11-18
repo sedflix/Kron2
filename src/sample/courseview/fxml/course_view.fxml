@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CourseViewController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.courseview.CourseViewController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="137.0" minWidth="10.0" percentWidth="25.0" prefWidth="102.0" />
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.0" minWidth="10.0" percentWidth="25.0" prefWidth="127.0" />
@@ -71,7 +71,7 @@
 
     </children>
     <stylesheets>
-        <URL value="@css/main.css" />
+        <URL value="@../../css/main.css" />
     </stylesheets>
 
 </GridPane>

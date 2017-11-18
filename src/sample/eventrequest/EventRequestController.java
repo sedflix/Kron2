@@ -1,4 +1,4 @@
-package sample;
+package sample.eventrequest;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +11,7 @@ import java.io.IOException;
 public class EventRequestController extends Application{
     @Override
     public void start(Stage primaryStage) throws IOException{
-        Parent root = FXMLLoader.load(getClass().getResource("/sample/EventRequest.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/sample/eventrequest/fxml/EventRequest.fxml"));
         primaryStage.setTitle("Kron2");
         primaryStage.setScene(new Scene(root, 600, 350));
         primaryStage.show();

@@ -1,4 +1,4 @@
-package sample;
+package sample.signup;
 
 
 import api.Admin;
@@ -22,7 +22,7 @@ import java.io.IOException;
 public class SignupController extends Application{
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/sample/Signup.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/sample/signup/fxml/Signup.fxml"));
         primaryStage.setTitle("Kron2");
         primaryStage.setScene(new Scene(root, 600, 350));
         primaryStage.show();

@@ -1,4 +1,4 @@
-package sample;
+package sample.welcomepage;
 
 import api.MySession;
 import javafx.application.Application;
@@ -7,6 +7,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import sample.signup.SignupController;
+import sample.login.LoginController;
 
 public class Controller extends Application {
     public static void main(String[] args) {
@@ -24,7 +26,7 @@ public class Controller extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         primaryStage.setTitle("IIITD ROOM MANAGEMENT");
-        Parent welcomeWindow = FXMLLoader.load(getClass().getResource("/sample/welcome_page.fxml"));
+        Parent welcomeWindow = FXMLLoader.load(getClass().getResource("/sample/welcomepage/fxml/welcome_page.fxml"));
         primaryStage.setScene(new Scene(welcomeWindow));
 
         Button loginButton = (Button) welcomeWindow.lookup("#loginRedirect");

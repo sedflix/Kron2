@@ -14,7 +14,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import org.hibernate.Session;
-import sample.CreateEvent;
+import sample.createevent.CreateEvent;
 
 public class HandleRequestGridPane {
 

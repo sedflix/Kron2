@@ -149,6 +149,6 @@
     </children>
 
     <stylesheets>
-        <URL value="@css/main.css" />
+        <URL value="@../../css/main.css" />
     </stylesheets>
 </GridPane>
