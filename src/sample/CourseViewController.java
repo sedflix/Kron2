@@ -2,6 +2,7 @@ package sample;
 
 import api.Course;
 import api.Faculty;
+import api.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -25,6 +26,7 @@ import java.util.List;
 import java.util.Set;
 
 public class CourseViewController extends Application{
+    private User user;
     private Parent courseDescription;
     public static void main(String[] args) {
         launch(args);
@@ -108,5 +110,13 @@ public class CourseViewController extends Application{
     }
     public Parent getCourseDescription(){
         return courseDescription;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

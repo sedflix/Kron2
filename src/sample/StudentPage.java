@@ -29,6 +29,7 @@ public class StudentPage extends Application{
         Button viewCourse = (Button) menuBar.getMenus().get(0).getGraphic();
         viewCourse.setOnAction(event -> {
             CourseViewController courseViewController = new CourseViewController();
+            courseViewController.setUser(user);
 //            System.out.println("34");
             try{
                 courseViewController.start(primaryStage);
@@ -43,6 +44,7 @@ public class StudentPage extends Application{
         Button viewRoom = (Button) menuBar.getMenus().get(3).getGraphic();
         viewRoom.setOnAction(event -> {
             ViewRoomController viewRoomController = new ViewRoomController();
+            viewRoomController.setUser(user);
             try{
                 viewRoomController.start(primaryStage);
                 borderPane.setCenter(viewRoomController.getRoot());
@@ -56,6 +58,7 @@ public class StudentPage extends Application{
         Button viewTimetable = (Button) menuBar.getMenus().get(1).getGraphic();
         viewTimetable.setOnAction(event -> {
             TimeTableController timeTableController = new TimeTableController();
+            timeTableController.setUser(user);
             try{
                 timeTableController.start(primaryStage);
                 borderPane.setCenter(timeTableController.getGridPane().getGridPane());
@@ -69,6 +72,7 @@ public class StudentPage extends Application{
         Button createEvent = (Button) menuBar.getMenus().get(2).getGraphic();
         createEvent.setOnAction(event -> {
             CreateEvent createEvent1 = new CreateEvent();
+            createEvent1.setUser(user);
             try{
                 createEvent1.start(primaryStage);
                 borderPane.setCenter(createEvent1.getRoot());

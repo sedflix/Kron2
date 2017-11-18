@@ -1,6 +1,7 @@
 package sample;
 
 import api.Room;
+import api.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,6 +19,7 @@ import java.sql.Date;
 
 public class ViewRoomController extends Application {
     private Parent root;
+    private User user;
     @Override
     public void start(Stage primaryStage) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/sample/ViewRoom.fxml"));
@@ -71,5 +73,13 @@ public class ViewRoomController extends Application {
 
     public static void main(String[] args){
         launch(args);
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

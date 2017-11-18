@@ -2,13 +2,14 @@ package sample.requests;
 
 import api.Admin;
 import api.MySession;
+import api.User;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.hibernate.Session;
 
 public class HandleRequestsController extends Application {
-
+    private User user;
     public static void main(String[] args) {
         Application.launch(args);
     }
@@ -29,4 +30,11 @@ public class HandleRequestsController extends Application {
         primaryStage.show();
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
 }

@@ -2,6 +2,7 @@ package sample;
 
 import api.Event;
 import api.MySession;
+import api.User;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,7 +24,7 @@ import java.sql.Time;
 import java.time.LocalDate;
 
 public class CreateEvent extends Application {
-
+    private User user;
     private Parent root;
     public static void main(String[] args) {
         launch(args);
@@ -102,5 +103,13 @@ public class CreateEvent extends Application {
 
     public Parent getRoot() {
         return root;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
     }
 }

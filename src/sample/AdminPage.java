@@ -25,6 +25,7 @@ public class AdminPage extends Application{
         Button viewRoom = (Button) menuBar.getMenus().get(1).getGraphic();
         viewRoom.setOnAction(event -> {
             ViewRoomController viewRoomController = new ViewRoomController();
+            viewRoomController.setUser(user);
             try{
                 viewRoomController.start(primaryStage);
                 borderPane.setCenter(viewRoomController.getRoot());
@@ -39,6 +40,7 @@ public class AdminPage extends Application{
         Button createEvent = (Button) menuBar.getMenus().get(0).getGraphic();
         createEvent.setOnAction(event -> {
             CreateEvent createEvent1 = new CreateEvent();
+            createEvent1.setUser(user);
             try{
                 createEvent1.start(primaryStage);
                 borderPane.setCenter(createEvent1.getRoot());
