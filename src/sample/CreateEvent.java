@@ -72,7 +72,11 @@ public class CreateEvent extends Application {
                     int endTimeHour = Integer.parseInt(endTime.substring(0,tempIndex));
                     int endTimeMinute = Integer.parseInt(endTime.substring(tempIndex+1));
 
-                    setUser(user);
+                    Time starttime = new Time(startTimeHour,startTimeMinute,00);
+                    Time endtime = new Time(endTimeHour,endTimeMinute,00);
+                    Date date = new Date(year,month,day);
+                    Room rooms = new Room(room);
+                    setUser(user,starttime,endtime,date,description,name,rooms);
                 }
             }
         });
