@@ -11,12 +11,16 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
 public class Faculty extends User {
 
     @ManyToMany(mappedBy = "faculties")
     private List<Course> coursesTaught = new ArrayList<Course>();
 
+    /**
+     * Default constructor
+     */
     public Faculty() {
     }
 
@@ -106,26 +110,14 @@ public class Faculty extends User {
     }
 
     /**
-     *
-     * @return All the events created by
+     * list of Event created by this
+     * @return list of Event created by this
      */
     public List<Event> getAllRequests() {
         Session session = MySession.getSession();
         Query query = session.createQuery("select event from Event as event where event.creators = :me");
         query.setParameter("me", this);
         return (List<Event>) query.getResultList();
-    }
-
-    public boolean updateEvent(Event event) {
-        return true;
-    }
-
-    public List<CourseEvent> getAllCourseEvent(){
-        return new ArrayList<CourseEvent>();
-    }
-
-    public List<Event> getAllEvents() {
-        return new ArrayList<Event>();
     }
 
 
