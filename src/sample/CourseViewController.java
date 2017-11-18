@@ -18,6 +18,8 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import org.hibernate.Hibernate;
+import sample.timetable.TimeTableController;
+import sample.timetable.TimeTableGridPane;
 
 import java.util.List;
 import java.util.Set;
@@ -66,9 +68,11 @@ public class CourseViewController extends Application{
 
 
         ScrollPane scrollPane = (ScrollPane) courseDescription.lookup("#scroll_time_table");
-        Node timeTable = FXMLLoader.load(getClass().getResource("/sample/TimeTable.fxml"));
+        TimeTableController temp = new TimeTableController();
+        temp.start(primaryStage);
+        TimeTableGridPane timeTable = temp.getGridPane();
 
-        scrollPane.setContent(timeTable);
+        scrollPane.setContent(timeTable.getGridPane());
 
 
 //        primaryStage.setScene(new Scene(courseDescription, 700, 900));
