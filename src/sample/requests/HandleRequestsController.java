@@ -1,8 +1,11 @@
 package sample.requests;
 
+import api.Admin;
+import api.MySession;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.hibernate.Session;
 
 public class HandleRequestsController extends Application {
 
@@ -16,7 +19,11 @@ public class HandleRequestsController extends Application {
 
         primaryStage.setTitle("Requests");
 
-        HandleRequestGridPane gridPane = new HandleRequestGridPane();
+        Session session = MySession.getSession();
+//        Faculty admin = session.get(Faculty.class, "raj ayyar@iiitd.ac.in");
+        Admin admin = session.get(Admin.class, "ravi@iiitd.ac.in");
+        HandleRequestGridPane gridPane = new HandleRequestGridPane(admin, false, false, true);
+        gridPane.update();
         Scene scene = new Scene(gridPane.getGridPanel(), 1200, 480);
         primaryStage.setScene(scene);
         primaryStage.show();

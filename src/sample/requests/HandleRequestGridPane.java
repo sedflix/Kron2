@@ -5,58 +5,160 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.*;
-import org.hibernate.Session;
 
 public class HandleRequestGridPane {
 
     User user;
     Admin admin;
     Faculty faculty;
+    Student student;
     GridPane gridPanel;
     ListView<Event> listView = new ListView<>();
     ObservableList<Event> data; //= FXCollections.observableArrayList
+    boolean pendinng = false;
+    boolean rejected = false;
+    boolean accepted = false;
+    boolean all = true;
 
-    HandleRequestGridPane() {
+    HandleRequestGridPane(User user, boolean pending, boolean rejected, boolean all) {
+        setUser(user);
         makeGrid();
     }
 
     public void makeGrid() {
 
         gridPanel = new GridPane();
-        gridPanel.setHgap(0);
-        gridPanel.setVgap(5);
-        gridPanel.setGridLinesVisible(true);
+
 
         RowConstraints rc = new RowConstraints();
-        //depends on number of requests
-        rc.setPercentHeight(100);
-        rc.setFillHeight(true);
-        rc.setVgrow(Priority.ALWAYS);
+        rc.setPercentHeight(10);
+        rc.setFillHeight(false);
+        rc.setVgrow(Priority.NEVER);
+
         ColumnConstraints cc = new ColumnConstraints();
-        //depends on faculty of admin
         cc.setPercentWidth(100);
         cc.setFillWidth(true);
         cc.setHgrow(Priority.ALWAYS);
         gridPanel.getColumnConstraints().add(cc);
         gridPanel.getRowConstraints().add(rc);
 
-
-        Session session = MySession.getSession();
-        admin = session.get(Admin.class, "ravi@iiitd.ac.in");
-
-        data = FXCollections.observableArrayList(admin.getAllPendingRequests());
-        listView.setItems(data);
-        listView.setCellFactory(list -> new EventItem());
+        HBox hbox = new HBox(20);
+        hbox.setAlignment(Pos.CENTER);
 
 
-        gridPanel.add(listView, 0, 0);
+        Button myRequests = new Button("My Events");
+        myRequests.setOnAction(actionEvent -> {
+            this.data = FXCollections.observableArrayList(this.user.getMyRequests());
+            update();
+        });
+        hbox.getChildren().add(myRequests);
+
+        /*
+            Buttons for Admin
+         */
+        if (admin != null) {
+
+            Button getAllEvents = new Button("All Events");
+            getAllEvents.setOnAction(actionEvent -> {
+                this.data = FXCollections.observableArrayList(this.admin.getAllRequests());
+                update();
+            });
+            hbox.getChildren().add(getAllEvents);
+
+            Button seeAllPending = new Button("All Pending Requests");
+            seeAllPending.setOnAction(actionEvent -> {
+                this.data = FXCollections.observableArrayList(this.admin.getAllPendingRequests());
+                update();
+            });
+            hbox.getChildren().add(seeAllPending);
+
+            Button getAllRejected = new Button("All Rejected Requests");
+            getAllRejected.setOnAction(actionEvent -> {
+                this.data = FXCollections.observableArrayList(this.admin.getAllRejectdRequests());
+                update();
+            });
+            hbox.getChildren().add(getAllRejected);
+
+
+        }
+
+        /*
+            Buttons for Students
+         */
+        if (student != null) {
+            Button myPendingRequests = new Button("My Pending Requests");
+            myPendingRequests.setOnAction(actionEvent -> {
+                this.data = FXCollections.observableArrayList(this.user.getMyPendingRequests());
+                update();
+            });
+            hbox.getChildren().add(myPendingRequests);
+
+
+            Button myRejectedRequests = new Button("My Rejected Requests");
+            myRejectedRequests.setOnAction(actionEvent -> {
+                this.data = FXCollections.observableArrayList(this.user.getMyRejectedRequests());
+                update();
+            });
+            hbox.getChildren().add(myRejectedRequests);
+        }
+
+
+        gridPanel.add(hbox, 0, 0);
+
+
+        rc = new RowConstraints();
+        rc.setPercentHeight(90);
+        rc.setFillHeight(true);
+        rc.setVgrow(Priority.ALWAYS);
+        gridPanel.getRowConstraints().add(rc);
+
+        GridPane.setVgrow(listView, Priority.ALWAYS);
+        GridPane.setFillHeight(listView, true);
+        GridPane.setValignment(listView, VPos.TOP);
+        gridPanel.add(listView, 0, 1);
     }
 
+    public void setUser(User user) {
+        this.user = user;
+        if (user.getDtype().equals("Student")) {
+            this.student = (Student) user;
+        } else if (user.getDtype().equals("Faculty")) {
+            this.faculty = (Faculty) user;
+        } else if (user.getDtype().equals("Admin")) {
+            this.admin = (Admin) user;
+        }
+    }
+
+    public void update() {
+        listView.setItems(this.data);
+        System.out.println(data);
+        listView.setCellFactory(list -> new EventItem());
+        listView.autosize();
+    }
+
+    public void setData() {
+        if (pendinng) {
+            if (student != null) {
+                this.data = FXCollections.observableArrayList(this.student.getPendingEventRequests());
+            } else if (admin != null) {
+                this.data = FXCollections.observableArrayList(this.admin.getAllPendingRequests());
+            }
+        } else if (all) {
+            if (student != null) {
+                this.data = FXCollections.observableArrayList(this.student.getMyRequests());
+            } else if (faculty != null) {
+                this.data = FXCollections.observableArrayList(this.faculty.getMyRequests());
+            } else if (admin != null) {
+                this.data = FXCollections.observableArrayList(this.admin.getAllRequests());
+            }
+        }
+    }
 
     public GridPane getGridPanel() {
         return gridPanel;
@@ -81,19 +183,47 @@ public class HandleRequestGridPane {
                 HBox right = new HBox(20);
 
 
-                Button approve = new Button("Approve");
-                approve.setOnAction(actionEvent -> {
-                    admin.approveEventRequest(item);
-                });
-                Button reject = new Button("Reject");
-                reject.setOnAction(actionEvent -> {
-                    admin.rejectEventRequest(item);
-                });
+                if (admin != null) {
+                    if (item.isPending() || item.isRejected()) {
+                        Button approve = new Button("Approve");
+                        approve.setOnAction(actionEvent -> {
+                            admin.approveEventRequest(item);
+                        });
+                        right.getChildren().add(approve);
+                    }
+                    if (!item.isRejected()) {
+                        Button reject = new Button("Reject");
+                        reject.setOnAction(actionEvent -> {
+                            admin.rejectEventRequest(item);
+                        });
+                        right.getChildren().add(reject);
+                    }
+
+                }
+
+                /*
+                    EDIT
+
+                    Add listener for edit
+                */
                 Button edit = new Button("Edit");
+                //TODO: Add listner for edit
+
+                if ((!item.isPending() && student != null) || (faculty != null) || (admin != null)) {
+                    right.getChildren().add(edit);
+                }
+
+                /*
+                delete
+                 */
+                Button delete = new Button("Delete");
+                delete.setOnAction(actionEvent -> {
+                    user.deleteEventRequest(item);
+                });
+                right.getChildren().add(delete);
 
 
                 right.setAlignment(Pos.CENTER_RIGHT);
-                right.getChildren().addAll(approve, reject, edit);
                 HBox.setHgrow(right, Priority.ALWAYS);
                 HBox.setMargin(right, new Insets(5, 100, 5, 10));
 

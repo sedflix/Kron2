@@ -3,11 +3,9 @@ package api;
 
 import org.hibernate.Session;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -42,7 +40,38 @@ public class User {
         return MySession.getSession().get(User.class, email.trim());
     }
 
-    public boolean deleteEventRequest(Session session, Event event) {
+    public List<Event> getMyRequests() {
+        Session session = MySession.getSession();
+        Query query = session.createQuery("FROM Event event where event.creators = :user");
+        query.setParameter("user", this);
+        return (List<Event>) query.getResultList();
+    }
+
+    public List<Event> getMyPendingRequests() {
+        Session session = MySession.getSession();
+        Query query = session.createQuery("FROM Event event where event.creators = :user and event.isPending = true");
+        query.setParameter("user", this);
+        return (List<Event>) query.getResultList();
+    }
+
+    public List<Event> getMyRejectedRequests() {
+        Session session = MySession.getSession();
+        Query query = session.createQuery("FROM Event event where event.creators = :user and event.isRejected = true");
+        query.setParameter("user", this);
+        return (List<Event>) query.getResultList();
+    }
+
+    public List<Event> getMyCancelledRequests() {
+        Session session = MySession.getSession();
+        Query query = session.createQuery("FROM Event event where event.creators = :user and event.isCancelled = true");
+        query.setParameter("user", this);
+        return (List<Event>) query.getResultList();
+    }
+
+
+    public boolean deleteEventRequest(Event event) {
+
+        Session session = MySession.getSession();
         try {
 
             if (event.getCreators().getEmail().equals(this.getEmail())) {

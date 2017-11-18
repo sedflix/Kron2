@@ -4,6 +4,7 @@ import org.hibernate.Session;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.Query;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -66,6 +67,13 @@ public class Faculty extends User {
     public boolean addEvent(String name, Room room, String description, Time startTime, Time endTime, Date date) {
         Session session = MySession.getSession();
         return addEvent(name, room, description, startTime, endTime, date, null);
+    }
+
+    public List<Event> getAllRequests() {
+        Session session = MySession.getSession();
+        Query query = session.createQuery("select event from Event as event where event.creators = :me");
+        query.setParameter("me", this);
+        return (List<Event>) query.getResultList();
     }
 
     public boolean updateEvent(Event event) {

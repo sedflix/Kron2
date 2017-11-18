@@ -33,8 +33,6 @@ public class Student extends User {
     }
 
 
-
-
     public List<Course> getAllCourses() {
         List<Course> allCourses = new ArrayList<>();
         allCourses.addAll(getRegisteredCourse());
@@ -218,17 +216,15 @@ public class Student extends User {
 
     }
 
-    public List<Event> getAllEventRequests(Session session) {
 
-        Query query = session.createQuery("FROM Event event where event.creators = :user");
-        query.setParameter("user", this);
-        return (List<Event>) query.getResultList();
-    }
+    public List<Event> getPendingEventRequests() {
+        Session session = MySession.getSession();
 
-    public List<Event> getPendingEventRequests(Session session) {
-        Query query = session.createQuery("FROM Event event where event.creators = :user and event.isPending = :pending");
+        Query query = session.createQuery("FROM Event event where event.creators = :user" +
+                " and event.isPending = :pending");
         query.setParameter("user", this);
         query.setParameter("pending", true);
+
         return (List<Event>) query.getResultList();
     }
 

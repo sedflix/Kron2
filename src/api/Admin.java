@@ -4,7 +4,6 @@ import org.hibernate.Session;
 
 import javax.persistence.Entity;
 import javax.persistence.Query;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,7 +14,9 @@ public class Admin extends Faculty {
 
 
     public List<Event> getAllRequests() {
-        return new ArrayList<Event>();
+        Session session = MySession.getSession();
+        Query query = session.createQuery("select event from Event as event");
+        return (List<Event>) query.getResultList();
     }
 
 
