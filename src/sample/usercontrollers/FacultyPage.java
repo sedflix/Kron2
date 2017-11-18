@@ -64,7 +64,7 @@ public class FacultyPage extends Application {
             try {
                 handleRequestsController.start(primaryStage);
                 borderPane.setCenter(handleRequestsController.getRoot());
-                borderPane.getChildren().addAll(handleRequestsController.getRoot());
+//                borderPane.getChildren().addAll(handleRequestsController.getRoot());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -77,7 +77,7 @@ public class FacultyPage extends Application {
             try{
                 courseViewController.start(primaryStage);
                 borderPane.setCenter(courseViewController.getCourseDescription());
-                borderPane.getChildren().addAll(courseViewController.getCourseDescription());
+//                borderPane.getChildren().addAll(courseViewController.getCourseDescription());
             }
             catch (Exception e){
                 e.printStackTrace();
