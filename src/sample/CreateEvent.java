@@ -11,8 +11,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.hibernate.Session;
+import sample.timetable.TimeTableController;
+import sample.timetable.TimeTableGridPane;
 
 import javax.xml.soap.Text;
 import java.sql.Date;
@@ -31,8 +34,11 @@ public class CreateEvent extends Application {
         root = FXMLLoader.load(getClass().getResource("/sample/create_event.fxml"));
 
         ScrollPane scrollPane = (ScrollPane) root.lookup("#scroll_time_table");
-        Node timeTable = FXMLLoader.load(getClass().getResource("/sample/TimeTable.fxml"));
-        scrollPane.setContent(timeTable);
+//        Node timeTable = FXMLLoader.load(getClass().getResource("/sample/TimeTable.fxml"));
+        TimeTableController temp = new TimeTableController();
+        temp.start(primaryStage);
+        TimeTableGridPane timeTable = temp.getGridPane();
+        scrollPane.setContent(timeTable.getGridPane());
 //        primaryStage.setTitle("Kron2");
 
 
@@ -91,7 +97,7 @@ public class CreateEvent extends Application {
 
 
 //        primaryStage.setScene(new Scene(root, 900, 900));
-//        primaryStage.show();
+        primaryStage.show();
     }
 
     public Parent getRoot() {
