@@ -2,6 +2,7 @@ package api;
 
 import org.hibernate.Session;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
@@ -34,7 +35,9 @@ public class WeeklyCron {
 //                Date date = new Date(System.currentTimeMillis());
 //
 //                event1.setDate();
-//                int x = (Calendar.getInstance().getFirstDayOfWeek()-  courseEvent.getDayOfWeek().getValue());
+                System.out.println(courseEvent.getCourse().getName());
+                int x = (Calendar.getInstance().getFirstDayOfWeek());
+                System.out.println(x);
                 event1.setPending(false);
                 event1.setCancelled(false);
                 event1.setRejected(false);
