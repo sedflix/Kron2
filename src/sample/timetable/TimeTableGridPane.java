@@ -143,7 +143,10 @@ public class TimeTableGridPane {
 
     public void addAllCoureseOfStudent(Student student) {
         student.getAllCourses().forEach(this::addCourse);
+    }
 
+    public void addAllCourses() {
+        Course.getAllCourses().forEach(this::addCourse);
     }
 
     public void addCourse(Course course) {

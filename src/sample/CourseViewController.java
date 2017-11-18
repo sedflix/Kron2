@@ -1,20 +1,21 @@
 package sample;
 
-import api.*;
+import api.Course;
+import api.Faculty;
+import api.Student;
+import api.User;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import org.hibernate.Hibernate;
-import sample.timetable.TimeTableController;
-import sample.timetable.TimeTableGridPane;
 
 import java.util.List;
 import java.util.Set;
@@ -54,16 +55,13 @@ public class CourseViewController extends Application{
                 }
             };
 
-            cell.setOnMousePressed(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                        if (! cell.isEmpty()) {
-                            Course forInfo = Course.getCourseByName(cell.getItem());
-                            setTemp(forInfo);
-                            setData(courseDescription, forInfo);
-                        }
-
+            cell.setOnMousePressed(event -> {
+                if (!cell.isEmpty()) {
+                    Course forInfo = Course.getCourseByName(cell.getItem());
+                    setTemp(forInfo);
+                    setData(courseDescription, forInfo);
                 }
+
             });
             return cell ;
         });
@@ -77,6 +75,7 @@ public class CourseViewController extends Application{
         auditButton.setOnMouseClicked(event -> {
             auditControl();
         });
+
 
 //        primaryStage.setScene(new Scene(courseDescription, 700, 900));
 //        primaryStage.show();
@@ -140,6 +139,8 @@ public class CourseViewController extends Application{
 
         }
     }
+
+
     public void auditControl(){
         if (user.getDtype().equals("Student")) {
             ((Student) user).insertAuditedCourse(temp);
