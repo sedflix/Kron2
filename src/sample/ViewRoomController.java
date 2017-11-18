@@ -17,11 +17,12 @@ import java.time.LocalDate;
 import java.sql.Date;
 
 public class ViewRoomController extends Application {
+    private Parent root;
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/sample/ViewRoom.fxml"));
-        primaryStage.setTitle("Kron2");
-        primaryStage.setScene(new Scene(root, 600, 350));
+        root = FXMLLoader.load(getClass().getResource("/sample/ViewRoom.fxml"));
+//        primaryStage.setTitle("Kron2");
+//        primaryStage.setScene(new Scene(root, 600, 350));
         primaryStage.show();
 
         Button button =(Button) root.lookup("#viewRoomButton");
@@ -63,6 +64,11 @@ public class ViewRoomController extends Application {
 
 
     }
+
+    public Parent getRoot() {
+        return root;
+    }
+
     public static void main(String[] args){
         launch(args);
     }

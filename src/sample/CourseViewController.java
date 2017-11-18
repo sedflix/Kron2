@@ -12,6 +12,8 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
@@ -21,7 +23,7 @@ import java.util.List;
 import java.util.Set;
 
 public class CourseViewController extends Application{
-
+    private Parent courseDescription;
     public static void main(String[] args) {
         launch(args);
     }
@@ -32,7 +34,7 @@ public class CourseViewController extends Application{
         /**
          * Couse Description
          */
-        Parent courseDescription = FXMLLoader.load(getClass().getResource("/sample/course_view.fxml"));
+        courseDescription = FXMLLoader.load(getClass().getResource("/sample/course_view.fxml"));
 
         ComboBox<String> comboBox = (ComboBox<String>) courseDescription.lookup("#search");
 
@@ -69,8 +71,7 @@ public class CourseViewController extends Application{
         scrollPane.setContent(timeTable);
 
 
-        primaryStage.setTitle("Kron2");
-        primaryStage.setScene(new Scene(courseDescription, 700, 900));
+//        primaryStage.setScene(new Scene(courseDescription, 700, 900));
         primaryStage.show();
     }
 
@@ -107,5 +108,8 @@ public class CourseViewController extends Application{
         TextArea coTA = (TextArea) courseDescription.lookup("#co");
         coTA.clear();
         coTA.setText(forInfo.getPostConditions());
+    }
+    public Parent getCourseDescription(){
+        return courseDescription;
     }
 }
