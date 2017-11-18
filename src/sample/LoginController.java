@@ -49,6 +49,24 @@ public class LoginController extends Application{
 
                            }
                        }
+                       else if (user.getDtype().equals("Faculty")){
+                           FacultyPage facultyPage = new FacultyPage();
+                           try {
+                               facultyPage.start(primaryStage);
+                           }
+                           catch (Exception e){
+
+                           }
+                       }
+                       else if (user.getDtype().equals("Admin")){
+                           AdminPage adminPage = new AdminPage();
+                           try {
+                               adminPage.start(primaryStage);
+                           }
+                           catch (Exception e){
+
+                           }
+                       }
                    }
                }
            }
