@@ -1,8 +1,6 @@
 package sample;
 
-import api.Student;
-import api.User;
-import api.UserAuthentication;
+import api.*;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -42,6 +40,7 @@ public class LoginController extends Application{
                    else {
                        if (user.getDtype().equals("Student")){
                            StudentPage studentPage = new StudentPage();
+                           studentPage.setStudent((Student) user);
                            try{
                                studentPage.start(primaryStage);
                            }
@@ -51,6 +50,7 @@ public class LoginController extends Application{
                        }
                        else if (user.getDtype().equals("Faculty")){
                            FacultyPage facultyPage = new FacultyPage();
+                           facultyPage.setFaculty((Faculty) user);
                            try {
                                facultyPage.start(primaryStage);
                            }
@@ -60,6 +60,7 @@ public class LoginController extends Application{
                        }
                        else if (user.getDtype().equals("Admin")){
                            AdminPage adminPage = new AdminPage();
+                           adminPage.setAdmin((Admin) user);
                            try {
                                adminPage.start(primaryStage);
                            }

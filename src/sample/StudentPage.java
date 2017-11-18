@@ -17,6 +17,7 @@ import java.beans.EventHandler;
 import java.util.concurrent.ExecutionException;
 
 public class StudentPage extends Application{
+    private Student student;
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Student Dashboard");
@@ -85,5 +86,13 @@ public class StudentPage extends Application{
     }
     public static void main(String args[]){
         launch(args);
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public Student getStudent() {
+        return student;
     }
 }

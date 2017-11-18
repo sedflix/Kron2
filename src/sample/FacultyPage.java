@@ -1,5 +1,6 @@
 package sample;
 
+import api.Faculty;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,6 +11,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class FacultyPage extends Application {
+    private Faculty faculty;
     public static void main(String args[]) {
         launch(args);
     }
@@ -51,6 +53,13 @@ public class FacultyPage extends Application {
 //        borderPane.setCenter();
         primaryStage.setScene(new Scene(borderPane));
         primaryStage.show();
+    }
 
+    public Faculty getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
     }
 }
