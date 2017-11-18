@@ -52,7 +52,6 @@ public class AdminPage extends Application{
                 e.printStackTrace();
             }
         });
-        //todo timetable
 
         Button requestManagement = (Button) menuBar.getMenus().get(2).getGraphic();
         requestManagement.setOnAction(event -> {

@@ -1,9 +1,6 @@
 package sample.courseview;
 
-import api.Course;
-import api.Faculty;
-import api.Student;
-import api.User;
+import api.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -168,23 +165,27 @@ public class CourseViewController extends Application {
 
         Student student = (Student) user;
         if (student.hasRegisteredForCourse(forInfo)) {
-            creditButton.setText("- Credit");
+            creditButton.setText("- Credit -");
             creditButton.setStyle("-fx-text-fill: red;");
         } else {
-            creditButton.setText("+ Credit");
+            creditButton.setText("+ Credit +");
             creditButton.setStyle("-fx-text-fill: green;");
         }
 
         if (student.hasAuditedCourse(forInfo)) {
-            auditButton.setText("- Audit");
+            auditButton.setText("- Audit -");
             auditButton.setStyle("-fx-text-fill: red;");
         } else {
-            auditButton.setText("+ Audit");
+            auditButton.setText("+ Audit +");
             auditButton.setStyle("-fx-text-fill: green;");
         }
 
     }
 
+    public void updateTempCourse(Course temp) {
+        MySession.getSession().evict(temp);
+        temp = Course.getCourseByName(temp.getName());
+    }
     public Parent getCourseDescription() {
         return courseDescription;
     }
@@ -202,9 +203,17 @@ public class CourseViewController extends Application {
             case "Student":
                 Student student = ((Student) user);
                 if (student.hasRegisteredForCourse(temp)) {
-                    student.deleteRegisteredCourse(temp);
+                    if (student.deleteRegisteredCourse(temp)) {
+                        setData(courseDescription, temp);
+                    } else {
+                        creditButton.setText("Sorry!");
+                    }
                 } else {
-                    student.insertRegisteredCourse(temp);
+                    if (student.insertRegisteredCourse(temp)) {
+                        setData(courseDescription, temp);
+                    } else {
+                        creditButton.setText("Clashing Schedule");
+                    }
                 }
                 break;
             case "Faculty":
@@ -212,7 +221,7 @@ public class CourseViewController extends Application {
             case "Admin":
                 break;
         }
-        setData(courseDescription, temp);
+
     }
 
     public void auditControl() throws IOException {
@@ -220,9 +229,17 @@ public class CourseViewController extends Application {
             case "Student":
                 Student student = ((Student) user);
                 if (student.hasAuditedCourse(temp)) {
-                    student.deleteAuditedCourse(temp);
+                    if (student.deleteAuditedCourse(temp)) {
+                        setData(courseDescription, temp);
+                    } else {
+                        auditButton.setText("Sorry!!");
+                    }
                 } else {
-                    student.insertAuditedCourse(temp);
+                    if (student.insertAuditedCourse(temp)) {
+                        setData(courseDescription, temp);
+                    } else {
+                        auditButton.setText("Clashing Schedule");
+                    }
                 }
                 break;
             case "Faculty":

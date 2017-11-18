@@ -1,5 +1,6 @@
 package sample.welcomepage;
 
+import api.Event;
 import api.MySession;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,15 +8,30 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import sample.signup.SignupController;
+import org.hibernate.Session;
 import sample.login.LoginController;
+import sample.signup.SignupController;
+
+import javax.persistence.Query;
+import java.util.Date;
+import java.util.List;
 
 public class Controller extends Application {
     public static void main(String[] args) {
         System.out.println("---\n");
         System.out.println("Starting to create to database");
         System.out.println("---\n");
-        MySession.getSession();
+        Session session = MySession.getSession();
+        Query query = session.createQuery("select event from Event as event where event.isPending = true");
+        List<Event> eventList = query.getResultList();
+        eventList.forEach(event -> {
+            if (Math.abs(event.getCreationTime().getDate() - new Date().getDate()) > 5) {
+                session.beginTransaction();
+                session.delete(event);
+                session.getTransaction().commit();
+                session.evict(event);
+            }
+        });
         System.out.println("---\n");
         System.out.println("End connecting to database");
         System.out.println("---\n");

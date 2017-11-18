@@ -15,7 +15,6 @@ public class WeeklyCron {
         courses.forEach(course -> {
             Set<CourseEvent> courseEvents = course.getCourseEvents();
             courseEvents.forEach(courseEvent -> {
-
                 Event event1 = new Event();
                 event1.setCourse(course);
                 event1.setCourseEvent(true);
