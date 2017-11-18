@@ -115,9 +115,6 @@ public class CreateEvent extends Application {
                 Room rooms = new Room(room);
                 if (addEventNow(user, starttime, endtime, date, description, name, rooms)) {
                     button.setStyle("-fx-text-fill:  greenyellow");
-                    if (event!=null) {
-                        primaryStage.close();
-                    }
                 } else {
                     button.setStyle("-fx-text-fill: red");
                 }
