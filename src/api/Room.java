@@ -126,7 +126,20 @@ public class Room {
         query.setParameter("startT", startTime);
         query.setParameter("endT", endTime);
         query.setParameter("dateT", date);
-        return query.getResultList().size() == 0;
+
+        if (query.getResultList().size() == 0) {
+            return true;
+        } else {
+            query = session.createQuery("select event from CourseEvent as event where event.room = :room " +
+                    "and (event.startTime>= :startT and event.endTime<= :endT) " +
+                    "and event.dayOfWeek = :dayofweek");
+            query.setParameter("room", this);
+            query.setParameter("startT", startTime);
+            query.setParameter("endT", endTime);
+            query.setParameter("dayofweek", date.toLocalDate().getDayOfWeek());
+
+            return query.getResultList().size() == 0;
+        }
 
     }
 

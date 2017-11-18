@@ -237,6 +237,8 @@ public class TimeTableGridPane {
             if (item != null) {
                 Label x = new Label(item.getCourse().getCourseCode() + "-" + item.getRoom().getRoomName());
                 x.setStyle("-fx-background-color: " + calculateColorBase(item.getCourse().getName()));
+
+                x.setStyle("-fx-text-fill: ");
                 setGraphic(x);
             }
         }
