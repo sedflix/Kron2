@@ -14,17 +14,17 @@ import javafx.scene.layout.*;
 
 public class HandleRequestGridPane {
 
-    User user;
-    Admin admin;
-    Faculty faculty;
-    Student student;
-    GridPane gridPanel;
-    ListView<Event> listView = new ListView<>();
-    ObservableList<Event> data; //= FXCollections.observableArrayList
-    boolean pendinng = false;
-    boolean rejected = false;
-    boolean accepted = false;
-    boolean all = true;
+    private User user;
+    private Admin admin;
+    private Faculty faculty;
+    private Student student;
+    private GridPane gridPanel;
+    private ListView<Event> listView = new ListView<>();
+    private ObservableList<Event> data; //= FXCollections.observableArrayList
+    private boolean pendinng = false;
+    private boolean rejected = false;
+    private boolean accepted = false;
+    private boolean all = true;
 
     HandleRequestGridPane(User user, boolean pending, boolean rejected, boolean all) {
         setUser(user);

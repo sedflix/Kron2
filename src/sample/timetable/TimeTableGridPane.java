@@ -139,7 +139,6 @@ public class TimeTableGridPane {
         int endIndex = 2 * (endHour - this.startTime) + (int) (endMinutes / 30);
 
         return new int[]{startIndex, endIndex - 1};
-
     }
 
     public void addAllCoureseOfStudent(Student student) {

@@ -4,11 +4,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
-
 import javafx.scene.control.Button;
-
-import java.io.IOException;
+import javafx.stage.Stage;
 
 public class Controller extends Application {
     public static void main(String[] args) {
@@ -17,6 +14,7 @@ public class Controller extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
         primaryStage.setTitle("IIITD ROOM MANAGEMENT");
         Parent welcomeWindow = FXMLLoader.load(getClass().getResource("/sample/welcome_page.fxml"));
         primaryStage.setScene(new Scene(welcomeWindow));

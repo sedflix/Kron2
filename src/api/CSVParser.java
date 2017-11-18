@@ -142,7 +142,6 @@ public class CSVParser {
 
         faltu(session);
         br.close();
-        session.close();
         MySession.closeSessionFactory();
 
 

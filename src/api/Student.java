@@ -29,10 +29,18 @@ public class Student extends User {
     @ManyToMany(mappedBy = "shoppingStudents")
     private Set<Course> shoppingCourse = new HashSet<>();
 
+    /**
+     * Default constructor
+     */
     public Student() {
     }
 
 
+    /**
+     * give all the registered, audited and shopping courses
+     *
+     * @return List of Courses of registered, audited and shopping courses
+     */
     public List<Course> getAllCourses() {
         List<Course> allCourses = new ArrayList<>();
         allCourses.addAll(getRegisteredCourse());
@@ -49,26 +57,44 @@ public class Student extends User {
 //        System.out.println(student.hasAnyClashWithLecturesOf(session.get(Course.class, "ISI")));
     }
 
+    /**
+     *
+     * @param name name(Like "Advanced Programming") of the course
+     *             that needs to be registered list for this student
+     * @return true if successful, otherwise false
+     */
     public boolean insertRegisteredCourse(String name) {
         Course course = Course.getCourseByName(name);
         return insertRegisteredCourse(course);
     }
 
+    /**
+     *
+     * @param name name(Like "Advanced Programming") of the course
+     *             that needs to be added to Audited List for this student
+     * @return true if successful, otherwise false
+     */
     public boolean insertAuditedCourse(String name) {
         Course course = Course.getCourseByName(name);
         return insertAuditedCourse(course);
     }
 
+    /**
+     *
+     * @param name name(Like "Advanced Programming") of the course
+     *             that needs to be added to Shopping List for this student
+     * @return true if successful, otherwise false
+     */
     public boolean insertShoppingCourse(String name) {
         Course course = Course.getCourseByName(name);
         return insertShoppingCourse(course);
     }
 
     /**
-     * Give a course, it adds as a registered course
+     * Given a course, it adds as a registered course
      *
      * @param course course that needs to be added
-     * @return true if successful
+     * @return true if successful, otherwise false
      */
     public boolean insertShoppingCourse(Course course) {
 
@@ -135,6 +161,12 @@ public class Student extends User {
         return true;
     }
 
+    /**
+     * Finds if the given course has any clashes with the current lectures(of audited and registered courses only)
+     * of the students. It only considers lecture od the given course
+     * @param course Course with which the clashes need to be testes.
+     * @return true if any lecture clashed
+     */
     public boolean hasAnyCourseThatClashWith(Course course) {
 
         return course.getCourseEvents().stream().
@@ -144,6 +176,13 @@ public class Student extends User {
 
     }
 
+    /**
+     * Finds if student has any lecture(of audited and registered courses only) at the given time period
+     * @param startTime start time of the period
+     * @param endTime end time of the period
+     * @param dayOfWeek DayOfWeek for that period
+     * @return true if the student has any lecture from his registered or audited course in the given time span
+     */
     public boolean isAnyLectureBetween(Time startTime, Time endTime, DayOfWeek dayOfWeek) {
 
         Session session = MySession.getSession();
@@ -174,7 +213,27 @@ public class Student extends User {
         return getShoppingCourse().contains(course);
     }
 
-    public boolean createEventRequest(Session session, String name, Room room, String description, Time startTime, Time endTime, Date date) {
+
+    /**
+     * Creates an event request with the given specification and sets
+     * isPending = true
+     * isRejected = false
+     * isCancelled = false
+     * <p>
+     * Checks if time is sensible
+     * checks if room is free between the given time
+     *
+     * @param name        Event name
+     * @param room        Room Object
+     * @param description Description of the event
+     * @param startTime   start time of the event
+     * @param endTime     end time of the event
+     * @param date        event date
+     * @return true if event creation is successfull
+     */
+    public boolean createEventRequest(String name, Room room, String description, Time startTime, Time endTime, Date date) {
+
+        Session session = MySession.getSession();
 
         if (new java.util.Date().before(startTime)) {
             System.out.println("Make a time machine first");
@@ -184,7 +243,10 @@ public class Student extends User {
             System.out.println("Make a time machine first");
             return false;
         }
-
+        if (!room.isFreeBetween(startTime, endTime, date)) {
+            System.out.println("Clashing with events");
+            return false;
+        }
         Event event = new Event();
         event.setTagline(name);
         event.setDescription(description);

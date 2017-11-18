@@ -3,21 +3,16 @@ package sample;
 import api.Event;
 import api.MySession;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.hibernate.Session;
 import sample.timetable.TimeTableController;
 import sample.timetable.TimeTableGridPane;
 
-import javax.xml.soap.Text;
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
@@ -89,8 +84,6 @@ public class CreateEvent extends Application {
                     session.beginTransaction();
                     session.saveOrUpdate(createEvent);
                     session.getTransaction().commit();
-                    session.close();
-                    MySession.closeSessionFactory();
                 }
             }
         });

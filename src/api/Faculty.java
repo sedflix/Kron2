@@ -20,6 +20,24 @@ public class Faculty extends User {
     public Faculty() {
     }
 
+    /**
+     * Creates an COURSE Event with the given specification and sets
+     * isPending = false
+     * isRejected = false
+     * isCancelled = false
+     * <p>
+     * Checks if time is sensible
+     * checks if room is free between the given time
+     *
+     * @param name        Event name
+     * @param room        Room Object
+     * @param description Description of the event
+     * @param startTime   start time of the event
+     * @param endTime     end time of the event
+     * @param date        event date
+     * @param course      The course with which the event is related
+     * @return true if event creation is successful
+     */
     public boolean addEvent(String name, Room room, String description, Time startTime, Time endTime, Date date, Course course) {
 
         if (new java.util.Date().before(startTime)) {
@@ -64,11 +82,33 @@ public class Faculty extends User {
         return true;
     }
 
+    /**
+     * Creates an Event with the given specification and sets
+     * isPending = false
+     * isRejected = false
+     * isCancelled = false
+     * course is set null
+     *
+     * Checks if time is sensible
+     * checks if room is free between the given time
+     *
+     * @param name Event name
+     * @param room Room Object
+     * @param description Description of the event
+     * @param startTime start time of the event
+     * @param endTime end time of the event
+     * @param date event date
+     * @return true if event creation is successful
+     */
     public boolean addEvent(String name, Room room, String description, Time startTime, Time endTime, Date date) {
         Session session = MySession.getSession();
         return addEvent(name, room, description, startTime, endTime, date, null);
     }
 
+    /**
+     *
+     * @return All the events created by
+     */
     public List<Event> getAllRequests() {
         Session session = MySession.getSession();
         Query query = session.createQuery("select event from Event as event where event.creators = :me");

@@ -1,18 +1,20 @@
 package sample;
 
 
-import api.*;
+import api.Admin;
+import api.Faculty;
+import api.MySession;
+import api.Student;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
-import javafx.scene.control.Button;
 import org.hibernate.Session;
 
 import java.io.IOException;
@@ -65,7 +67,6 @@ public class SignupController extends Application{
                         session.saveOrUpdate(faculty);
                     }
                     session.getTransaction().commit();
-                    session.close();
                 }
 
             }

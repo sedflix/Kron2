@@ -72,6 +72,7 @@ public class Course {
     @OneToMany(mappedBy = "course")
     private Set<CourseEvent> courseEvents = new HashSet<>();
 
+
     public Course(String name, String courseCode, List<Department> departments, List<Integer> courseNumber, Set<Faculty> faculties, String postConditions, int credits) {
         this.name = name;
         this.courseCode = courseCode;
@@ -82,9 +83,11 @@ public class Course {
         this.credits = credits;
     }
 
+    /**
+     * Default constructor required for Hibernate
+     */
     public Course() {
     }
-
 
     /**
      * It will break the search term using the space as a delimiter.
@@ -116,19 +119,27 @@ public class Course {
         Query query = session.createQuery("FROM Course course where course.postConditions like :postCondition");
         query.setParameter("postCondition", "%" + searchTerm + "%");
         List<Course> list = query.getResultList();
-        session.close();
         return list;
 
     }
 
+    /**
+     * If you want to list of all the Courses in the database
+     *
+     * @return List of all the Courses in the database
+     */
     public static List<Course> getAllCourses() {
         Session session = MySession.getSession();
         Query query = session.createQuery("FROM Course");
         List<Course> list = query.getResultList();
-        session.close();
         return list;
     }
 
+    /**
+     * Returns the course object with all of it's features with the given name
+     * @param name The name of the course, like "Advanced Programming"
+     * @return the course object corresponding to the name
+     */
     public static Course getCourseByName(String name) {
         Session session = MySession.getSession();
         Query query = session.createQuery("FROM Course course where course.name = :nameC");
@@ -137,26 +148,10 @@ public class Course {
         return courseX;
     }
 
-    public List<Event> getThisWeekEvents() {
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(calendar.getWeekYear(), calendar.getWeeksInWeekYear(), 0);
-        Calendar calendar2 = Calendar.getInstance();
-        calendar2.set(calendar.getWeekYear(), calendar.getWeeksInWeekYear(), 6);
-        return getEventInTimeSpan(calendar.getTime(), calendar2.getTime());
-    }
-
-
-    public List<Event> getEventInTimeSpan(Date start, Date end) {
-        Session session = MySession.getSession();
-        Query query = session.createQuery("FROM Event event where event.course = :nocourse and ( event.date >= :startDate and event.date <= :endDate )", Event.class);
-        query.setParameter("nocourse", this);
-        query.setParameter("startDate", start);
-        query.setParameter("endDate", end);
-        List<Event> list = query.getResultList();
-        return list;
-    }
-
+    /**
+     * For testing
+     * @param args
+     */
     public static void main(String[] args) {
         Session session = MySession.getSession();
 //        List<Course> course = Course.search("Students");
@@ -179,6 +174,35 @@ public class Course {
         student.insertAuditedCourse(course);
     }
 
+    /**
+     * @return list of events that are this week
+     */
+    public List<Event> getThisWeekEvents() {
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(calendar.getWeekYear(), calendar.getWeeksInWeekYear(), 0);
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.set(calendar.getWeekYear(), calendar.getWeeksInWeekYear(), 6);
+        return getEventInTimeSpan(calendar.getTime(), calendar2.getTime());
+    }
+
+    /**
+     * Returns all the events that occur between the date start and the date end
+     *
+     * @param start inclusive starting date
+     * @param end   inclusive ending date
+     * @return List of Event b/w start and end
+     */
+    public List<Event> getEventInTimeSpan(Date start, Date end) {
+        Session session = MySession.getSession();
+        Query query = session.createQuery("FROM Event event where event.course = :nocourse and ( event.date >= :startDate and event.date <= :endDate )", Event.class);
+        query.setParameter("nocourse", this);
+        query.setParameter("startDate", start);
+        query.setParameter("endDate", end);
+        List<Event> list = query.getResultList();
+        return list;
+    }
+
 
     public String getName() {
         return name;
@@ -187,7 +211,6 @@ public class Course {
     public void setName(String name) {
         this.name = name;
     }
-
 
     public String getPreConditions() {
         return preConditions;

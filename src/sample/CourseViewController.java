@@ -4,7 +4,6 @@ import api.Course;
 import api.Faculty;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
@@ -12,8 +11,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
@@ -75,7 +72,7 @@ public class CourseViewController extends Application{
         scrollPane.setContent(timeTable.getGridPane());
 
 
-//        primaryStage.setScene(new Scene(courseDescription, 700, 900));
+        primaryStage.setScene(new Scene(courseDescription, 700, 900));
         primaryStage.show();
     }
 

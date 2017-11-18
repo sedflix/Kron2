@@ -32,7 +32,7 @@
     </rowConstraints>
     <children>
         <!--<TextFlow fx:id="course_heading" prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER" GridPane.columnSpan="2147483647" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />-->
-        <TextFlow fx:id="faculty" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
+        <TextFlow fx:id="faculty" layoutX="10.0" layoutY="10.0" prefHeight="67.0" prefWidth="600.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
             <GridPane.margin>
                 <Insets />
             </GridPane.margin>
@@ -50,7 +50,7 @@
                 <Insets left="10.0" />
             </padding>
         </TextFlow>
-        <Button fx:id="creditButton" alignment="CENTER" mnemonicParsing="false"  prefHeight="1000.0" prefWidth="1000.0" text=" + Credits" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+        <Button fx:id="creditButton" alignment="CENTER" mnemonicParsing="false" prefHeight="1000.0" prefWidth="1000.0" text=" + Credits" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
         <Button mnemonicParsing="false" prefHeight="1000.0" prefWidth="1000.0" text="+ Audit" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
         <TextArea fx:id="co" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnSpan="2147483647" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS">
             <GridPane.margin>
