@@ -54,7 +54,7 @@ public class ViewRoomController extends Application {
                 Time endTime = new Time(endHour,endMinute,00);
 
                 Date date = new Date(year-1900,month,day);
-                System.out.println(date.getYear());
+//                System.out.println(date.getYear());
 
                 if(Room.isFreeBetween(room,startTime,endTime,date)){
                     button.setStyle("-fx-text-fill: green");

@@ -99,7 +99,7 @@ public class CreateEvent extends Application {
                 int day = temp1.getDayOfMonth();
                 int month = temp1.getMonthValue();
                 int year = temp1.getYear();
-                System.out.println(day+":"+month+":"+year);
+//                System.out.println(day+":"+month+":"+year);
 
                 int tempIndex = startTime.indexOf(":");
                 int startTimeHour = Integer.parseInt(startTime.substring(0, tempIndex));
