@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-
-<?import javafx.scene.control.ComboBox?>
-<ComboBox xmlns:fx="http://javafx.com/fxml/1" fx:id="search" editable="true" maxHeight="1.7976931348623157E308"
-          maxWidth="1.7976931348623157E308" promptText="Search for Course" xmlns="http://javafx.com/javafx/8.0.121"/>
