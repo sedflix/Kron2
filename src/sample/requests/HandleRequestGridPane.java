@@ -16,6 +16,9 @@ import javafx.stage.Stage;
 import org.hibernate.Session;
 import sample.createevent.CreateEvent;
 
+/**
+ * This generates a grid pane to make the request handler.
+ */
 public class HandleRequestGridPane {
 
     private User user;

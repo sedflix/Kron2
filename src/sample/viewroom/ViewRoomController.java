@@ -15,6 +15,9 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.sql.Date;
 
+/**
+ * View Room page buttons are handled by this class
+ */
 public class ViewRoomController extends Application {
     private Parent root;
     private User user;

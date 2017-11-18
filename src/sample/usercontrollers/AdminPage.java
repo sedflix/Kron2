@@ -14,6 +14,10 @@ import sample.requests.HandleRequestsController;
 import sample.viewroom.ViewRoomController;
 import sample.welcomepage.Controller;
 
+/**
+ * This is controller class for Admin
+ *
+ */
 public class AdminPage extends Application{
     private User user;
     @Override

@@ -16,6 +16,10 @@ import javax.persistence.Query;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * This is the main controller. This loads the welcome page and handles the control before the user logs in.
+ * It hands over control to one of the USER CONTROLLERS once a valid login is done.
+ */
 public class Controller extends Application {
     public static void main(String[] args) {
         System.out.println("---\n");

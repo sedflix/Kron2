@@ -15,7 +15,9 @@ import sample.usercontrollers.AdminPage;
 import sample.usercontrollers.FacultyPage;
 import sample.usercontrollers.StudentPage;
 
-
+/**
+ * This checks for user login to be valid
+ */
 public class LoginController extends Application{
    @Override
     public void start(Stage primaryStage) throws Exception{

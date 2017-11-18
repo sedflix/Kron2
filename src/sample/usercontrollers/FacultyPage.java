@@ -15,6 +15,9 @@ import sample.requests.HandleRequestsController;
 import sample.viewroom.ViewRoomController;
 import sample.welcomepage.Controller;
 
+/**
+ * This is controller for Faculty Page
+ */
 public class FacultyPage extends Application {
     private User user;
     public static void main(String args[]) {

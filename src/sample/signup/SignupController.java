@@ -20,6 +20,9 @@ import sample.login.LoginController;
 
 import java.io.IOException;
 
+/**
+ * This handles signUp and leads to login
+ */
 public class SignupController extends Application{
     @Override
     public void start(Stage primaryStage) throws IOException {

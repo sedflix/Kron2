@@ -7,6 +7,9 @@ import javafx.scene.Parent;
 import javafx.stage.Stage;
 import org.hibernate.Session;
 
+/**
+ * Request is controlled by this class
+ */
 public class HandleRequestsController extends Application {
     private User user;
     HandleRequestGridPane gridPane;

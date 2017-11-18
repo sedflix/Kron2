@@ -18,6 +18,9 @@ import sample.welcomepage.Controller;
 
 import java.io.IOException;
 
+/**
+ * This is controller class for Student Page
+ */
 public class StudentPage extends Application{
     private User user;
     @Override

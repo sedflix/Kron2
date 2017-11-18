@@ -5,6 +5,9 @@ import api.User;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * This is controller to generate TimeTable. This also lets us view Course details when we click on time table cards.
+ */
 
 public class TimeTableController extends Application {
     private User user;
