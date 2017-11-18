@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import sample.timetable.TimeTableController;
 import sample.timetable.TimeTableGridPane;
 
+import javax.xml.soap.Text;
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
@@ -33,18 +34,21 @@ public class CreateEvent extends Application {
         temp.start(primaryStage);
         TimeTableGridPane timeTable = temp.getGridPane();
         scrollPane.setContent(timeTable.getGridPane());
-//        primaryStage.setTitle("Kron2");
+        primaryStage.setTitle("Kron2");
 
+        Text text = (Text) root.lookup("#h1");
 
         Button button = (Button) root.lookup("#requestButton");
 
         if (edit) {
+            text.setTextContent("Edit Event");
             if (user.getDtype().equals("Student")) {
                 button.setText("Edit Event/Book");
             } else {
                 button.setText("Edit Event");
             }
         } else {
+            text.setTextContent("Create Event Request");
             if (user.getDtype().equals("Student")) {
                 button.setText("Request Event/Book");
             } else {
