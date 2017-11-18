@@ -111,13 +111,13 @@ public class CSVParser {
                 else if (i==4){
                     dayOfWeek = DayOfWeek.FRIDAY;
                 }
-                CourseEvent event = new CourseEvent(startTime, endTime, room, "Why the fuck do we have description?", dayOfWeek, course, 1);
+                CourseEvent event = new CourseEvent(startTime, endTime, room, "decription", dayOfWeek, course, 1);
                 Event event1 = new Event();
                 event1.setCourse(course);
                 event1.setCourseEvent(true);
                 event1.setRoom(room);
-                event1.setTagline("Class aa jaya karo bc");
-                event1.setDescription("useless as fuck");
+                event1.setTagline("--");
+                event1.setDescription("some");
                 event1.setCreators((User) prof);
                 event1.setStartTime(startTime);
                 event1.setEndTime(endTime);

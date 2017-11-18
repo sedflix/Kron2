@@ -117,7 +117,8 @@ public class Room {
         Session session = MySession.getSession();
 
         Query query = session.createQuery("select event from Event as event where event.room = :room " +
-                "and (event.startTime>= :startT and event.endTime<= :endT) " +
+                "and ( (event.startTime between :startT and :endT)" +
+                "or (event.endTime between :startT and :endT) )  " +
                 "and event.date = :dateT and event.isPending = false  " +
                 "and event.isRejected = false  " +
                 "and event.isCancelled = false ");

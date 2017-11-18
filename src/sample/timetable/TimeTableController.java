@@ -23,6 +23,7 @@ public class TimeTableController extends Application {
 
         gridPane = new TimeTableGridPane();
         gridPane.setUser(user);
+
         //TODO: edit for faculty and admin
         if (user.getDtype().equals("Student")) {
             gridPane.addAllCoureseOfStudent((Student) user);

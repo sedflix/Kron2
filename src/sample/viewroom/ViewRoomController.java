@@ -5,15 +5,15 @@ import api.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
-import java.sql.Date;
 
 /**
  * View Room page buttons are handled by this class
@@ -57,7 +57,7 @@ public class ViewRoomController extends Application {
                 Time endTime = new Time(endHour,endMinute,00);
 
                 Date date = new Date(year-1900,month,day);
-//                System.out.println(date.getYear());
+                System.out.println(date.getYear());
 
                 if(Room.isFreeBetween(room,startTime,endTime,date)){
                     button.setStyle("-fx-text-fill: green");
