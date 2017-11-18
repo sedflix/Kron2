@@ -26,7 +26,8 @@ public class FacultyPage extends Application {
         BorderPane borderPane = (BorderPane) menu.lookup("#borderPane");
         MenuBar menuBar = (MenuBar) borderPane.getTop();
 
-
+        //todo menu bar
+        //todo timetable
         Button viewRoom = (Button) menuBar.getMenus().get(1).getGraphic();
         viewRoom.setOnAction(event -> {
             ViewRoomController viewRoomController = new ViewRoomController();
