@@ -30,6 +30,7 @@ public class CreateEvent extends Application {
 
         ScrollPane scrollPane = (ScrollPane) root.lookup("#scroll_time_table");
         TimeTableController temp = new TimeTableController();
+        temp.setUser(user);
         temp.start(primaryStage);
         TimeTableGridPane timeTable = temp.getGridPane();
         scrollPane.setContent(timeTable.getGridPane());
@@ -122,7 +123,7 @@ public class CreateEvent extends Application {
 
 
 //        primaryStage.setScene(new Scene(root, 900, 900));
-        primaryStage.show();
+//        primaryStage.show();
     }
 
     public Parent getRoot() {

@@ -72,9 +72,9 @@ public class FacultyPage extends Application {
 
         Button viewCourse = (Button) menuBar.getMenus().get(0).getGraphic();
         viewCourse.setOnAction(event -> {
-            CourseViewController courseViewController = new CourseViewController();
-            courseViewController.setUser(user);
             try{
+                CourseViewController courseViewController = new CourseViewController();
+                courseViewController.setUser(user);
                 courseViewController.start(primaryStage);
                 borderPane.setCenter(courseViewController.getCourseDescription());
 //                borderPane.getChildren().addAll(courseViewController.getCourseDescription());

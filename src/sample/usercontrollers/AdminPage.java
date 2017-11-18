@@ -45,7 +45,7 @@ public class AdminPage extends Application{
             try{
                 createEvent1.start(primaryStage);
                 borderPane.setCenter(createEvent1.getRoot());
-                borderPane.getChildren().addAll(createEvent1.getRoot());
+//                borderPane.getChildren().addAll(createEvent1.getRoot());
             }
             catch (Exception e){
                 e.printStackTrace();

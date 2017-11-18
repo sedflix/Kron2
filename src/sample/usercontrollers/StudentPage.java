@@ -81,7 +81,7 @@ public class StudentPage extends Application{
             try {
                 handleRequestsController.start(primaryStage);
                 borderPane.setCenter(handleRequestsController.getRoot());
-                borderPane.getChildren().add(handleRequestsController.getRoot());
+//                borderPane.getChildren().add(handleRequestsController.getRoot());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -89,6 +89,7 @@ public class StudentPage extends Application{
 
         Button createEvent = (Button) menuBar.getMenus().get(2).getGraphic();
         createEvent.setOnAction(event -> {
+            System.out.println(234);
             CreateEvent createEvent1 = new CreateEvent();
             createEvent1.setUser(user);
             try{
