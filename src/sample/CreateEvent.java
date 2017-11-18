@@ -21,19 +21,19 @@ import java.time.LocalDate;
 
 public class CreateEvent extends Application {
 
-
+    private Parent root;
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/sample/create_event.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/sample/create_event.fxml"));
 
         ScrollPane scrollPane = (ScrollPane) root.lookup("#scroll_time_table");
         Node timeTable = FXMLLoader.load(getClass().getResource("/sample/TimeTable.fxml"));
         scrollPane.setContent(timeTable);
-        primaryStage.setTitle("Kron2");
+//        primaryStage.setTitle("Kron2");
 
 
         Button button = (Button) root.lookup("#requestButton");
@@ -90,8 +90,11 @@ public class CreateEvent extends Application {
         });
 
 
-        primaryStage.setScene(new Scene(root, 900, 900));
-        primaryStage.show();
+//        primaryStage.setScene(new Scene(root, 900, 900));
+//        primaryStage.show();
     }
 
+    public Parent getRoot() {
+        return root;
+    }
 }

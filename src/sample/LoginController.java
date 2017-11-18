@@ -1,5 +1,6 @@
 package sample;
 
+import api.Student;
 import api.User;
 import api.UserAuthentication;
 import javafx.application.Application;
@@ -39,7 +40,15 @@ public class LoginController extends Application{
                        System.out.println("Invalid Email or Password");
                    }
                    else {
-                       System.out.println(user.getDtype());
+                       if (user.getDtype().equals("Student")){
+                           StudentPage studentPage = new StudentPage();
+                           try{
+                               studentPage.start(primaryStage);
+                           }
+                           catch (Exception e){
+
+                           }
+                       }
                    }
                }
            }
