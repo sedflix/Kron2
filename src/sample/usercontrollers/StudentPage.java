@@ -14,6 +14,7 @@ import sample.createevent.CreateEvent;
 import sample.requests.HandleRequestsController;
 import sample.timetable.TimeTableController;
 import sample.viewroom.ViewRoomController;
+import sample.welcomepage.Controller;
 
 import java.io.IOException;
 
@@ -89,7 +90,6 @@ public class StudentPage extends Application{
 
         Button createEvent = (Button) menuBar.getMenus().get(2).getGraphic();
         createEvent.setOnAction(event -> {
-            System.out.println(234);
             CreateEvent createEvent1 = new CreateEvent();
             createEvent1.setUser(user);
             try{
@@ -99,6 +99,17 @@ public class StudentPage extends Application{
             }
             catch (Exception e){
 
+            }
+        });
+
+        Button logout = (Button) menuBar.getMenus().get(5).getGraphic();
+        logout.setOnAction(event -> {
+            Controller controller = new Controller();
+            try{
+                controller.start(primaryStage);
+            }
+            catch (Exception e){
+                e.printStackTrace();
             }
         });
 

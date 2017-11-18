@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import sample.createevent.CreateEvent;
 import sample.requests.HandleRequestsController;
 import sample.viewroom.ViewRoomController;
+import sample.welcomepage.Controller;
 
 public class AdminPage extends Application{
     private User user;
@@ -66,6 +67,17 @@ public class AdminPage extends Application{
                 e.printStackTrace();
             }
         });
+        Button logout = (Button) menuBar.getMenus().get(3).getGraphic();
+        logout.setOnAction(event -> {
+            Controller controller = new Controller();
+            try{
+                controller.start(primaryStage);
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        });
+
 
 
 //        borderPane.setCenter();

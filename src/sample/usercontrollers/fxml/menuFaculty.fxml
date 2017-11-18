@@ -28,6 +28,11 @@
                   <Button mnemonicParsing="false" text="Request Management" />
                </graphic>
             </Menu>
+            <Menu mnemonicParsing="false">
+               <graphic>
+                  <Button mnemonicParsing="false" text="Exit" />
+               </graphic>
+            </Menu>
         </menus>
       </MenuBar>
    </top>

@@ -16,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.hibernate.Session;
+import sample.login.LoginController;
 
 import java.io.IOException;
 
@@ -67,6 +68,13 @@ public class SignupController extends Application{
                         session.saveOrUpdate(faculty);
                     }
                     session.getTransaction().commit();
+                    LoginController loginController = new LoginController();
+                    try {
+                        loginController.start(primaryStage);
+                    }
+                    catch(Exception e) {
+                        e.printStackTrace();
+                    }
                 }
 
             }

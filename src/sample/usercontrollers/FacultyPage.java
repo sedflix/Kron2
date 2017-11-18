@@ -13,6 +13,7 @@ import sample.courseview.CourseViewController;
 import sample.createevent.CreateEvent;
 import sample.requests.HandleRequestsController;
 import sample.viewroom.ViewRoomController;
+import sample.welcomepage.Controller;
 
 public class FacultyPage extends Application {
     private User user;
@@ -78,6 +79,17 @@ public class FacultyPage extends Application {
                 courseViewController.start(primaryStage);
                 borderPane.setCenter(courseViewController.getCourseDescription());
 //                borderPane.getChildren().addAll(courseViewController.getCourseDescription());
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        });
+
+        Button logout = (Button) menuBar.getMenus().get(4).getGraphic();
+        logout.setOnAction(event -> {
+            Controller controller = new Controller();
+            try{
+                controller.start(primaryStage);
             }
             catch (Exception e){
                 e.printStackTrace();
