@@ -21,6 +21,7 @@ public class HandleRequestsController extends Application {
         primaryStage.setTitle("Requests");
 
         Session session = MySession.getSession();
+        //TODO: REMOVE Please
 //        Faculty admin = session.get(Faculty.class, "raj ayyar@iiitd.ac.in");
         Admin admin = session.get(Admin.class, "ravi@iiitd.ac.in");
         HandleRequestGridPane gridPane = new HandleRequestGridPane(admin, false, false, true);

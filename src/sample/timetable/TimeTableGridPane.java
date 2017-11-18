@@ -28,6 +28,7 @@ public class TimeTableGridPane {
     private StackPane[] times;
     private StackPane[] days;
     private GridPane gridPane;
+
     public TimeTableGridPane() {
         this.startTime = 8;
         this.endTime = 17;
@@ -105,10 +106,10 @@ public class TimeTableGridPane {
                             Stage tempStage = new Stage();
                             try {
                                 Parent parent = FXMLLoader.load(getClass().getResource("/sample/course_view.fxml"));
-                                courseViewController.setData(parent,ov.getValue().getCourse());
+                                courseViewController.setData(parent, ov.getValue().getCourse());
                                 tempStage.setScene(new Scene(parent));
                                 tempStage.show();
-                            }catch (Exception e){
+                            } catch (Exception e) {
 
                             }
 //                            System.out.println(ov.getValue().getCourse().getName());
