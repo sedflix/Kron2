@@ -113,7 +113,7 @@ public class CourseViewController extends Application{
 
         TextArea coTA = (TextArea) courseDescription.lookup("#co");
         coTA.clear();
-        coTA.setText(forInfo.getPostConditions());
+        coTA.setText(processedString(forInfo.getPostConditions()));
     }
     public Parent getCourseDescription(){
         return courseDescription;
@@ -149,5 +149,18 @@ public class CourseViewController extends Application{
         } else if (user.getDtype().equals("Admin")) {
 
         }
+    }
+
+    public String processedString(String conditions){
+        int index = conditions.indexOf(":");
+        String toReturn = "";
+        while(index>0){
+            toReturn+="--";
+            toReturn+=conditions.substring(0,index).trim();
+            toReturn+="\n";
+            conditions = conditions.substring(index+1);
+            index = conditions.indexOf(":");
+        }
+        return toReturn;
     }
 }
