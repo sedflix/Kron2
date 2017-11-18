@@ -1,5 +1,6 @@
 package sample;
 
+import api.MySession;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,6 +10,13 @@ import javafx.stage.Stage;
 
 public class Controller extends Application {
     public static void main(String[] args) {
+        System.out.println("---\n");
+        System.out.println("Starting to create to database");
+        System.out.println("---\n");
+        MySession.getSession();
+        System.out.println("---\n");
+        System.out.println("End connecting to database");
+        System.out.println("---\n");
         launch(args);
     }
 
