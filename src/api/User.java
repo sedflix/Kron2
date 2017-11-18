@@ -36,10 +36,21 @@ public class User {
     public User() {
     }
 
+    /**
+     * Given teh users email ID it returns the corresponding User object with all features of the user
+     *
+     * @param email email of the user
+     * @return USer object
+     */
     public static User getUserByEmail(String email) {
         return MySession.getSession().get(User.class, email.trim());
     }
 
+    /**
+     * Gives all events that have been created by the User
+     *
+     * @return List of all Events that have been created by the User
+     */
     public List<Event> getMyRequests() {
         Session session = MySession.getSession();
         Query query = session.createQuery("FROM Event event where event.creators = :user");
@@ -47,6 +58,11 @@ public class User {
         return (List<Event>) query.getResultList();
     }
 
+    /**
+     * Gives all events that have been created by the User and are still pending approval or rejection
+     *
+     * @return List of all Events that have been created by the User and are still pending approval or rejection
+     */
     public List<Event> getMyPendingRequests() {
         Session session = MySession.getSession();
         Query query = session.createQuery("FROM Event event where event.creators = :user and event.isPending = true");
@@ -54,6 +70,11 @@ public class User {
         return (List<Event>) query.getResultList();
     }
 
+    /**
+     * Gives all events that have been created by the User and have been rejected
+     *
+     * @return List of all Events that have been created by the User and have been rejected
+     */
     public List<Event> getMyRejectedRequests() {
         Session session = MySession.getSession();
         Query query = session.createQuery("FROM Event event where event.creators = :user and event.isRejected = true");
@@ -61,6 +82,11 @@ public class User {
         return (List<Event>) query.getResultList();
     }
 
+    /**
+     * Gell all the requests that been cancelled
+     *
+     * @return all the requests that have been cancelled
+     */
     public List<Event> getMyCancelledRequests() {
         Session session = MySession.getSession();
         Query query = session.createQuery("FROM Event event where event.creators = :user and event.isCancelled = true");
@@ -69,18 +95,21 @@ public class User {
     }
 
 
+    /**
+     * Deletes the given database from the database
+     *
+     * @param event Event object that needs to be deleted
+     * @return true if deletion is successful
+     */
     public boolean deleteEventRequest(Event event) {
 
         Session session = MySession.getSession();
         try {
 
-            if (event.getCreators().getEmail().equals(this.getEmail())) {
-                session.beginTransaction();
-                session.delete(event);
-                session.getTransaction().commit();
-            } else {
-                throw new Exception("The event was not created by you");
-            }
+            session.beginTransaction();
+            session.delete(event);
+            session.getTransaction().commit();
+
         } catch (Exception e) {
             System.out.println("failed to delete " + e.getMessage());
             return false;
