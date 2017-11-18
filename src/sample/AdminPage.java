@@ -1,6 +1,7 @@
 package sample;
 
 import api.Admin;
+import api.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,7 +13,7 @@ import javafx.stage.Stage;
 import sample.timetable.TimeTableController;
 
 public class AdminPage extends Application{
-    private Admin admin;
+    private User user;
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Student Dashboard");
@@ -58,11 +59,11 @@ public class AdminPage extends Application{
         launch(args);
     }
 
-    public Admin getAdmin() {
-        return admin;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public void setAdmin(Admin admin) {
-        this.admin = admin;
+    public User getUser() {
+        return user;
     }
 }

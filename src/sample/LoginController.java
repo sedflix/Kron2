@@ -40,7 +40,7 @@ public class LoginController extends Application{
                    else {
                        if (user.getDtype().equals("Student")){
                            StudentPage studentPage = new StudentPage();
-                           studentPage.setStudent((Student) user);
+                           studentPage.setUser(user);
                            try{
                                studentPage.start(primaryStage);
                            }
@@ -50,7 +50,7 @@ public class LoginController extends Application{
                        }
                        else if (user.getDtype().equals("Faculty")){
                            FacultyPage facultyPage = new FacultyPage();
-                           facultyPage.setFaculty((Faculty) user);
+                           facultyPage.setUser(user);
                            try {
                                facultyPage.start(primaryStage);
                            }
@@ -60,7 +60,7 @@ public class LoginController extends Application{
                        }
                        else if (user.getDtype().equals("Admin")){
                            AdminPage adminPage = new AdminPage();
-                           adminPage.setAdmin((Admin) user);
+                           adminPage.setUser(user);
                            try {
                                adminPage.start(primaryStage);
                            }
