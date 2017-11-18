@@ -1,5 +1,7 @@
 package sample;
 
+import api.Faculty;
+import api.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,6 +12,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class FacultyPage extends Application {
+    private User user;
     public static void main(String args[]) {
         launch(args);
     }
@@ -25,6 +28,7 @@ public class FacultyPage extends Application {
         Button viewRoom = (Button) menuBar.getMenus().get(1).getGraphic();
         viewRoom.setOnAction(event -> {
             ViewRoomController viewRoomController = new ViewRoomController();
+            viewRoomController.setUser(user);
             try {
                 viewRoomController.start(primaryStage);
                 borderPane.setCenter(viewRoomController.getRoot());
@@ -38,6 +42,7 @@ public class FacultyPage extends Application {
         Button createEvent = (Button) menuBar.getMenus().get(0).getGraphic();
         createEvent.setOnAction(event -> {
             CreateEvent createEvent1 = new CreateEvent();
+            createEvent1.setUser(user);
             try {
                 createEvent1.start(primaryStage);
                 borderPane.setCenter(createEvent1.getRoot());
@@ -51,6 +56,13 @@ public class FacultyPage extends Application {
 //        borderPane.setCenter();
         primaryStage.setScene(new Scene(borderPane));
         primaryStage.show();
+    }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

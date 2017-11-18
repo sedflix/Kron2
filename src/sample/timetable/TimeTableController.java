@@ -2,6 +2,7 @@ package sample.timetable;
 
 import api.MySession;
 import api.Student;
+import api.User;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -11,7 +12,7 @@ import java.sql.Time;
 
 
 public class TimeTableController extends Application {
-
+    private User user;
 
     public static void main(String[] args) {
         Application.launch(args);
@@ -34,4 +35,11 @@ public class TimeTableController extends Application {
         return gridPane;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

@@ -1,5 +1,7 @@
 package sample;
 
+import api.Admin;
+import api.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,6 +13,7 @@ import javafx.stage.Stage;
 import sample.timetable.TimeTableController;
 
 public class AdminPage extends Application{
+    private User user;
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Student Dashboard");
@@ -22,6 +25,7 @@ public class AdminPage extends Application{
         Button viewRoom = (Button) menuBar.getMenus().get(1).getGraphic();
         viewRoom.setOnAction(event -> {
             ViewRoomController viewRoomController = new ViewRoomController();
+            viewRoomController.setUser(user);
             try{
                 viewRoomController.start(primaryStage);
                 borderPane.setCenter(viewRoomController.getRoot());
@@ -36,6 +40,7 @@ public class AdminPage extends Application{
         Button createEvent = (Button) menuBar.getMenus().get(0).getGraphic();
         createEvent.setOnAction(event -> {
             CreateEvent createEvent1 = new CreateEvent();
+            createEvent1.setUser(user);
             try{
                 createEvent1.start(primaryStage);
                 borderPane.setCenter(createEvent1.getRoot());
@@ -54,5 +59,13 @@ public class AdminPage extends Application{
     }
     public static void main(String args[]){
         launch(args);
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
     }
 }

@@ -2,6 +2,7 @@ package sample;
 
 import api.Course;
 import api.Faculty;
+import api.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,6 +23,7 @@ import java.util.List;
 import java.util.Set;
 
 public class CourseViewController extends Application{
+    private User user;
     private Parent courseDescription;
     public static void main(String[] args) {
         launch(args);
@@ -64,13 +66,6 @@ public class CourseViewController extends Application{
         });
 
 
-        ScrollPane scrollPane = (ScrollPane) courseDescription.lookup("#scroll_time_table");
-        TimeTableController temp = new TimeTableController();
-        temp.start(primaryStage);
-        TimeTableGridPane timeTable = temp.getGridPane();
-
-        scrollPane.setContent(timeTable.getGridPane());
-
 
         primaryStage.setScene(new Scene(courseDescription, 700, 900));
         primaryStage.show();
@@ -112,5 +107,13 @@ public class CourseViewController extends Application{
     }
     public Parent getCourseDescription(){
         return courseDescription;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
