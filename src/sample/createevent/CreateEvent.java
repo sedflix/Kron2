@@ -65,7 +65,6 @@ public class CreateEvent extends Application {
             TextField crowdSize = (TextField) root.lookup("#crowdSizeField");
             ComboBox<String> roomNumber = (ComboBox<String>) root.lookup("#roomNumberField");
 
-            //TODO: string manipulation for data and time
 
             datePicker.setUserData(LocalDate.of(event.getDate().getYear(),event.getDate().getMonth(),event.getDate().getDate()));
             startBox.setValue(removeLastThree(event.getStartTime().toString()));

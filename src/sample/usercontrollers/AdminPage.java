@@ -10,6 +10,8 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import sample.createevent.CreateEvent;
+import sample.requests.HandleRequestGridPane;
+import sample.requests.HandleRequestsController;
 import sample.viewroom.ViewRoomController;
 
 public class AdminPage extends Application{
@@ -45,6 +47,20 @@ public class AdminPage extends Application{
                 createEvent1.start(primaryStage);
                 borderPane.setCenter(createEvent1.getRoot());
                 borderPane.getChildren().addAll(createEvent1.getRoot());
+            }
+            catch (Exception e){
+
+            }
+        });
+
+        Button requestManagement = (Button) menuBar.getMenus().get(2).getGraphic();
+        requestManagement.setOnAction(event -> {
+            HandleRequestsController handleRequestsController = new HandleRequestsController();
+            handleRequestsController.setUser(user);
+            try {
+                handleRequestsController.start(primaryStage);
+                borderPane.setCenter(handleRequestsController.getRoot());
+                borderPane.getChildren().add(handleRequestsController.getRoot());
             }
             catch (Exception e){
 

@@ -213,7 +213,6 @@ public class HandleRequestGridPane {
                     Add listener for edit
                 */
                 Button edit = new Button("Edit");
-                //TODO: Add listner for edit
                 edit.setOnAction(actionEvent -> {
                     CreateEvent createEventController = new CreateEvent();
                     createEventController.setEdit(true);

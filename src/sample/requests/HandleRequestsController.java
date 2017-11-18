@@ -4,12 +4,14 @@ import api.Admin;
 import api.MySession;
 import api.User;
 import javafx.application.Application;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.hibernate.Session;
 
 public class HandleRequestsController extends Application {
     private User user;
+    HandleRequestGridPane gridPane;
     public static void main(String[] args) {
         Application.launch(args);
     }
@@ -23,8 +25,8 @@ public class HandleRequestsController extends Application {
         Session session = MySession.getSession();
         //TODO: REMOVE Please
 //        Faculty admin = session.get(Faculty.class, "raj ayyar@iiitd.ac.in");
-        Admin admin = session.get(Admin.class, "ravi@iiitd.ac.in");
-        HandleRequestGridPane gridPane = new HandleRequestGridPane(admin, false, false, true);
+//        Admin admin = session.get(Admin.class, "ravi@iiitd.ac.in");
+        gridPane = new HandleRequestGridPane(user, false, false, true);
         gridPane.update();
         Scene scene = new Scene(gridPane.getGridPanel(), 1200, 480);
         primaryStage.setScene(scene);
@@ -37,5 +39,9 @@ public class HandleRequestsController extends Application {
 
     public User getUser() {
         return user;
+    }
+
+    public Parent getRoot(){
+        return gridPane.getGridPanel();
     }
 }

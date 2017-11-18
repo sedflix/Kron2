@@ -20,7 +20,7 @@
             </Menu>
             <Menu mnemonicParsing="false">
                <graphic>
-                  <Button mnemonicParsing="false" text="Pending Requests" />
+                  <Button fx:id="requestManagement" mnemonicParsing="false" text="Request Management" />
                </graphic>
             </Menu>
         </menus>
