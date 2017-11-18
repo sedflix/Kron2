@@ -66,7 +66,8 @@ public class CreateEvent extends Application {
             ComboBox<String> roomNumber = (ComboBox<String>) root.lookup("#roomNumberField");
 
             //TODO: string manipulation for data and time
-            datePicker.setUserData(event.getDate());
+
+            datePicker.setUserData(LocalDate.of(event.getDate().getYear(),event.getDate().getMonth(),event.getDate().getDate()));
             startBox.setValue(removeLastThree(event.getStartTime().toString()));
             endBox.setValue(removeLastThree(event.getEndTime().toString()));
             eventName.setText(event.getTagline());
@@ -114,7 +115,9 @@ public class CreateEvent extends Application {
                 Room rooms = new Room(room);
                 if (addEventNow(user, starttime, endtime, date, description, name, rooms)) {
                     button.setStyle("-fx-text-fill:  greenyellow");
-                    primaryStage.close();
+                    if (event!=null) {
+                        primaryStage.close();
+                    }
                 } else {
                     button.setStyle("-fx-text-fill: red");
                 }
