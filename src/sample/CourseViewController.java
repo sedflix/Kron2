@@ -67,13 +67,6 @@ public class CourseViewController extends Application{
         });
 
 
-        ScrollPane scrollPane = (ScrollPane) courseDescription.lookup("#scroll_time_table");
-        TimeTableController temp = new TimeTableController();
-        temp.start(primaryStage);
-        TimeTableGridPane timeTable = temp.getGridPane();
-
-        scrollPane.setContent(timeTable.getGridPane());
-
 
 //        primaryStage.setScene(new Scene(courseDescription, 700, 900));
         primaryStage.show();
