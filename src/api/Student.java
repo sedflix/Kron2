@@ -154,6 +154,7 @@ public class Student extends User {
 
         this.getAuditedCourse().add(course);
         course.getAuditedStudents().add(this);
+        session.evict(this);
         session.saveOrUpdate(this);
         session.saveOrUpdate(course);
         session.getTransaction().commit();
