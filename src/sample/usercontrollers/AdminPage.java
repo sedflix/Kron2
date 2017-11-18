@@ -10,7 +10,6 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import sample.createevent.CreateEvent;
-import sample.requests.HandleRequestGridPane;
 import sample.requests.HandleRequestsController;
 import sample.viewroom.ViewRoomController;
 
@@ -49,7 +48,7 @@ public class AdminPage extends Application{
                 borderPane.getChildren().addAll(createEvent1.getRoot());
             }
             catch (Exception e){
-
+                e.printStackTrace();
             }
         });
 
@@ -63,7 +62,7 @@ public class AdminPage extends Application{
                 borderPane.getChildren().add(handleRequestsController.getRoot());
             }
             catch (Exception e){
-
+                e.printStackTrace();
             }
         });
 

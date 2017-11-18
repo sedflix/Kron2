@@ -7,12 +7,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import sample.courseview.CourseViewController;
 import sample.createevent.CreateEvent;
-import sample.viewroom.ViewRoomController;
+import sample.requests.HandleRequestsController;
 import sample.timetable.TimeTableController;
+import sample.viewroom.ViewRoomController;
 
 public class StudentPage extends Application{
     private User user;
@@ -63,6 +64,19 @@ public class StudentPage extends Application{
             }
             catch (Exception e){
 
+            }
+        });
+
+        Button requestManagement = (Button) menuBar.getMenus().get(4).getGraphic();
+        requestManagement.setOnAction(event -> {
+            HandleRequestsController handleRequestsController = new HandleRequestsController();
+            handleRequestsController.setUser(user);
+            try {
+                handleRequestsController.start(primaryStage);
+                borderPane.setCenter(handleRequestsController.getRoot());
+                borderPane.getChildren().add(handleRequestsController.getRoot());
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
 
