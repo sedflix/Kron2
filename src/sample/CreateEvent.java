@@ -1,8 +1,6 @@
 package sample;
 
-import api.Event;
-import api.MySession;
-import api.User;
+import api.*;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -74,17 +72,7 @@ public class CreateEvent extends Application {
                     int endTimeHour = Integer.parseInt(endTime.substring(0,tempIndex));
                     int endTimeMinute = Integer.parseInt(endTime.substring(tempIndex+1));
 
-                    Event createEvent = new Event();
-                    createEvent.setStartTime(new Time(startTimeHour,startTimeMinute,00));
-                    createEvent.setEndTime(new Time(endTimeHour,endTimeMinute,00));
-
-                    createEvent.setDescription(description);
-                    createEvent.setDate(new Date(year,month,day));
-
-                    Session session = MySession.getSession();
-                    session.beginTransaction();
-                    session.saveOrUpdate(createEvent);
-                    session.getTransaction().commit();
+                    setUser(user);
                 }
             }
         });
@@ -104,5 +92,15 @@ public class CreateEvent extends Application {
 
     public User getUser() {
         return user;
+    }
+    public void setUser(User user,Time startTime, Time endTime, Date date, String description,String name,Room room) {
+        this.user = user;
+        if (user.getDtype().equals("Student")) {
+            ((Student) user).createEventRequest(name,room,description,startTime,endTime,date);
+        } else if (user.getDtype().equals("Faculty")) {
+            ((Faculty) user).addEvent(name,room,description,startTime,endTime,date);
+        } else if (user.getDtype().equals("Admin")) {
+            ((Admin) user).addEvent(name,room,description,startTime,endTime,date);
+        }
     }
 }
