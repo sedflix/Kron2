@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import sample.courseview.CourseViewController;
 import sample.createevent.CreateEvent;
 import sample.requests.HandleRequestsController;
 import sample.viewroom.ViewRoomController;
@@ -26,8 +27,9 @@ public class FacultyPage extends Application {
         BorderPane borderPane = (BorderPane) menu.lookup("#borderPane");
         MenuBar menuBar = (MenuBar) borderPane.getTop();
 
-
-        Button viewRoom = (Button) menuBar.getMenus().get(1).getGraphic();
+        //todo menu bar
+        //todo timetable
+        Button viewRoom = (Button) menuBar.getMenus().get(2).getGraphic();
         viewRoom.setOnAction(event -> {
             ViewRoomController viewRoomController = new ViewRoomController();
             viewRoomController.setUser(user);
@@ -41,7 +43,7 @@ public class FacultyPage extends Application {
         });
 
 
-        Button createEvent = (Button) menuBar.getMenus().get(0).getGraphic();
+        Button createEvent = (Button) menuBar.getMenus().get(1).getGraphic();
         createEvent.setOnAction(event -> {
             CreateEvent createEvent1 = new CreateEvent();
             createEvent1.setUser(user);
@@ -55,15 +57,29 @@ public class FacultyPage extends Application {
         });
 
 
-        Button requestManagement = (Button) menuBar.getMenus().get(2).getGraphic();
+        Button requestManagement = (Button) menuBar.getMenus().get(3).getGraphic();
         requestManagement.setOnAction(event -> {
             HandleRequestsController handleRequestsController = new HandleRequestsController();
             handleRequestsController.setUser(user);
             try {
                 handleRequestsController.start(primaryStage);
                 borderPane.setCenter(handleRequestsController.getRoot());
-                borderPane.getChildren().add(handleRequestsController.getRoot());
+//                borderPane.getChildren().addAll(handleRequestsController.getRoot());
             } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        Button viewCourse = (Button) menuBar.getMenus().get(0).getGraphic();
+        viewCourse.setOnAction(event -> {
+            CourseViewController courseViewController = new CourseViewController();
+            courseViewController.setUser(user);
+            try{
+                courseViewController.start(primaryStage);
+                borderPane.setCenter(courseViewController.getCourseDescription());
+//                borderPane.getChildren().addAll(courseViewController.getCourseDescription());
+            }
+            catch (Exception e){
                 e.printStackTrace();
             }
         });

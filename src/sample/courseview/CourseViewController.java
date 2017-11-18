@@ -103,7 +103,7 @@ public class CourseViewController extends Application {
         }
 
 //        primaryStage.setScene(new Scene(courseDescription, 700, 900));
-//        primaryStage.show();
+        primaryStage.show();
     }
 
     public void setData(Parent courseDescription, Course forInfo) throws IOException {
