@@ -34,8 +34,8 @@ public class LoginController extends Application{
                String pass = passwordField.getText();
                if (mail!=null && pass!=null) {
                    User user = UserAuthentication.login(mail, pass);
-                   if (user == null){
-                       System.out.println("Invalid Email or Password");
+                   if (user == null) {
+                       button.setStyle("-fx-text-fill: red");
                    }
                    else {
                        if (user.getDtype().equals("Student")){
