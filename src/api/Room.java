@@ -1,6 +1,5 @@
 package api;
 
-import org.hibernate.CacheMode;
 import org.hibernate.Session;
 
 import javax.persistence.Column;
@@ -90,21 +89,30 @@ public class Room {
 
     public static void main(String[] args) {
         Session session = MySession.getSession();
-        session.setCacheMode(CacheMode.GET);
-
-        List<Room> rooms = Room.getAllRooms();
-        rooms.forEach((o) -> {
-            System.out.println(o.getRoomName());
-//            System.out.print("--");
-//            System.out.println(o.isFreeBetween(session, Time.valueOf("01:00:00"), Time.valueOf("23:00:00"), Date.valueOf("2017-11-15")));
-
-        });
-
-//        rooms = Room.getAvailableRoomsBetween(session, Time.valueOf("01:00:00"), Time.valueOf("23:00:00"), Date.valueOf("2017-11-15"));
+//        session.setCacheMode(CacheMode.GET);
+//
+//        List<Room> rooms = Room.getAllRooms();
+//        rooms.forEach((o) -> {
+//            System.out.println(o.getRoomName());
+////            System.out.print("--");
+////            System.out.println(o.isFreeBetween(session, Time.valueOf("01:00:00"), Time.valueOf("23:00:00"), Date.valueOf("2017-11-15")));
+//
+//        });
+//
+////        rooms = Room.getAvailableRoomsBetween(session, Time.valueOf("01:00:00"), Time.valueOf("23:00:00"), Date.valueOf("2017-11-15"));
+////        rooms.forEach(o -> System.out.println(o.getRoomName()));
+//        rooms = Room.getAvailableRoomsOn(Date.valueOf("2017-11-15"));
 //        rooms.forEach(o -> System.out.println(o.getRoomName()));
-        rooms = Room.getAvailableRoomsOn(Date.valueOf("2017-11-15"));
-        rooms.forEach(o -> System.out.println(o.getRoomName()));
 
+        Time c = Time.valueOf("11:00:00");
+        Time end = Time.valueOf("12:30:00");
+        Date date = Date.valueOf("2018-01-01");
+        System.out.println(c);
+        System.out.println(end);
+        System.out.println(date);
+        boolean c21 = Room.isFreeBetween("C21", c, end, date);
+
+        System.out.println(c21);
     }
 
     public static boolean isFreeBetween(String roomName, Time startTime, Time endTime, Date date) {
@@ -117,8 +125,10 @@ public class Room {
         Session session = MySession.getSession();
 
         Query query = session.createQuery("select event from Event as event where event.room = :room " +
-                "and ( (event.startTime between :startT and :endT)" +
-                "or (event.endTime between :startT and :endT) )  " +
+                "and( (event.startTime <= :startT and  event.endTime >= :endT)" +
+                "or (event.startTime >= :startT and event.startTime <= :endT)" +
+                "or (event.endTime >=:startT and event.endTime <= :endT) " +
+                "or (event.startTime >= :startT and  event.endTime <= :endT))" +
                 "and event.date = :dateT and event.isPending = false  " +
                 "and event.isRejected = false  " +
                 "and event.isCancelled = false ");
@@ -128,11 +138,12 @@ public class Room {
         query.setParameter("endT", endTime);
         query.setParameter("dateT", date);
 
-        if (query.getResultList().size() == 0) {
+        if (query.getResultList().size() != 0) {
+
             return true;
         } else {
             query = session.createQuery("select event from CourseEvent as event where event.room = :room " +
-                    "and (event.startTime>= :startT and event.endTime<= :endT) " +
+                    "and (event.startTime >= :startT and event.endTime<= :endT) " +
                     "and event.dayOfWeek = :dayofweek");
             query.setParameter("room", this);
             query.setParameter("startT", startTime);

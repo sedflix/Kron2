@@ -25,6 +25,7 @@ public class Event {
     @Column
     private String tagline;
 
+
     @Column
     private String description;
 

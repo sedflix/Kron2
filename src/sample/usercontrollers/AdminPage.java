@@ -64,7 +64,7 @@ public class AdminPage extends Application{
             try {
                 handleRequestsController.start(primaryStage);
                 borderPane.setCenter(handleRequestsController.getRoot());
-                borderPane.getChildren().add(handleRequestsController.getRoot());
+//                borderPane.getChildren().add(handleRequestsController.getRoot());
             }
             catch (Exception e){
                 e.printStackTrace();
