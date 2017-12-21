@@ -23,10 +23,10 @@ Event management and timetable generator JavaFX App for colleges.
 - MySQL JDBC Driver
 - MySQL
 
-A test database is provided in database.sql 
-Use api/CSVParser to auto populate the database
+A test database is provided in `database.sql` 
+Use `api/CSVParser` to auto populate the database
 
-All other required dependencies can be found in src/lib/. I have not used any dependency manager. I tried but you know Maven. 
+All other required dependencies can be found in `src/lib/`. I have not used any dependency manager. I tried but you know Maven. 
 
 ## A little bit about the code
 
@@ -39,7 +39,8 @@ Make necessary changes to  `src/Resources/hibernate.cfg.xml` as per you MySQL cr
 
 TODO:
 
-- [ ] Use Spring to make a webapp 
+
 - [ ] Add Google Auth
 - [ ] Integrate it with Google Calendar
 - [ ] Manage dependencies stuffs
+- [ ] Use Spring to make a webapp 
